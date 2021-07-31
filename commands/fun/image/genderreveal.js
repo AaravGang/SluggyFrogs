@@ -41,7 +41,7 @@ async function genderReveal(client, msg, params, serverDetails) {
   // Draw a shape onto the main canvas
   context.drawImage(avatar, 40, 80, 130, 130);
 
-  const attachment = new Discord.msgAttachment(
+  const attachment = new Discord.MessageAttachment(
     canvas.toBuffer(),
     "welcome-image.png"
   );
