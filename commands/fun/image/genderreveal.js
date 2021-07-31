@@ -8,7 +8,7 @@ const Canvas = require("canvas");
 const Discord = require("discord.js");
 const dotenv = require("dotenv");
 dotenv.config();
-const prefix = process.env.PREFIX;
+const creators = process.env.CREATOR_IDS.split(' ');
 var bg;
 
 Canvas.loadImage(
@@ -27,7 +27,7 @@ async function genderReveal(client, msg, params, serverDetails) {
   var avatar;
   if (
     msg.mentions.members.first() &&
-    msg.mentions.members.first().user.id != "774979462290341888"
+    !creators.includes(msg.mentions.members.first().user.id)
   ) {
     avatar = await Canvas.loadImage(
       msg.mentions.members.first().user.displayAvatarURL({ format: "jpg" })
