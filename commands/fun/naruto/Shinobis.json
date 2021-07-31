@@ -1,0 +1,74 @@
+{
+  "naruto": {
+    "name": "Uzumaki Naruto",
+    "commandName": "naruto",
+    "chakra": 1000,
+    "health": 1000,
+    "jutsuNames": ["rasengan", "giantrasengan", "rasenshuriken", "shadowclone"],
+    "fees": 800,
+    "chakraTypes": ["wind"]
+  },
+  "sasuke": {
+    "name": "Uchiha Sasuke",
+    "commandName": "sasuke",
+    "chakra": 1000,
+    "health": 1000,
+    "jutsuNames": ["chidori", "fireball", "genjutsu", "amaterasu"],
+    "fees": 800,
+    "chakraTypes": ["fire", "lightning"]
+  },
+  "kakashi": {
+    "name": "Hatake Kakashi",
+    "commandName": "kakashi",
+    "chakra": 1000,
+    "health": 1000,
+    "jutsuNames": ["chidori", "mudwall", "kamui", "genjutsu"],
+    "fees": 900,
+    "chakraTypes": ["lightning"]
+  },
+  "sakura": {
+    "name": "Haruno Sakura",
+    "commandName": "sakura",
+    "chakra": 1000,
+    "health": 1000,
+    "jutsuNames": ["hundredhealings", "superpunch"],
+    "fees": 600,
+    "chakraTypes": ["normal"]
+  },
+  "hashirama": {
+    "name": "Senju Hashirama",
+    "commandName": "hashirama",
+    "chakra": 1200,
+    "health": 1200,
+    "jutsuNames": ["dfb", "dfe", "woodclone", "woodrelease"],
+    "fees": 1500,
+    "chakraTypes": ["wood"]
+  },
+  "tobirama": {
+    "name": "Senju Tobirama",
+    "commandName": "tobirama",
+    "chakra": 1100,
+    "health": 1100,
+    "jutsuNames": ["shadowclone", "ftg", "waterdragon", "waterrelease"],
+    "fees": 1500,
+    "chakraTypes": ["water"]
+  },
+  "orochimaru": {
+    "name": "Orochimaru",
+    "commandName": "orochimaru",
+    "chakra": 1100,
+    "health": 1100,
+    "jutsuNames": ["ebt", "hs", "ftts", "windrelease"],
+    "fees": 1300,
+    "chakraTypes": ["poison"]
+  },
+  "itachi": {
+    "name": "Uchiha Itachi",
+    "commandName": "itachi",
+    "chakra": 1100,
+    "health": 1100,
+    "jutsuNames": ["waterclone", "fdfp", "tsukuyomi", "crowclone"],
+    "fees": 1300,
+    "chakraTypes": ["fire"]
+  }
+}

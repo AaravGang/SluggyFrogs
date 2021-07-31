@@ -1,0 +1,65 @@
+{
+  "kunai": {
+    "name": "Kunai",
+    "commandName": "kunai",
+    "max": 20,
+    "cost": 200,
+    "healthBoost": 0,
+    "chakraBoost": 0,
+    "powerBoost": 15
+  },
+  "shuriken": {
+    "name": "Shuriken",
+    "commandName": "shuriken",
+    "cost": 250,
+    "max": 15,
+    "healthBoost": 0,
+    "chakraBoost": 0,
+    "powerBoost": 25
+  },
+  "gianttoad": {
+    "name": "Giant Toad",
+    "commandName": "gianttoad",
+    "cost": 10000,
+    "max": 1,
+    "healthBoost": 150,
+    "chakraBoost": 100,
+    "powerBoost": 100
+  },
+  "giantsnake": {
+    "name": "Giant Snake",
+    "commandName": "giantsnake",
+    "cost": 10000,
+    "max": 1,
+    "healthBoost": 100,
+    "chakraBoost": 100,
+    "powerBoost": 150
+  },
+  "snake": {
+    "name": "Snake",
+    "commandName": "snake",
+    "cost": 2000,
+    "max": 10,
+    "healthBoost": 50,
+    "chakraBoost": 0,
+    "powerBoost": 100
+  },
+  "sfk": {
+    "name": "Sword of Kusanagi",
+    "commandName": "sfk",
+    "cost": 15000,
+    "max": 1,
+    "healthBoost": 0,
+    "chakraBoost": 0,
+    "powerBoost": 400
+  },
+  "sot": {
+    "name": "The Sword of Totsuka",
+    "commandName": "sot",
+    "cost": 20000,
+    "max": 1,
+    "healthBoost": 0,
+    "chakraBoost": 0,
+    "powerBoost": 500
+  }
+}

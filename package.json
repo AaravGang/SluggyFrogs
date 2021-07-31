@@ -1,0 +1,17 @@
+{
+  "name": "narutodiscord",
+  "version": "1.0.0",
+  "description": "Naruto Bot for Discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.8.0",
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0",
+    "mongoose": "^5.13.3"
+  }
+}

@@ -1,0 +1,292 @@
+{
+  "shadowclone": {
+    "name": "Shadow Clone",
+    "commandName": "shadowclone",
+    "power": 70,
+    "chakra": 40,
+    "type": "normal",
+    "description": "Get a few weak clones, that attack your opponent with tai-jutsu",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 15
+  },
+  "rasengan": {
+    "name": "Rasengan",
+    "commandName": "rasengan",
+    "power": 130,
+    "chakra": 100,
+    "type": "normal",
+    "description": "Attack your opponent with a ball of highly rotating chakra!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 3
+  },
+  "giantrasengan": {
+    "name": "Gaint Rasengan",
+    "commandName": "giantrasengan",
+    "power": 160,
+    "chakra": 100,
+    "type": "normal",
+    "description": "Attack your opponent with a massive ball of highly rotating chakra!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 2
+  },
+  "rasenshuriken": {
+    "name": "Rasen Shuriken",
+    "commandName": "rasenshuriken",
+    "power": 180,
+    "chakra": 130,
+    "type": "normal",
+    "description": "Ransengan shaped like s shuriken!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 1
+  },
+  "chidori": {
+    "name": "Chidori",
+    "commandName": "chidori",
+    "power": 120,
+    "chakra": 80,
+    "type": "lightning",
+    "description": "Attack your opponent with speedy strike of highly concentrated lightning style chakra!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 3
+  },
+  "fireball": {
+    "name": "Fire Ball",
+    "commandName": "fireball",
+    "power": 90,
+    "chakra": 60,
+    "type": "fire",
+    "description": "A super massive ball of fire.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 10
+  },
+  "genjutsu": {
+    "name": "Genjutsu",
+    "commandName": "genjutsu",
+    "power": 30,
+    "chakra": 90,
+    "type": "genjutsu",
+    "description": "Trap your opponent in a genjutsu for 1 move!",
+    "jutsuBranches": ["genjutsu", "attack"],
+    "usageLeft": 2
+  },
+  "hundredhealings": {
+    "name": "100 Healings",
+    "commandName": "hundredhealings",
+    "power": 150,
+    "chakra": 100,
+    "type": "healing",
+    "description": "Heal yourself!",
+    "jutsuBranches": ["healing"],
+    "usageLeft": 4
+  },
+  "superpunch": {
+    "name": "Shannaro",
+    "commandName": "superpunch",
+    "power": 110,
+    "chakra": 80,
+    "type": "normal",
+    "description": "Shannaro!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 15
+  },
+  "mudwall": {
+    "name": "Mudwall",
+    "commandName": "mudwall",
+    "power": 100,
+    "chakra": 60,
+    "type": "earth",
+    "description": "Use it for defense",
+    "jutsuBranches": ["defense"],
+    "usageLeft": 5
+  },
+  "taijutsu": {
+    "name": "Taijutsu",
+    "commandName": "taijutsu",
+    "power": 75,
+    "chakra": 30,
+    "type": "normal",
+    "description": "Use it for attack when less chakra",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 20
+  },
+  "crystalrelease": {
+    "name": "Crystal Release",
+    "commandName": "crystalrelease",
+    "power": 300,
+    "chakra": 200,
+    "type": "normal",
+    "description": "Use this ground breaking kekkei genkai jutsu for freezing your opponent and damaging him",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 1
+  },
+  "kamui": {
+    "name": "Kamui",
+    "commandName": "kamui",
+    "power": 300,
+    "chakra": 450,
+    "type": "normal",
+    "description": "Space-Time Ninjutsu.",
+    "jutsuBranches": ["defense", "attack"],
+    "usageLeft": 1
+  },
+  "dfe": {
+    "name": "Deep Forest Emergence",
+    "commandName": "dfe",
+    "power": 300,
+    "chakra": 200,
+    "type": "wood",
+    "description": "It is self explanatory.",
+    "jutsuBranches": ["defense"],
+    "usageLeft": 2
+  },
+  "dfb": {
+    "name": "Deep Forest Bloom",
+    "commandName": "dfb",
+    "power": 300,
+    "chakra": 200,
+    "type": "wood",
+    "description": "Blossom some very dangerous flowers.",
+    "jutsuBranches": ["attack", "genjutsu"],
+    "usageLeft": 2
+  },
+  "woodclone": {
+    "name": "Wood Clone",
+    "commandName": "woodclone",
+    "power": 130,
+    "chakra": 80,
+    "type": "wood",
+    "description": "Get some strong wood clones.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 20
+  },
+  "amaterasu": {
+    "name": "Amaterasu",
+    "commandName": "amaterasu",
+    "power": 250,
+    "chakra": 200,
+    "type": "fire",
+    "description": "In-extinguishible (kinda) black flames.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 2
+  },
+  "woodrelease": {
+    "name": "Wood Release",
+    "commandName": "woodrelease",
+    "power": 250,
+    "chakra": 200,
+    "type": "wood",
+    "description": "Release wood, what else?",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 10
+  },
+  "ftg": {
+    "name": "Flying Thunder God",
+    "commandName": "ftg",
+    "power": 350,
+    "chakra": 150,
+    "type": "lightning",
+    "description": "Move so fast, that you can dodge almost anything.",
+    "jutsuBranches": ["defense"],
+    "usageLeft": 3
+  },
+  "waterdragon": {
+    "name": "Water Dragon",
+    "commandName": "waterdragon",
+    "power": 150,
+    "chakra": 100,
+    "type": "water",
+    "description": "Get a dragon of water.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 4
+  },
+  "waterrelease": {
+    "name": "Water Release",
+    "commandName": "waterrelease",
+    "power": 200,
+    "chakra": 150,
+    "type": "water",
+    "description": "Kinda like the parent of all water style jutsus.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 4
+  },
+  "ebt": {
+    "name": "Eight Branches Technique",
+    "commandName": "ebt",
+    "power": 450,
+    "chakra": 300,
+    "type": "poison",
+    "description": "This is Orochimaru's greatest and strongest snake-related technique.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 1
+  },
+  "hs": {
+    "name": "Hiding In The Surface",
+    "commandName": "hs",
+    "power": 450,
+    "chakra": 200,
+    "type": "earth",
+    "description": "Allows the user to melt into the ground.",
+    "jutsuBranches": ["defense"],
+    "usageLeft": 2
+  },
+  "ftts": {
+    "name": "Formation of Ten Thousand Snakes",
+    "commandName": "ftts",
+    "power": 300,
+    "chakra": 250,
+    "type": "poison",
+    "description": "User summons ten thousand snakes.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 2
+  },
+  "windrelease": {
+    "name": "Wind Release: Great Breakthrough",
+    "commandName": "windrelease",
+    "power": 150,
+    "chakra": 90,
+    "type": "wind",
+    "description": "The user breathes wind from their mouth, blowing away whatever is in front of them.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 5
+  },
+  "waterclone": {
+    "name": "Water Clone",
+    "commandName": "waterclone",
+    "power": 80,
+    "chakra": 40,
+    "type": "water",
+    "description": "Get some water clones.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 10
+  },
+  "fdfp": {
+    "name": "Fire Dragon Flame Projectile",
+    "commandName": "fdfp",
+    "power": 150,
+    "chakra": 90,
+    "type": "fire",
+    "description": "Fire shaped like a dragon.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 5
+  },
+  "tsukuyomi": {
+    "name": "Tsukuyomi",
+    "commandName": "tsukuyomi",
+    "power": 400,
+    "chakra": 250,
+    "type": "genjutsu",
+    "description": "Trap your opponent in a super strong gen-jutsu.",
+    "jutsuBranches": ["attack", "genjutsu"],
+    "usageLeft": 1
+  },
+  "crowclone": {
+    "name": "Crow Clone Technique",
+    "commandName": "crowclone",
+    "power": 100,
+    "chakra": 150,
+    "type": "genjutsu",
+    "description": "Summons multiple clones that deal some damage and trap your opponent in a genjutsu.",
+    "jutsuBranches": ["attack", "defense"],
+    "usageLeft": 2
+  }
+}
