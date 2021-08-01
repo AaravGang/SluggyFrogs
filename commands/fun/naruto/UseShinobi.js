@@ -1,5 +1,6 @@
 const Shinobis = require("./Shinobis");
 const shinobiDetails = Shinobis.shinobiDetails;
+const Shinobi = Shinobis.Shinobi
 
 const beginGame = require("./BeginGame").beginGame;
 
@@ -46,7 +47,7 @@ async function hireShinobi(client, msg, params) {
   // shinobi with that name does not exist
   if (!shinobiDetails[shinobiName]) {
     msg.reply("Invalid shinobi name.");
-    Shinobis.execute(client, msg, params);
+    Shinobis.execute(client, msg);
     return false;
   }
 
