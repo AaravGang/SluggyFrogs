@@ -313,6 +313,7 @@ async function sendGameOverMessages(
 }
 
 function jutsuClash(player1, player2, firstPlayer) {
+  console.log(firstPlayer)
   if (player1.currentJutsu) {
     player1.currentJutsu.use(player1, player2, player1 == firstPlayer);
   } else {

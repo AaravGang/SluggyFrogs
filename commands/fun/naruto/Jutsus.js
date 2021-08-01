@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const prefix = process.env.PREFIX;
 
-const playedFirstBoost = 1 / 10;
+const playedFirstBoost = 1 / 4;
 
 const jutsuTypes = [
   "fire",
@@ -13,6 +13,7 @@ const jutsuTypes = [
   "normal",
   "wood",
   "poison",
+  "spacetime",
 ];
 
 const jutsuTypeDominance = {
@@ -27,6 +28,7 @@ const jutsuTypeDominance = {
   genjutsu: [],
   wood: ["wind", "earth", "water", "normal"],
   poison: ["fire", "water", "wind", "lightning", "normal", "wood"],
+  spacetime: [],
 };
 const powerIncrease = 20;
 
@@ -63,8 +65,11 @@ class Jutsu {
         opponent.currentJutsu.jutsuBranches.includes("defense")
       ) {
         powerDec +=
-          opponent.currentJutsu.power < this.power
-            ? opponent.currentJutsu.power
+          opponent.currentJutsu.power +
+            (playedFirst ? 0 : playedFirstBoost * opponent.currentJutsu.power) <
+          this.power
+            ? opponent.currentJutsu.power +
+              (playedFirst ? 0 : playedFirstBoost * opponent.currentJutsu.power)
             : this.power;
       }
       opponent.shinobi.health -= this.power - powerDec + powerInc;

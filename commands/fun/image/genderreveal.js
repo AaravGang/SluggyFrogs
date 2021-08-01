@@ -49,7 +49,8 @@ async function genderReveal(client, msg, params, serverDetails) {
     "welcome-image.png"
   );
 
-  
-
-  msg.channel.send(`Your deepest secrets have been revealed, XD :)!`, attachment);
+  msg.channel.send(
+    `Your deepest secrets have been revealed, XD :)!`,
+    attachment
+  );
 }

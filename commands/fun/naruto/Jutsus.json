@@ -122,11 +122,11 @@
   "kamui": {
     "name": "Kamui",
     "commandName": "kamui",
-    "power": 300,
+    "power": 200,
     "chakra": 450,
-    "type": "normal",
+    "type": "spacetime",
     "description": "Space-Time Ninjutsu.",
-    "jutsuBranches": ["defense", "attack"],
+    "jutsuBranches": ["attack", "genjutsu"],
     "usageLeft": 1
   },
   "dfe": {
