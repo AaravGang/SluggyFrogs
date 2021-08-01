@@ -2,6 +2,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const prefix = process.env.PREFIX;
 
+const playedFirstBoost = 1 / 10;
+
 const jutsuTypes = [
   "fire",
   "water",
@@ -42,7 +44,7 @@ class Jutsu {
     this.jutsuBranches = props.jutsuBranches;
     this.usageLeft = props.usageLeft;
   }
-  use(currentPlayer, opponent) {
+  use(currentPlayer, opponent, playedFirst = false) {
     this.usageLeft -= 1;
     if (
       opponent.currentJutsu &&
@@ -50,6 +52,10 @@ class Jutsu {
     ) {
       return [currentPlayer, opponent];
     }
+
+    let powerInc = 0;
+    if (playedFirst) powerInc += playedFirstBoost * this.power;
+
     if (this.jutsuBranches.includes("attack")) {
       let powerDec = 0;
       if (
@@ -61,7 +67,7 @@ class Jutsu {
             ? opponent.currentJutsu.power
             : this.power;
       }
-      opponent.shinobi.health -= this.power - powerDec;
+      opponent.shinobi.health -= this.power - powerDec + powerInc;
       if (
         opponent.currentJutsu &&
         this.boostOver.includes(opponent.currentJutsu.type)
@@ -71,7 +77,7 @@ class Jutsu {
       return [currentPlayer, opponent];
     }
     if (this.jutsuBranches.includes("healing")) {
-      currentPlayer.shinobi.health += this.power;
+      currentPlayer.shinobi.health += this.power + powerInc;
       return [currentPlayer, opponent];
     }
   }

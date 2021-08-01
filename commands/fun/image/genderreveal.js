@@ -8,16 +8,19 @@ const Canvas = require("canvas");
 const Discord = require("discord.js");
 const dotenv = require("dotenv");
 dotenv.config();
-const creators = process.env.CREATOR_IDS.split(' ');
-var bg;
+const creators = process.env.CREATOR_IDS.split(" ");
+var bgOpts = [];
 
 Canvas.loadImage(
   "https://64.media.tumblr.com/202c1955cb2c42045142656a81107657/tumblr_nx29y66Y2y1tmbsp5o1_1280.jpg"
-).then((img) => (bg = img));
+).then((img) => bgOpts.push(img));
+
+Canvas.loadImage("commands/fun/image/haha.jpg").then((img) => bgOpts.push(img));
 
 // setTimeout(()=>console.log(bg),6000)
 
 async function genderReveal(client, msg, params, serverDetails) {
+  let bg = bgOpts[Math.floor(Math.random() * bgOpts.length)];
   const canvas = Canvas.createCanvas(500, 500);
   const context = canvas.getContext("2d");
   // Since the image takes time to load, you should await it
@@ -46,5 +49,7 @@ async function genderReveal(client, msg, params, serverDetails) {
     "welcome-image.png"
   );
 
-  msg.channel.send(`Welcome to the server!`, attachment);
+  
+
+  msg.channel.send(`Your deepest secrets have been revealed, XD :)!`, attachment);
 }

@@ -1,10 +1,5 @@
-
 // PUT SHIINBIS AND JUTSUS AND SHOP IN DB
 // PASS IN AS PARAMETER WHERE NEEDED
-
-
-
-
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -87,6 +82,8 @@ async function beginGame(client, msg, serverDetails) {
     currentJutsu: null,
   };
 
+  var firstPlayer;
+
   const filter = async (message) => {
     let content = message.content.toLowerCase();
     if (!content.startsWith("use")) {
@@ -99,9 +96,17 @@ async function beginGame(client, msg, serverDetails) {
       .filter((item) => item)[1];
 
     if (message.author.id === player1.id) {
-      return await setPlayerJutsu(message, player1, jutsuName, gameID);
+      if (await setPlayerJutsu(message, player1, jutsuName, gameID)) {
+        if (!firstPlayer) firstPlayer = player1;
+        return true;
+      }
+      return false;
     } else if (message.author.id === player2.id) {
-      return await setPlayerJutsu(message, player2, jutsuName, gameID);
+      if (await setPlayerJutsu(message, player2, jutsuName, gameID)) {
+        if (!firstPlayer) firstPlayer = player2;
+        return true;
+      }
+      return false;
     }
   };
 
@@ -128,6 +133,7 @@ async function beginGame(client, msg, serverDetails) {
 
     // reset can play every move
     canPlay = 2;
+    firstPlayer = null;
 
     // if a player has no available jutsus skip his turn
     getAvailableJutsus(player1.shinobi).length === 0 ? (canPlay -= 1) : null;
@@ -148,7 +154,7 @@ async function beginGame(client, msg, serverDetails) {
       .then(async (collected) => {
         serverStats = await getServerStats(msg.guild);
         if (serverStats.narutoGame.gameID != gameID) return;
-        jutsuClash(player1, player2);
+        jutsuClash(player1, player2, firstPlayer);
       })
       .catch(async (collected) => {
         serverStats = await getServerStats(msg.guild);
@@ -177,7 +183,7 @@ async function beginGame(client, msg, serverDetails) {
           );
         }
 
-        return jutsuClash(player1, player2);
+        return jutsuClash(player1, player2, firstPlayer);
       });
   }
 
@@ -306,14 +312,14 @@ async function sendGameOverMessages(
   return true;
 }
 
-function jutsuClash(player1, player2) {
+function jutsuClash(player1, player2, firstPlayer) {
   if (player1.currentJutsu) {
-    player1.currentJutsu.use(player1, player2);
+    player1.currentJutsu.use(player1, player2, player1 == firstPlayer);
   } else {
     player1.shinobi.chakra += skipChakraInc;
   }
   if (player2.currentJutsu) {
-    player2.currentJutsu.use(player2, player1);
+    player2.currentJutsu.use(player2, player1, player2 == firstPlayer);
   } else {
     player2.shinobi.chakra += skipChakraInc;
   }
@@ -413,7 +419,7 @@ async function sendPlayersStats(msg, player1, player2) {
       url: await helper.getGif(gifQuery),
     },
     footer: {
-      text: `You have ${timeLimit} seconds to choose your jutsu, If you don't your turn will be skipped.If both of you don't choose a jutsu the game will be tied!`,
+      text: `You have ${timeLimit} seconds to choose your jutsu, If you don't your turn will be skipped.If both of you don't choose a jutsu the game will be tied!\n\nThe one who plays first gets a good boost of power!`,
     },
   };
 
