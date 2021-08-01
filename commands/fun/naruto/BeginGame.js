@@ -453,12 +453,6 @@ function getAvailableJutsusEmbed(msg, player) {
   }
 
   availableJutsus.forEach((jutsu, ind) => {
-    if (ind % 2 === 0 && ind != 0) {
-      playerJutsusEmbed.fields.push({
-        name: "\u200B",
-        value: "\u200B",
-      });
-    }
     playerJutsusEmbed.fields.push({
       name: `\`use ${jutsu.commandName}\``,
       value: `[hover for details](${msg.url} "${jutsu.getDescription()}")`,
