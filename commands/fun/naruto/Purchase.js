@@ -34,10 +34,12 @@ async function addItem(client, msg, params, serverDetails) {
   if (wantToAdd <= 0) {
     return msg.reply("Number of items to add must be a natural number!");
   }
-  if (item.cost * wantToAdd > memberBal) {
+  if (item.cost * (number - alreadyPresentNumber) > memberBal) {
     return msg.reply(
-      `You don't have enough money to purchase ${wantToAdd} ${itemName} (${
-        item.cost * wantToAdd
+      `You don't have enough money to purchase ${
+        number - alreadyPresentNumber
+      } ${itemName} (${
+        item.cost * (number - alreadyPresentNumber)
       }💰).\nCurrent balance: ${memberBal}💰`
     );
   }
@@ -45,7 +47,7 @@ async function addItem(client, msg, params, serverDetails) {
   let updateBalanceStatus = await updateMemberBal(
     msg.guild,
     msg.author.id,
-    -item.cost * wantToAdd
+    -item.cost * (number - alreadyPresentNumber)
   );
   if (!updateBalanceStatus) {
     return msg.reply("Error while trying to deduct money from you bank!");
@@ -59,9 +61,13 @@ async function addItem(client, msg, params, serverDetails) {
   );
   if (updateStatus) {
     msg.reply(
-      `Added item! Current stock of ${itemName}: ${number}\nMoney deducted from your wallet: ${
+      `Added item! Current stock of ${itemName}: ${
+        number - alreadyPresentNumber
+      }\nMoney deducted from your wallet: ${
         item.cost * wantToAdd
-      }; Current Balance: ${memberBal - item.cost * wantToAdd}`
+      }; Current Balance: ${
+        memberBal - item.cost * (number - alreadyPresentNumber)
+      }`
     );
   } else {
     msg.reply("Error while trying to add item to your inventory.");
