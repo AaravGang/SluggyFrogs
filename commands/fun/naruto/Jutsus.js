@@ -19,7 +19,7 @@ const jutsuTypes = [
 
 const jutsuTypeDominance = {
   water: ["fire", "lava", "normal"],
-  fire: ["wind", "normal"],
+  fire: ["wind", "normal", "wood"],
   wind: ["lightning", "normal"],
   earth: ["water", "lightning", "normal"],
   lightning: ["water", "normal"],
