@@ -64,7 +64,7 @@ async function addItem(client, msg, params, serverDetails) {
       `Added item! Current stock of ${itemName}: ${
         number - alreadyPresentNumber
       }\nMoney deducted from your wallet: ${
-        item.cost * wantToAdd
+        item.cost * (number - alreadyPresentNumber)
       }; Current Balance: ${
         memberBal - item.cost * (number - alreadyPresentNumber)
       }`
