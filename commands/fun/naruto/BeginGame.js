@@ -270,7 +270,7 @@ async function gameOver(client, msg, player1, player2, serverStats) {
   //REWARD WINNER AND LOSER WITH SOME ARBITARY AMOUNT
   const updateMembersBalPayload = {};
   [winnerAmount, loserAmount] = [
-    Math.floor(randomNumber(2, 5) * winner.shinobi.fees),
+    Math.floor(randomNumber(2, 4) * winner.shinobi.fees),
     Math.floor(randomNumber(0.2, 0.9) * Math.max(winner.shinobi.fees, 600)),
   ];
   updateMembersBalPayload[winner.id] = winnerAmount;

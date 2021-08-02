@@ -178,24 +178,6 @@ async function addJutsu(jutsu) {
   }
 }
 
-async function getChakraTypes() {
-  return await chakraTypesModel.find({});
-}
-
-async function addChakraType(ct, update = false) {
-  if (update) {
-    await chakraTypesModel.findOneAndUpdate({ name: ct.name }, { $set: ct });
-    return true;
-  }
-  await chakraTypesModel.create(ct);
-  return true;
-}
-
-async function deleteChakraType(name) {
-  await chakraTypesModel.findOneAndDelete({ name: name });
-  return true
-}
-
 module.exports = {
   onGuildJoin: onGuildJoin,
   onGuildLeave: onGuildLeave,
@@ -209,7 +191,4 @@ module.exports = {
   updateToInventory: updateToInventory,
   getInventory: getInventory,
   addJutsu: addJutsu,
-  getChakraTypes: getChakraTypes,
-  addChakraType: addChakraType,
-  deleteChakraType: deleteChakraType,
 };

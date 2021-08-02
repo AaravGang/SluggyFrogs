@@ -73,8 +73,15 @@
     "commandName": "itachi",
     "chakra": 1100,
     "health": 1100,
-    "jutsuNames": ["waterclone", "fdfp", "tsukuyomi", "crowclone", "fireball"],
-    "fees": 1300,
+    "jutsuNames": [
+      "waterclone",
+      "fdfp",
+      "tsukuyomi",
+      "crowclone",
+      "fireball",
+      "amaterasu"
+    ],
+    "fees": 1400,
     "chakraTypes": ["fire"]
   },
   "madara": {

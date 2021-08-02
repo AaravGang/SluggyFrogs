@@ -41,13 +41,11 @@ async function narutoGame(client, msg, params, serverDetails) {
     id: playerStats.player1.id,
     name: playerStats.player1.username,
     shinobi: null,
-    wealth: serverDetails.members[playerStats.player1.id].bal,
   };
   const player2 = {
     id: playerStats.player2.id,
     name: playerStats.player2.username,
     shinobi: null,
-    wealth: serverDetails.members[playerStats.player2.id].bal,
   };
   const newGameStats = {
     gameID: Date.now(),

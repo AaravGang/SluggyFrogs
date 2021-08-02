@@ -37,6 +37,8 @@ const serverSchema = new mongoose.Schema({
 });
 const serverModel = mongoose.model("server-models", serverSchema);
 
+
+
 const jutsuSchema = new mongoose.Schema({
   name: { type: String, require: true, unique: true },
   commandName: { type: String, require: true, unique: true },
