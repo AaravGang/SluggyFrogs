@@ -127,7 +127,7 @@ async function beginGame(client, msg, serverDetails) {
     serverStats = await getServerStats(msg.guild);
     if (serverStats.narutoGame.gameID != gameID) return;
 
-    preMessages = await sendMessages(msg, player1, player2);
+    preMessages = await sendMessages(msg, player1, player2, firstPlayer);
     player1.currentJutsu = null;
     player2.currentJutsu = null;
 
@@ -313,7 +313,7 @@ async function sendGameOverMessages(
 }
 
 function jutsuClash(player1, player2, firstPlayer) {
-  console.log(firstPlayer)
+  console.log(firstPlayer);
   if (player1.currentJutsu) {
     player1.currentJutsu.use(player1, player2, player1 == firstPlayer);
   } else {
@@ -359,11 +359,11 @@ function checkValidJutsu(msg, jutsuName, player) {
   return availableJutsus.filter((jutsu) => jutsu.commandName === jutsuName)[0];
 }
 
-async function sendMessages(msg, player1, player2) {
+async function sendMessages(msg, player1, player2, firstPlayer) {
   const preMessages = [];
 
   //send stats
-  preMessages.push(await sendPlayersStats(msg, player1, player2));
+  preMessages.push(await sendPlayersStats(msg, player1, player2, firstPlayer));
 
   //send available jutsus for player1
   preMessages.push(
@@ -394,20 +394,26 @@ function getPlayerStatsForEmbed(player) {
   };
 }
 
-async function sendPlayersStats(msg, player1, player2) {
+async function sendPlayersStats(msg, player1, player2, firstPlayer) {
   let title =
     player1.currentJutsu && player2.currentJutsu
       ? "Now that's a good fight "
       : "Ahh! Don't fight so lousily ";
 
   var gifQuery = "";
-  if (player1.currentJutsu) {
-    gifQuery += `${player1.shinobi.name} ${player1.currentJutsu.name}`;
-  } else if (player2.currentJutsu) {
-    gifQuery += `${player2.shinobi.name} ${player2.currentJutsu.name}`;
-  } else if (!player1.currentJutsu && !player2.currentJutsu) {
-    gifQuery += `${player1.shinobi.name} fight ${player2.shinobi.name}`;
+
+  if (!firstPlayer) {
+    gifQuery = `${player1.shinobi.name} vs ${player.shinobi.name}`;
+  } else {
+    gifQuery = `${firstPlayer.shinobi.name} ${firstPlayer.currentJutsu.name}`;
   }
+  // if (player1.currentJutsu) {
+  //   gifQuery += `${player1.shinobi.name} ${player1.currentJutsu.name}`;
+  // } else if (player2.currentJutsu) {
+  //   gifQuery += `${player2.shinobi.name} ${player2.currentJutsu.name}`;
+  // } else if (!player1.currentJutsu && !player2.currentJutsu) {
+  //   gifQuery += `${player1.shinobi.name} fight ${player2.shinobi.name}`;
+  // }
   // let jutsu1 = player1.currentJutsu ? player1.currentJutsu.name : "";
   // let jutsu2 = player2.currentJutsu ? player2.currentJutsu.name : "";
   // let gifQuery = `${player1.shinobi.name} ${jutsu1} vs ${player2.shinobi.name} ${jutsu2}`;
