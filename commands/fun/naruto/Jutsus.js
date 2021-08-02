@@ -14,6 +14,7 @@ const jutsuTypes = [
   "wood",
   "poison",
   "spacetime",
+  "sealing",
 ];
 
 const jutsuTypeDominance = {
@@ -29,6 +30,7 @@ const jutsuTypeDominance = {
   wood: ["wind", "earth", "water", "normal"],
   poison: ["fire", "water", "wind", "lightning", "normal", "wood"],
   spacetime: [],
+  sealing: [],
 };
 const powerIncrease = 20;
 
@@ -50,7 +52,8 @@ class Jutsu {
     this.usageLeft -= 1;
     if (
       opponent.currentJutsu &&
-      opponent.currentJutsu.jutsuBranches.includes("genjutsu")
+      (opponent.currentJutsu.jutsuBranches.includes("genjutsu") ||
+        opponent.currentJutsu.jutsuBranches.includes("sealing"))
     ) {
       return [currentPlayer, opponent];
     }

@@ -2,19 +2,25 @@
   "naruto": {
     "name": "Uzumaki Naruto",
     "commandName": "naruto",
-    "chakra": 1000,
-    "health": 1000,
-    "jutsuNames": ["rasengan", "giantrasengan", "rasenshuriken", "shadowclone"],
-    "fees": 800,
+    "chakra": 1100,
+    "health": 1100,
+    "jutsuNames": [
+      "rasengan",
+      "giantrasengan",
+      "rasenshuriken",
+      "shadowclone",
+      "tbb"
+    ],
+    "fees": 900,
     "chakraTypes": ["wind"]
   },
   "sasuke": {
     "name": "Uchiha Sasuke",
     "commandName": "sasuke",
-    "chakra": 1000,
-    "health": 1000,
-    "jutsuNames": ["chidori", "fireball", "genjutsu", "amaterasu"],
-    "fees": 800,
+    "chakra": 1100,
+    "health": 1100,
+    "jutsuNames": ["chidori", "fireball", "genjutsu", "amaterasu", "susano"],
+    "fees": 900,
     "chakraTypes": ["fire", "lightning"]
   },
   "kakashi": {
@@ -22,15 +28,15 @@
     "commandName": "kakashi",
     "chakra": 1000,
     "health": 1000,
-    "jutsuNames": ["chidori", "mudwall", "kamui", "genjutsu"],
+    "jutsuNames": ["chidori", "mudwall", "kamui", "genjutsu", "cs"],
     "fees": 900,
     "chakraTypes": ["lightning"]
   },
   "sakura": {
     "name": "Haruno Sakura",
     "commandName": "sakura",
-    "chakra": 1000,
-    "health": 1000,
+    "chakra": 1100,
+    "health": 1100,
     "jutsuNames": ["hundredhealings", "superpunch"],
     "fees": 600,
     "chakraTypes": ["normal"]
@@ -40,7 +46,7 @@
     "commandName": "hashirama",
     "chakra": 1200,
     "health": 1200,
-    "jutsuNames": ["dfb", "dfe", "woodclone", "woodrelease"],
+    "jutsuNames": ["dfb", "dfe", "woodclone", "woodrelease", "wd"],
     "fees": 1500,
     "chakraTypes": ["wood"]
   },
@@ -49,16 +55,16 @@
     "commandName": "tobirama",
     "chakra": 1100,
     "health": 1100,
-    "jutsuNames": ["shadowclone", "ftg", "waterdragon", "waterrelease"],
-    "fees": 1500,
+    "jutsuNames": ["shadowclone", "ftg", "waterdragon", "waterrelease", "fr"],
+    "fees": 1400,
     "chakraTypes": ["water"]
   },
   "orochimaru": {
     "name": "Orochimaru",
     "commandName": "orochimaru",
-    "chakra": 1100,
-    "health": 1100,
-    "jutsuNames": ["ebt", "hs", "ftts", "windrelease"],
+    "chakra": 1300,
+    "health": 1300,
+    "jutsuNames": ["ebt", "hs", "ftts", "windrelease", "regen"],
     "fees": 1300,
     "chakraTypes": ["poison"]
   },
@@ -67,8 +73,17 @@
     "commandName": "itachi",
     "chakra": 1100,
     "health": 1100,
-    "jutsuNames": ["waterclone", "fdfp", "tsukuyomi", "crowclone"],
+    "jutsuNames": ["waterclone", "fdfp", "tsukuyomi", "crowclone", "fireball"],
     "fees": 1300,
+    "chakraTypes": ["fire"]
+  },
+  "madara": {
+    "name": "Uchiha Madara",
+    "commandName": "madara",
+    "chakra": 1100,
+    "health": 1100,
+    "jutsuNames": ["limbo", "ts", "susano", "fireball", "genjutsu"],
+    "fees": 1500,
     "chakraTypes": ["fire"]
   }
 }

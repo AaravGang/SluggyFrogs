@@ -288,5 +288,84 @@
     "description": "Summons multiple clones that deal some damage and trap your opponent in a genjutsu.",
     "jutsuBranches": ["attack", "defense"],
     "usageLeft": 2
+  },
+  "susano": {
+    "name": "Susano",
+    "commandName": "susano",
+    "power": 200,
+    "chakra": 450,
+    "type": "normal",
+    "description": "The strongest defense that there is.",
+    "jutsuBranches": ["attack", "defense"],
+    "usageLeft": 1
+  },
+  "ts": {
+    "name": "Tengai Shinsei",
+    "commandName": "ts",
+    "power": 400,
+    "chakra": 450,
+    "type": "fire",
+    "description": "The user summons meteorites.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 1
+  },
+  "limbo": {
+    "name": "Limbo: Border Jail",
+    "commandName": "limbo",
+    "power": 300,
+    "chakra": 350,
+    "type": "sealing",
+    "description": "Summons 4 clones of himself that are on a completely different dimension, so they can’t be seen.",
+    "jutsuBranches": ["attack", "sealing"],
+    "usageLeft": 1
+  },
+  "regen": {
+    "name": "Regeneration",
+    "commandName": "regen",
+    "power": 400,
+    "chakra": 400,
+    "type": "healing",
+    "description": "The user exchanges an immense ammount of chakra for health.",
+    "jutsuBranches": ["healing"],
+    "usageLeft": 1
+  },
+  "fr": {
+    "name": "Flying Raijin",
+    "commandName": "fr",
+    "power": 300,
+    "chakra": 250,
+    "type": "spacetime",
+    "description": "The Flying Raijin is a powerful teleportation fūinjutsu developed by the Second Hokage.",
+    "jutsuBranches": ["defense"],
+    "usageLeft": 2
+  },
+  "tbb": {
+    "name": "Tailed Beast Ball",
+    "commandName": "tbb",
+    "power": 400,
+    "chakra": 300,
+    "type": "normal",
+    "description": "An immense amount of chakra moulded into a deadly super dense ball.",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 1
+  },
+  "cs": {
+    "name": "Chidori Stream",
+    "commandName": "cs",
+    "power": 300,
+    "chakra": 250,
+    "type": "lightning",
+    "description": "Two chidoris connected by lightning. Cutting down your enemies becomes ez pz!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 1
+  },"wd":{
+    "name": "Wood Dragons",
+    "commandName": "wd",
+    "power": 400,
+    "chakra": 350,
+    "type": "wood",
+    "description": "Destroy your enemies with a super strong wood dragon!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 1
   }
 }
