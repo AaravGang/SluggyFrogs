@@ -23,20 +23,21 @@ async function addItem(client, msg, params, serverDetails) {
   const memberBal = member.bal;
 
   const alreadyPresentNumber = inventory[itemName] ? inventory[itemName] : 0;
-  const number = Math.min(
-    Shop[itemName].max,
-    !parseInt(params[1]) ? 1 : parseInt(params[1]) + alreadyPresentNumber
-  );
 
-  if (number <= 0) {
+  if (alreadyPresentNumber >= Shop[itemName].max) {
+    return msg.reply(`Your storage for ${itemName} is already at its max!`);
+  }
+
+  const wantToAdd = !isNaN(params[1]) ? parseInt(params[1]) : 1;
+  const number = Math.min(Shop[itemName].max, wantToAdd + alreadyPresentNumber);
+
+  if (wantToAdd <= 0) {
     return msg.reply("Number of items to add must be a natural number!");
   }
-  if (item.cost * (number - alreadyPresentNumber) > memberBal) {
+  if (item.cost * wantToAdd > memberBal) {
     return msg.reply(
-      `You don't have enough money to purchase ${
-        number - alreadyPresentNumber
-      } ${itemName} (${
-        item.cost * (number - alreadyPresentNumber)
+      `You don't have enough money to purchase ${wantToAdd} ${itemName} (${
+        item.cost * wantToAdd
       }💰).\nCurrent balance: ${memberBal}💰`
     );
   }
@@ -44,7 +45,7 @@ async function addItem(client, msg, params, serverDetails) {
   let updateBalanceStatus = await updateMemberBal(
     msg.guild,
     msg.author.id,
-    -item.cost * (number - alreadyPresentNumber)
+    -item.cost * wantToAdd
   );
   if (!updateBalanceStatus) {
     return msg.reply("Error while trying to deduct money from you bank!");
@@ -57,10 +58,12 @@ async function addItem(client, msg, params, serverDetails) {
     number
   );
   if (updateStatus) {
-    msg.reply(`Added item! Current stock of ${itemName}: ${number}`);
+    msg.reply(
+      `Added item! Current stock of ${itemName}: ${number}\nMoney deducted from your wallet: ${
+        item.cost * wantToAdd
+      }; Current Balance: ${memberBal - item.cost * wantToAdd}`
+    );
   } else {
     msg.reply("Error while trying to add item to your inventory.");
   }
 }
-
-
