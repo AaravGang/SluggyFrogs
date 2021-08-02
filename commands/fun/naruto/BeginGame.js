@@ -313,7 +313,6 @@ async function sendGameOverMessages(
 }
 
 function jutsuClash(player1, player2, firstPlayer) {
-  console.log(firstPlayer);
   if (player1.currentJutsu) {
     player1.currentJutsu.use(player1, player2, player1 == firstPlayer);
   } else {
@@ -403,10 +402,11 @@ async function sendPlayersStats(msg, player1, player2, firstPlayer) {
   var gifQuery = "";
 
   if (!firstPlayer) {
-    gifQuery = `${player1.shinobi.name} vs ${player.shinobi.name}`;
+    gifQuery = `${player1.shinobi.name} vs ${player2.shinobi.name}`;
   } else {
     gifQuery = `${firstPlayer.shinobi.name} ${firstPlayer.currentJutsu.name}`;
   }
+
   // if (player1.currentJutsu) {
   //   gifQuery += `${player1.shinobi.name} ${player1.currentJutsu.name}`;
   // } else if (player2.currentJutsu) {
