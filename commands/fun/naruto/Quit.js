@@ -43,7 +43,7 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
       console.log(serverDetails.narutoGame);
       let payload = {};
       let winAmt = Math.floor(
-        randomNumber(2, 4) * ShinobisJson[winner.shinobi].fees
+        randomNumber(2.5, 4.5) * ShinobisJson[winner.shinobi].fees
       );
 
       payload[winner.id] = winAmt;

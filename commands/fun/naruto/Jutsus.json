@@ -92,8 +92,8 @@
   "mudwall": {
     "name": "Mudwall",
     "commandName": "mudwall",
-    "power": 100,
-    "chakra": 60,
+    "power": 140,
+    "chakra": 80,
     "type": "earth",
     "description": "Use it for defense",
     "jutsuBranches": ["defense"],
@@ -122,8 +122,8 @@
   "kamui": {
     "name": "Kamui",
     "commandName": "kamui",
-    "power": 200,
-    "chakra": 450,
+    "power": 250,
+    "chakra": 350,
     "type": "spacetime",
     "description": "Space-Time Ninjutsu.",
     "jutsuBranches": ["attack", "genjutsu"],
@@ -182,11 +182,11 @@
   "ftg": {
     "name": "Flying Thunder God",
     "commandName": "ftg",
-    "power": 350,
-    "chakra": 150,
+    "power": 360,
+    "chakra": 170,
     "type": "lightning",
-    "description": "Move so fast, that you can dodge almost anything.",
-    "jutsuBranches": ["defense"],
+    "description": "super fast attack that zaps your opponent down to nothing.",
+    "jutsuBranches": ["attack"],
     "usageLeft": 3
   },
   "waterdragon": {
@@ -292,7 +292,7 @@
   "susano": {
     "name": "Susano",
     "commandName": "susano",
-    "power": 200,
+    "power": 350,
     "chakra": 450,
     "type": "normal",
     "description": "The strongest defense that there is.",
@@ -333,7 +333,7 @@
     "name": "Flying Raijin",
     "commandName": "fr",
     "power": 300,
-    "chakra": 250,
+    "chakra": 150,
     "type": "spacetime",
     "description": "The Flying Raijin is a powerful teleportation fūinjutsu developed by the Second Hokage.",
     "jutsuBranches": ["defense"],

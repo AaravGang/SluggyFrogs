@@ -28,7 +28,7 @@ const jutsuTypeDominance = {
   healing: [],
   genjutsu: [],
   wood: ["wind", "earth", "water", "normal"],
-  poison: ["fire", "water", "wind", "lightning", "normal", "wood"],
+  poison: ["fire", "water", "wind", "normal", "wood"],
   spacetime: [],
   sealing: [],
 };

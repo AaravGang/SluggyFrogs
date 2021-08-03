@@ -270,8 +270,9 @@ async function gameOver(client, msg, player1, player2, serverStats) {
   //REWARD WINNER AND LOSER WITH SOME ARBITARY AMOUNT
   const updateMembersBalPayload = {};
   [winnerAmount, loserAmount] = [
-    Math.floor(randomNumber(2, 4) * winner.shinobi.fees),
-    Math.floor(randomNumber(0.2, 0.9) * Math.max(winner.shinobi.fees, 600)),
+    Math.floor(randomNumber(2.5, 4.5) * winner.shinobi.fees),
+    0,
+    // Math.floor(randomNumber(0.2, 0.9) * Math.max(winner.shinobi.fees, 600)),
   ];
   updateMembersBalPayload[winner.id] = winnerAmount;
   updateMembersBalPayload[loser.id] = loserAmount;
@@ -307,7 +308,7 @@ async function sendGameOverMessages(
     `Congratulations! <@${winner.id}>, You have won. <@${loser.id}>, Better luck next time!`
   );
   msg.channel.send(
-    `<@${winner.id}>, You have been awarded with ${winnerAmount}💰!\n\n<@${loser.id}>, You recieved ${loserAmount}💰`
+    `<@${winner.id}>, You have been awarded with ${winnerAmount}💰!\n\n<@${loser.id}>, You recieved 💩💰`
   );
   return true;
 }
