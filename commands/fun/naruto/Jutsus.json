@@ -42,8 +42,8 @@
   "chidori": {
     "name": "Chidori",
     "commandName": "chidori",
-    "power": 120,
-    "chakra": 80,
+    "power": 140,
+    "chakra": 100,
     "type": "lightning",
     "description": "Attack your opponent with speedy strike of highly concentrated lightning style chakra!",
     "jutsuBranches": ["attack"],
