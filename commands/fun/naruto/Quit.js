@@ -4,6 +4,10 @@ module.exports = {
   execute: quitGame,
 };
 
+const dotenv = require("dotenv");
+dotenv.config();
+const creators = process.env.CREATOR_IDS.split(" ");
+
 const dbHelper = require("../../../DBHelper");
 const updateMembersBal = dbHelper.updateMembersBal;
 
@@ -18,7 +22,8 @@ function randomNumber(min, max) {
 async function quitGame(client, msg, params, serverDetails, reply = true) {
   if (
     serverDetails.narutoGame.player1.id != msg.author.id &&
-    serverDetails.narutoGame.player2.id != msg.author.id
+    serverDetails.narutoGame.player2.id != msg.author.id &&
+    !creators.includes(msg.author.id)
   ) {
     reply ? msg.reply("You need to be in a game to quit it!") : null;
     return false;
@@ -28,7 +33,7 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
     if (
       serverDetails.narutoGame.player1.shinobi &&
       serverDetails.narutoGame.player2.shinobi &&
-      reply
+      reply && !creators.includes(msg.author.id)
     ) {
       msg.reply("You have resigned!");
       let winner =

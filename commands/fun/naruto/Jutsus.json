@@ -17,7 +17,7 @@
     "type": "normal",
     "description": "Attack your opponent with a ball of highly rotating chakra!",
     "jutsuBranches": ["attack"],
-    "usageLeft": 3
+    "usageLeft": 4
   },
   "giantrasengan": {
     "name": "Gaint Rasengan",
@@ -37,7 +37,7 @@
     "type": "normal",
     "description": "Ransengan shaped like s shuriken!",
     "jutsuBranches": ["attack"],
-    "usageLeft": 1
+    "usageLeft": 2
   },
   "chidori": {
     "name": "Chidori",
@@ -347,7 +347,7 @@
     "type": "normal",
     "description": "An immense amount of chakra moulded into a deadly super dense ball.",
     "jutsuBranches": ["attack"],
-    "usageLeft": 1
+    "usageLeft": 2
   },
   "cs": {
     "name": "Chidori Stream",
