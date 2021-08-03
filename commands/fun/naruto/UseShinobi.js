@@ -1,6 +1,6 @@
 const Shinobis = require("./Shinobis");
 const shinobiDetails = Shinobis.shinobiDetails;
-const Shinobi = Shinobis.Shinobi
+const Shinobi = Shinobis.Shinobi;
 
 const beginGame = require("./BeginGame").beginGame;
 
@@ -8,6 +8,7 @@ const dbHelper = require("../../../DBHelper.js");
 const updateNarutoGameStats = dbHelper.updateNarutoGameStats;
 const updateMemberBal = dbHelper.updateMemberBal;
 const getServerStats = dbHelper.getServerStats;
+const updateMemberPrevShinobi = dbHelper.updateMemberPrevShinobi;
 
 module.exports = {
   name: "hire",
@@ -58,6 +59,12 @@ async function hireShinobi(client, msg, params) {
     );
     return false;
   }
+  if (serverDetails.members[player.id].prevShinobi == shinobiName) {
+    msg.reply(
+      `That's what you used previously! *Experience* **change** for a bit.`
+    );
+    return false;
+  }
 
   if (serverDetails.members[player.id].bal < shinobiDetails[shinobiName].fees) {
     msg.reply(`You don't have enough money to hire ${shinobiName} 😢`);
@@ -87,6 +94,16 @@ async function hireShinobi(client, msg, params) {
   // error while updating
   if (!updateStatus) {
     msg.reply("Internal error while trying to update your shinobi.");
+    return false;
+  }
+  updateStaus = await updateMemberPrevShinobi(
+    msg.guild,
+    msg.author.id,
+    shinobiName
+  );
+
+  if (!updateStatus) {
+    msg.reply("Internal error while trying to update your previous shinobi.");
     return false;
   }
 

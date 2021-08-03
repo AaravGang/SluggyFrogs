@@ -62,10 +62,10 @@
   "orochimaru": {
     "name": "Orochimaru",
     "commandName": "orochimaru",
-    "chakra": 1300,
-    "health": 1300,
+    "chakra": 1200,
+    "health": 1200,
     "jutsuNames": ["ebt", "hs", "ftts", "windrelease", "regen"],
-    "fees": 1300,
+    "fees": 1500,
     "chakraTypes": ["poison"]
   },
   "itachi": {
@@ -87,8 +87,8 @@
   "madara": {
     "name": "Uchiha Madara",
     "commandName": "madara",
-    "chakra": 1100,
-    "health": 1100,
+    "chakra": 1200,
+    "health": 1200,
     "jutsuNames": ["limbo", "ts", "susano", "fireball", "genjutsu"],
     "fees": 1500,
     "chakraTypes": ["fire"]

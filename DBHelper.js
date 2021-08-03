@@ -178,6 +178,19 @@ async function addJutsu(jutsu) {
   }
 }
 
+async function updateMemberPrevShinobi(guild, memberId, newShinobi) {
+  const updateField = {};
+  updateField[`members.${memberId}.prevShinobi`] = newShinobi;
+  try {
+    return await serverModel.findOneAndUpdate(
+      { serverID: guild.id },
+      { $set: updateField }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   onGuildJoin: onGuildJoin,
   onGuildLeave: onGuildLeave,
@@ -191,4 +204,5 @@ module.exports = {
   updateToInventory: updateToInventory,
   getInventory: getInventory,
   addJutsu: addJutsu,
+  updateMemberPrevShinobi: updateMemberPrevShinobi,
 };
