@@ -78,7 +78,7 @@ async function getShinobiDetails(client, msg, params = null) {
         }\` | [hover for details](${
           msg.url
         } "${shinobi.getDetailsForEmbed()}")`,
-        inline: false,
+        inline: true,
       });
     }
   } else {

@@ -140,14 +140,18 @@ function getJutsuDetails(client, msg, params = []) {
     }
   }
   // console.log(new Set(params));
+  let count = 0;
   for (let param of new Set(params)) {
+    if (count >= 2) {
+      break;
+    }
     let jutsu = jutsus[param];
     if (jutsu) {
+      count++;
       jutsuEmbed.fields.push({
         name: jutsu.name,
-        value: `\`use ${jutsu.commandName}\` | [hover for details](${
-          msg.url
-        } "${jutsu.getDescription()}")`,
+        value: `\`use ${jutsu.commandName}\`\n${jutsu.getDescription()}`,
+        inline: true,
       });
     }
   }
