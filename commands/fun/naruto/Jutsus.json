@@ -2,7 +2,7 @@
   "shadowclone": {
     "name": "Shadow Clone",
     "commandName": "shadowclone",
-    "power": 70,
+    "power": 80,
     "chakra": 40,
     "type": "normal",
     "description": "Get a few weak clones, that attack your opponent with tai-jutsu",
@@ -12,8 +12,8 @@
   "rasengan": {
     "name": "Rasengan",
     "commandName": "rasengan",
-    "power": 130,
-    "chakra": 100,
+    "power": 150,
+    "chakra": 90,
     "type": "normal",
     "description": "Attack your opponent with a ball of highly rotating chakra!",
     "jutsuBranches": ["attack"],
@@ -22,8 +22,8 @@
   "giantrasengan": {
     "name": "Gaint Rasengan",
     "commandName": "giantrasengan",
-    "power": 160,
-    "chakra": 100,
+    "power": 200,
+    "chakra": 120,
     "type": "normal",
     "description": "Attack your opponent with a massive ball of highly rotating chakra!",
     "jutsuBranches": ["attack"],
@@ -32,8 +32,8 @@
   "rasenshuriken": {
     "name": "Rasen Shuriken",
     "commandName": "rasenshuriken",
-    "power": 180,
-    "chakra": 130,
+    "power": 250,
+    "chakra": 180,
     "type": "normal",
     "description": "Ransengan shaped like s shuriken!",
     "jutsuBranches": ["attack"],
@@ -317,7 +317,7 @@
     "type": "sealing",
     "description": "Summons 4 clones of himself that are on a completely different dimension, so they can’t be seen.",
     "jutsuBranches": ["attack", "sealing"],
-    "usageLeft": 1
+    "usageLeft": 2
   },
   "regen": {
     "name": "Regeneration",
@@ -342,7 +342,7 @@
   "tbb": {
     "name": "Tailed Beast Ball",
     "commandName": "tbb",
-    "power": 400,
+    "power": 450,
     "chakra": 300,
     "type": "normal",
     "description": "An immense amount of chakra moulded into a deadly super dense ball.",
@@ -357,7 +357,7 @@
     "type": "lightning",
     "description": "Two chidoris connected by lightning. Cutting down your enemies becomes ez pz!",
     "jutsuBranches": ["attack"],
-    "usageLeft": 1
+    "usageLeft": 2
   },"wd":{
     "name": "Wood Dragons",
     "commandName": "wd",
@@ -366,6 +366,6 @@
     "type": "wood",
     "description": "Destroy your enemies with a super strong wood dragon!",
     "jutsuBranches": ["attack"],
-    "usageLeft": 1
+    "usageLeft": 2
   }
 }

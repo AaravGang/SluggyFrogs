@@ -20,19 +20,19 @@
   "gianttoad": {
     "name": "Giant Toad",
     "commandName": "gianttoad",
-    "cost": 10000,
+    "cost": 3000,
     "max": 1,
-    "healthBoost": 150,
-    "chakraBoost": 100,
+    "healthBoost": 70,
+    "chakraBoost": 80,
     "powerBoost": 50
   },
   "giantsnake": {
     "name": "Giant Snake",
     "commandName": "giantsnake",
-    "cost": 10000,
+    "cost": 3000,
     "max": 1,
-    "healthBoost": 100,
-    "chakraBoost": 100,
+    "healthBoost": 50,
+    "chakraBoost": 80,
     "powerBoost": 70
   },
   "snake": {
