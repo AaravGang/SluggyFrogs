@@ -75,7 +75,7 @@ async function getShinobiDetails(client, msg, params = null) {
         name: shinobi.name,
         value: `Use \`${prefix} hire ${
           shinobi.commandName
-        }\` | [hover for details](${
+        }\n\`[hover for details](${
           msg.url
         } "${shinobi.getDetailsForEmbed()}")`,
         inline: true,
