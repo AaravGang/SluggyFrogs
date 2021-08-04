@@ -1,6 +1,6 @@
 const Shinobis = require("./Shinobis");
 const shinobiDetails = Shinobis.shinobiDetails;
-const Shinobi = Shinobis.Shinobi;
+const rankOrder = Shinobis.rankOrder;
 
 const beginGame = require("./BeginGame").beginGame;
 
@@ -56,6 +56,22 @@ async function hireShinobi(client, msg, params) {
   if (opponent.shinobi === shinobiName) {
     msg.reply(
       `${shinobiName} has already been hired. Choose any other shinobi`
+    );
+    return false;
+  }
+
+  if (
+    opponent.shinobi &&
+    rankOrder.indexOf(shinobiDetails[shinobiName].rank) >
+      rankOrder.indexOf(shinobiDetails[opponent.shinobi].rank)
+  ) {
+    msg.reply(
+      `***DESTROYING*** your opponent is not allowed!\nYour opponent has chosen a shinobi of a lower rank ${
+        shinobiDetails[opponent.shinobi].rank
+      }, choose a shinobi of that rank or lower.\nAvailable ranks: ${rankOrder.slice(
+        0,
+        rankOrder.indexOf(shinobiDetails[opponent.shinobi].rank) + 1
+      )} `
     );
     return false;
   }

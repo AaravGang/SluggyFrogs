@@ -12,7 +12,8 @@
       "tbb"
     ],
     "fees": 900,
-    "chakraTypes": ["wind"]
+    "chakraTypes": ["wind"],
+    "rank": "genin"
   },
   "sasuke": {
     "name": "Uchiha Sasuke",
@@ -21,7 +22,8 @@
     "health": 1100,
     "jutsuNames": ["chidori", "fireball", "genjutsu", "amaterasu", "susano"],
     "fees": 900,
-    "chakraTypes": ["fire", "lightning"]
+    "chakraTypes": ["fire", "lightning"],
+    "rank": "genin"
   },
   "kakashi": {
     "name": "Hatake Kakashi",
@@ -30,7 +32,8 @@
     "health": 1000,
     "jutsuNames": ["chidori", "mudwall", "kamui", "genjutsu", "cs"],
     "fees": 900,
-    "chakraTypes": ["lightning"]
+    "chakraTypes": ["lightning"],
+    "rank": "jonin"
   },
   "sakura": {
     "name": "Haruno Sakura",
@@ -39,7 +42,8 @@
     "health": 1100,
     "jutsuNames": ["hundredhealings", "superpunch"],
     "fees": 600,
-    "chakraTypes": ["normal"]
+    "chakraTypes": ["normal"],
+    "rank": "genin"
   },
   "hashirama": {
     "name": "Senju Hashirama",
@@ -48,7 +52,8 @@
     "health": 1200,
     "jutsuNames": ["dfb", "dfe", "woodclone", "woodrelease", "wd"],
     "fees": 1500,
-    "chakraTypes": ["wood"]
+    "chakraTypes": ["wood"],
+    "rank": "kage"
   },
   "tobirama": {
     "name": "Senju Tobirama",
@@ -57,7 +62,8 @@
     "health": 1100,
     "jutsuNames": ["shadowclone", "ftg", "waterdragon", "waterrelease", "fr"],
     "fees": 1400,
-    "chakraTypes": ["water"]
+    "chakraTypes": ["water", "normal", "lightning"],
+    "rank": "kage"
   },
   "orochimaru": {
     "name": "Orochimaru",
@@ -66,7 +72,8 @@
     "health": 1200,
     "jutsuNames": ["ebt", "hs", "ftts", "windrelease", "regen"],
     "fees": 1500,
-    "chakraTypes": ["poison"]
+    "chakraTypes": ["poison"],
+    "rank": "jonin"
   },
   "itachi": {
     "name": "Uchiha Itachi",
@@ -82,7 +89,8 @@
       "amaterasu"
     ],
     "fees": 1400,
-    "chakraTypes": ["fire"]
+    "chakraTypes": ["fire"],
+    "rank": "jonin"
   },
   "madara": {
     "name": "Uchiha Madara",
@@ -91,6 +99,7 @@
     "health": 1200,
     "jutsuNames": ["limbo", "ts", "susano", "fireball", "genjutsu"],
     "fees": 1500,
-    "chakraTypes": ["fire"]
+    "chakraTypes": ["fire"],
+    "rank": "kage"
   }
 }

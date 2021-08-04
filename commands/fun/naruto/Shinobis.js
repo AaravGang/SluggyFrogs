@@ -6,10 +6,11 @@ dotenv.config();
 const prefix = process.env.PREFIX;
 
 const boostForChakraSync = 20;
+const rankOrder = ["genin", "chunin", "jonin", "kage"];
 
 class Shinobi {
   constructor(
-    { name, commandName, chakra, health, jutsuNames, fees, chakraTypes },
+    { name, commandName, chakra, health, jutsuNames, fees, chakraTypes, rank },
     healthBoost = 0,
     chakraBoost = 0,
     powerBoost = 0
@@ -33,6 +34,7 @@ class Shinobi {
       );
     }
     this.fees = fees;
+    this.rank = rank;
   }
   getShinobiDetails() {
     return {
@@ -45,22 +47,30 @@ class Shinobi {
       fees: this.fees,
       damageBoost: this.damageBoost,
       chakraTypes: this.chakraTypes,
+      rank: this.rank,
     };
   }
   getDetailsForEmbed() {
-    return `Name: ${this.name}\n\nCommand Name: ${this.commandName}\n\nChakra:${this.chakra}\n\nHealth:${this.health}\n\nJutsus: ${this.jutsuNames}\n\nChakra Types: ${this.chakraTypes}\n\nFees: ${this.fees}`;
+    return `Name: ${this.name}\n\nCommand Name: ${this.commandName}\n\nRank: ${this.rank}\n\nChakra:${this.chakra}\n\nHealth:${this.health}\n\nJutsus: ${this.jutsuNames}\n\nChakra Types: ${this.chakraTypes}\n\nFees: ${this.fees}`;
   }
 }
 
-
-// move this inside getshinobidetails if psbl
 const shinobiDetails = require("./Shinobis.json");
 
 const shinobis = {};
 for ([key, value] of Object.entries(shinobiDetails)) {
   shinobis[key] = new Shinobi(value);
 }
-//
+
+const rankWise = Object.entries(shinobis).sort(
+  ([, s1], [, s2]) => rankOrder.indexOf(s1.rank) - rankOrder.indexOf(s2.rank)
+);
+const rankWiseShinobis = {};
+for (let rank of rankOrder) {
+  rankWiseShinobis[rank] = rankWise
+    .filter(([shinobiName, details]) => details.rank == rank)
+    .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+}
 
 async function getShinobiDetails(client, msg, params = null) {
   const shinobisListEmbed = {
@@ -70,16 +80,23 @@ async function getShinobiDetails(client, msg, params = null) {
   };
 
   if (!params || !params.length) {
-    for (let [shinobiKey, shinobi] of Object.entries(shinobis)) {
+    for (let [rankName, rankShinobis] of Object.entries(rankWiseShinobis)) {
       shinobisListEmbed.fields.push({
-        name: shinobi.name,
-        value: `Use \`${prefix} hire ${
-          shinobi.commandName
-        }\n\`[hover for details](${
-          msg.url
-        } "${shinobi.getDetailsForEmbed()}")`,
-        inline: true,
+        name: `⚔️ **${rankName.toUpperCase()}** ⚔️`,
+        value: "\u200b",
       });
+
+      for (let [shinobiKey, shinobi] of Object.entries(rankShinobis)) {
+        shinobisListEmbed.fields.push({
+          name: shinobi.name,
+          value: `Use \`${prefix} hire ${
+            shinobi.commandName
+          }\n\`[hover for details](${
+            msg.url
+          } "${shinobi.getDetailsForEmbed()}")`,
+          inline: true,
+        });
+      }
     }
   } else {
     let ind = 0;
@@ -120,4 +137,5 @@ module.exports = {
   execute: getShinobiDetails,
   shinobiDetails: shinobiDetails,
   Shinobi: Shinobi,
+  rankOrder: rankOrder,
 };
