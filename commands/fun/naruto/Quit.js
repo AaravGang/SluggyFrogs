@@ -33,7 +33,8 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
     if (
       serverDetails.narutoGame.player1.shinobi &&
       serverDetails.narutoGame.player2.shinobi &&
-      reply && !creators.includes(msg.author.id)
+      reply &&
+      !creators.includes(msg.author.id)
     ) {
       msg.reply("You have resigned!");
       let winner =
@@ -47,6 +48,7 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
       );
 
       payload[winner.id] = winAmt;
+
       let updateStatus = await updateMembersBal(msg.guild, payload);
       if (updateStatus) {
         msg.channel.send(`<@${winner.id}>, You have won ${winAmt}💰`);
@@ -55,6 +57,21 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
           "unable to update money of winner when someone quit the game."
         );
       }
+    } else if (
+      serverDetails.narutoGame.player1.shinobi ||
+      serverDetails.narutoGame.player2.shinobi
+    ) {
+      let playerWhoHired = serverDetails.narutoGame.player1.shinobi
+        ? serverDetails.narutoGame.player1
+        : serverDetails.narutoGame.player2;
+      let payload = {};
+      payload[playerWhoHired.id] = ShinobisJson[playerWhoHired.shinobi].fees;
+      await updateMembersBal(msg.guild, payload);
+      msg.channel.send(
+        `<@${playerWhoHired.id}>, Your money was refunded (${
+          ShinobisJson[playerWhoHired.shinobi].fees
+        })`
+      );
     }
 
     let newGameStats = {

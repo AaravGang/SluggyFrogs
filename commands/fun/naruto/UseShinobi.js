@@ -66,9 +66,9 @@ async function hireShinobi(client, msg, params) {
       rankOrder.indexOf(shinobiDetails[opponent.shinobi].rank)
   ) {
     msg.reply(
-      `***DESTROYING*** your opponent is not allowed!\nYour opponent has chosen a shinobi of a lower rank ${
+      `***DESTROYING*** your opponent is not allowed!\nYour opponent has chosen a shinobi of a lower rank (${
         shinobiDetails[opponent.shinobi].rank
-      }, choose a shinobi of that rank or lower.\nAvailable ranks: ${rankOrder.slice(
+      }), choose a shinobi of that rank or lower.\nAvailable ranks: ${rankOrder.slice(
         0,
         rankOrder.indexOf(shinobiDetails[opponent.shinobi].rank) + 1
       )} `
@@ -77,7 +77,7 @@ async function hireShinobi(client, msg, params) {
   }
   if (serverDetails.members[player.id].prevShinobi == shinobiName) {
     msg.reply(
-      `That's what you used previously! *Experience* **change** for a bit.`
+      `That's whom you hired previously! **Don't get to comfortable with a shinobi**.`
     );
     return false;
   }
