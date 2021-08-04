@@ -17,7 +17,7 @@
     "type": "normal",
     "description": "Attack your opponent with a ball of highly rotating chakra!",
     "jutsuBranches": ["attack"],
-    "usageLeft": 4
+    "usageLeft": 6
   },
   "giantrasengan": {
     "name": "Gaint Rasengan",
@@ -423,7 +423,7 @@
     "name": "Sexy Jutsu",
     "commandName": "sexyjutsu",
     "power": 0,
-    "chakra": 30,
+    "chakra": 90,
     "type": "genjutsu",
     "description": "Use to find out!",
     "jutsuBranches": ["genjutsu"],
