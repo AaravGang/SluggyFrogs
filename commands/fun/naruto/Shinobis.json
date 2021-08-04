@@ -63,7 +63,7 @@
     "jutsuNames": ["shadowclone", "ftg", "waterdragon", "waterrelease", "fr"],
     "fees": 1400,
     "chakraTypes": ["water", "normal", "lightning"],
-    "rank": "kage"
+    "rank": "jonin"
   },
   "orochimaru": {
     "name": "Orochimaru",
@@ -73,7 +73,7 @@
     "jutsuNames": ["ebt", "hs", "ftts", "windrelease", "regen"],
     "fees": 1500,
     "chakraTypes": ["poison"],
-    "rank": "jonin"
+    "rank": "kage"
   },
   "itachi": {
     "name": "Uchiha Itachi",
