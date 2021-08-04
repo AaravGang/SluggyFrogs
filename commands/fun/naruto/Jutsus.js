@@ -15,6 +15,7 @@ const jutsuTypes = [
   "poison",
   "spacetime",
   "sealing",
+  "taijutsu",
 ];
 
 const jutsuTypeDominance = {
@@ -31,6 +32,7 @@ const jutsuTypeDominance = {
   poison: ["fire", "water", "wind", "normal", "wood"],
   spacetime: [],
   sealing: [],
+  taijutsu: [],
 };
 const powerIncrease = 20;
 

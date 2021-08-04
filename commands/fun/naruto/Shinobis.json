@@ -13,7 +13,7 @@
     ],
     "fees": 900,
     "chakraTypes": ["wind"],
-    "rank": "genin"
+    "rank": "chunin"
   },
   "sasuke": {
     "name": "Uchiha Sasuke",
@@ -23,7 +23,7 @@
     "jutsuNames": ["chidori", "fireball", "genjutsu", "amaterasu", "susano"],
     "fees": 900,
     "chakraTypes": ["fire", "lightning"],
-    "rank": "genin"
+    "rank": "chunin"
   },
   "kakashi": {
     "name": "Hatake Kakashi",
@@ -31,18 +31,18 @@
     "chakra": 1000,
     "health": 1000,
     "jutsuNames": ["chidori", "mudwall", "kamui", "genjutsu", "cs"],
-    "fees": 900,
+    "fees": 1100,
     "chakraTypes": ["lightning"],
     "rank": "jonin"
   },
   "sakura": {
     "name": "Haruno Sakura",
     "commandName": "sakura",
-    "chakra": 1100,
-    "health": 1100,
-    "jutsuNames": ["hundredhealings", "superpunch"],
+    "chakra": 1000,
+    "health": 1000,
+    "jutsuNames": ["hundredhealings", "superpunch", "taijutsu"],
     "fees": 600,
-    "chakraTypes": ["normal"],
+    "chakraTypes": ["normal", "taijutsu"],
     "rank": "genin"
   },
   "hashirama": {
@@ -101,5 +101,45 @@
     "fees": 1500,
     "chakraTypes": ["fire"],
     "rank": "kage"
+  },
+  "neji": {
+    "name": "Hyuga Neji",
+    "commandName": "neji",
+    "chakra": 1000,
+    "health": 1000,
+    "jutsuNames": ["gentlefist", "taijutsu", "et128p", "rotation"],
+    "fees": 900,
+    "chakraTypes": ["taijutsu"],
+    "rank": "chunin"
+  },
+  "sai": {
+    "name": "Sai",
+    "commandName": "sai",
+    "chakra": 1000,
+    "health": 1000,
+    "jutsuNames": ["sbs", "tvsb", "taijutsu"],
+    "fees": 600,
+    "chakraTypes": ["normal"],
+    "rank": "genin"
+  },
+  "konohamaru": {
+    "name": "Sarutobi Konohamaru",
+    "commandName": "konohamaru",
+    "chakra": 900,
+    "health": 900,
+    "jutsuNames": ["sexyjutsu", "rasengan"],
+    "fees": 400,
+    "chakraTypes": ["normal"],
+    "rank": "genin"
+  },
+  "choji": {
+    "name": "Akimichi Choji",
+    "commandName": "choji",
+    "chakra": 900,
+    "health": 1100,
+    "jutsuNames": ["hbt", "pe", "bw"],
+    "fees": 600,
+    "chakraTypes": ["normal"],
+    "rank": "genin"
   }
 }

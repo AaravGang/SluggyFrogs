@@ -84,7 +84,7 @@
     "commandName": "superpunch",
     "power": 110,
     "chakra": 80,
-    "type": "normal",
+    "type": "taijutsu",
     "description": "Shannaro!",
     "jutsuBranches": ["attack"],
     "usageLeft": 15
@@ -104,7 +104,7 @@
     "commandName": "taijutsu",
     "power": 75,
     "chakra": 30,
-    "type": "normal",
+    "type": "taijutsu",
     "description": "Use it for attack when less chakra",
     "jutsuBranches": ["attack"],
     "usageLeft": 20
@@ -347,7 +347,7 @@
     "type": "normal",
     "description": "An immense amount of chakra moulded into a deadly super dense ball.",
     "jutsuBranches": ["attack"],
-    "usageLeft": 2
+    "usageLeft": 1
   },
   "cs": {
     "name": "Chidori Stream",
@@ -358,7 +358,8 @@
     "description": "Two chidoris connected by lightning. Cutting down your enemies becomes ez pz!",
     "jutsuBranches": ["attack"],
     "usageLeft": 2
-  },"wd":{
+  },
+  "wd": {
     "name": "Wood Dragons",
     "commandName": "wd",
     "power": 350,
@@ -367,5 +368,95 @@
     "description": "Destroy your enemies with a super strong wood dragon!",
     "jutsuBranches": ["attack"],
     "usageLeft": 2
+  },
+  "gentlefist": {
+    "name": "Gentle Fist",
+    "commandName": "gentlefist",
+    "power": 160,
+    "chakra": 100,
+    "type": "taijutsu",
+    "description": "Super strong taijutsu limited to the Hyuga!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 8
+  },
+  "et128p": {
+    "name": "Eight Trigrams 128 Palms",
+    "commandName": "et128p",
+    "power": 300,
+    "chakra": 180,
+    "type": "taijutsu",
+    "description": "128 continuous attacks on all the opponents chakra points!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 2
+  },
+  "rotation": {
+    "name": "Rotation",
+    "commandName": "rotation",
+    "power": 300,
+    "chakra": 180,
+    "type": "taijutsu",
+    "description": "The user rotates super fast to defend all attacks!",
+    "jutsuBranches": ["defense"],
+    "usageLeft": 2
+  },
+  "tvsb": {
+    "name": "Sealing Technique: Tiger Vision Staring Bullet",
+    "commandName": "tvsb",
+    "power": 160,
+    "chakra": 100,
+    "type": "normal",
+    "description": "The user seals his opponent in a painting!",
+    "jutsuBranches": ["sealing"],
+    "usageLeft": 2
+  },
+  "sbs": {
+    "name": "Super Beast Scroll",
+    "commandName": "sbs",
+    "power": 140,
+    "chakra": 90,
+    "type": "normal",
+    "description": "The user draws something and brings it to life!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 20
+  },
+  "sexyjutsu": {
+    "name": "Sexy Jutsu",
+    "commandName": "sexyjutsu",
+    "power": 0,
+    "chakra": 30,
+    "type": "genjutsu",
+    "description": "Use to find out!",
+    "jutsuBranches": ["genjutsu"],
+    "usageLeft": 5
+  },
+  "hbt": {
+    "name": "Human Boulder Technique",
+    "commandName": "hbt",
+    "power": 200,
+    "chakra": 150,
+    "type": "normal",
+    "description": "User becomes XXXXXXXL size!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 4
+  },
+  "pe": {
+    "name": "Partial Expansion Technique",
+    "commandName": "pe",
+    "power": 120,
+    "chakra": 80,
+    "type": "normal",
+    "description": "A part of the user becomes XXXXXXXL size!",
+    "jutsuBranches": ["attack"],
+    "usageLeft": 8
+  },
+  "bw": {
+    "name": "Butterfly Wings",
+    "commandName": "bw",
+    "power": 200,
+    "chakra": 150,
+    "type": "normal",
+    "description": "Caster grows wings and is now able to dodge attacks easily!",
+    "jutsuBranches": ["defense"],
+    "usageLeft": 3
   }
 }
