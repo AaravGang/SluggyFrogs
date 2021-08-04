@@ -22,8 +22,7 @@ function randomNumber(min, max) {
 async function quitGame(client, msg, params, serverDetails, reply = true) {
   if (
     serverDetails.narutoGame.player1.id != msg.author.id &&
-    serverDetails.narutoGame.player2.id != msg.author.id &&
-    !creators.includes(msg.author.id)
+    serverDetails.narutoGame.player2.id != msg.author.id
   ) {
     reply ? msg.reply("You need to be in a game to quit it!") : null;
     return false;
@@ -33,8 +32,7 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
     if (
       serverDetails.narutoGame.player1.shinobi &&
       serverDetails.narutoGame.player2.shinobi &&
-      reply &&
-      !creators.includes(msg.author.id)
+      reply
     ) {
       msg.reply("You have resigned!");
       let winner =
