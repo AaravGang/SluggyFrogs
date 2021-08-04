@@ -127,7 +127,7 @@
     "commandName": "konohamaru",
     "chakra": 900,
     "health": 900,
-    "jutsuNames": ["sexyjutsu", "rasengan"],
+    "jutsuNames": ["sexyjutsu", "rasengan","shadowclone"],
     "fees": 400,
     "chakraTypes": ["normal"],
     "rank": "genin"
