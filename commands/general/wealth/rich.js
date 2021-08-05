@@ -17,18 +17,26 @@ async function getRichOrder(client, msg, params, serverDetails) {
   };
 
   let ind = 1;
-
-  for ([key, value] of Object.entries(serverDetails.members).sort(
+  let authorMentioned = false;
+  const rankOrder = Object.entries(serverDetails.members).sort(
     ([, a], [, b]) => b.bal - a.bal
-  )) {
+  );
+
+
+  for ([key, value] of rankOrder) {
+    if (ind > 3 && key != msg.author.id) {
+      ind++
+      continue;
+    }
     let field = {
       name: `${ind}) ${value.userName}`,
-        value: `Wealth: ${value.bal}💰`,
-      inline:true
+      value: `Wealth: ${value.bal}💰`,
+      inline: false,
     };
     if (msg.author.id == value.id) {
       field.name = `***${field.name}***`;
       field.value = `***${field.value}***`;
+      authorMentioned = true;
     }
 
     rankEmbed.fields.push(field);
