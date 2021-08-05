@@ -23,6 +23,9 @@ async function getRichOrder(client, msg, params, serverDetails) {
   const rankOrder = Object.entries(serverDetails.members).sort(
     ([, a], [, b]) => b.bal - a.bal
   );
+  rankEmbed.footer = {
+    text: `Total cussers: ${rankOrder.length}`,
+  };
 
   for ([key, value] of rankOrder) {
     if (ind > 3 && key != msg.author.id) {
