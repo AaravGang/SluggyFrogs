@@ -57,7 +57,7 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
       }
     } else if (
       serverDetails.narutoGame.player1.shinobi ||
-      serverDetails.narutoGame.player2.shinobi
+      serverDetails.narutoGame.player2.shinobi && reply
     ) {
       let playerWhoHired = serverDetails.narutoGame.player1.shinobi
         ? serverDetails.narutoGame.player1
