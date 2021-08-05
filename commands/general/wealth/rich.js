@@ -8,6 +8,8 @@ module.exports = {
   execute: getRichOrder,
 };
 
+const rankEmojis = ["🥇", "🥈", "🥉"];
+
 async function getRichOrder(client, msg, params, serverDetails) {
   let rankEmbed = {
     title: "Sluggy Rich",
@@ -22,14 +24,15 @@ async function getRichOrder(client, msg, params, serverDetails) {
     ([, a], [, b]) => b.bal - a.bal
   );
 
-
   for ([key, value] of rankOrder) {
     if (ind > 3 && key != msg.author.id) {
-      ind++
+      ind++;
       continue;
     }
     let field = {
-      name: `${ind}) ${value.userName}`,
+      name: `${
+        rankEmojis[ind - 1] ? rankEmojis[ind - 1] : ind.toString() + ")"
+      } ${value.userName}`,
       value: `Wealth: ${value.bal}💰`,
       inline: false,
     };
