@@ -20,6 +20,9 @@ Canvas.loadImage("commands/fun/image/haha.jpg").then((img) => bgOpts.push(img));
 // setTimeout(()=>console.log(bg),6000)
 
 async function genderReveal(client, msg, params, serverDetails) {
+  const maya = await Canvas.loadImage(
+    "commands/fun/image/Screenshot_2021-08-05_at_12.28.58_PM.png"
+  );
   let bg = bgOpts[Math.floor(Math.random() * bgOpts.length)];
   const canvas = Canvas.createCanvas(500, 500);
   const context = canvas.getContext("2d");
@@ -42,7 +45,7 @@ async function genderReveal(client, msg, params, serverDetails) {
   }
 
   // Draw a shape onto the main canvas
-  context.drawImage(avatar, 40, 80, 130, 130);
+  context.drawImage(maya, 40, 80, 130, 130);
 
   const attachment = new Discord.MessageAttachment(
     canvas.toBuffer(),

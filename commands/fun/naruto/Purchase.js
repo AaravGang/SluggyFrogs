@@ -61,9 +61,7 @@ async function addItem(client, msg, params, serverDetails) {
   );
   if (updateStatus) {
     msg.reply(
-      `Added item! Current stock of ${itemName}: ${
-        number - alreadyPresentNumber
-      }\nMoney deducted from your wallet: ${
+      `Added item! Current stock of ${itemName}: ${number}\nMoney deducted from your wallet: ${
         item.cost * (number - alreadyPresentNumber)
       }; Current Balance: ${
         memberBal - item.cost * (number - alreadyPresentNumber)
