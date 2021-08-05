@@ -23,7 +23,8 @@ async function getRichOrder(client, msg, params, serverDetails) {
   )) {
     let field = {
       name: `${ind}) ${value.userName}`,
-      value: `Wealth: ${value.bal}💰`,
+        value: `Wealth: ${value.bal}💰`,
+      inline:true
     };
     if (msg.author.id == value.id) {
       field.name = `***${field.name}***`;
