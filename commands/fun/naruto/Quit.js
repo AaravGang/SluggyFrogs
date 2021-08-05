@@ -68,7 +68,7 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
       msg.channel.send(
         `<@${playerWhoHired.id}>, Your money was refunded (${
           ShinobisJson[playerWhoHired.shinobi].fees
-        })`
+        }💰)`
       );
     }
 
