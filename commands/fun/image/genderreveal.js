@@ -13,9 +13,13 @@ var bgOpts = [];
 
 Canvas.loadImage(
   "https://64.media.tumblr.com/202c1955cb2c42045142656a81107657/tumblr_nx29y66Y2y1tmbsp5o1_1280.jpg"
-).then((img) => bgOpts.push(img));
+).then((img) =>
+  bgOpts.push({ image: img, avatarSize: 130, avatarX: 40, avatarY: 80 })
+);
 
-Canvas.loadImage("commands/fun/image/haha.jpg").then((img) => bgOpts.push(img));
+Canvas.loadImage("commands/fun/image/haha.jpg").then((img) =>
+  bgOpts.push({ image: img, avatarSize: 130, avatarX: 60, avatarY: 120 })
+);
 
 // setTimeout(()=>console.log(bg),6000)
 
@@ -42,7 +46,13 @@ async function genderReveal(client, msg, params, serverDetails) {
   }
 
   // Draw a shape onto the main canvas
-  context.drawImage(avatar, 40, 80, 130, 130);
+  context.drawImage(
+    avatar,
+    bg.avatarX,
+    bg.avatarY,
+    bg.avatarSize,
+    bg.avatarSize
+  );
 
   const attachment = new Discord.MessageAttachment(
     canvas.toBuffer(),
