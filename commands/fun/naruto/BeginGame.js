@@ -15,12 +15,15 @@ const getNarutoGameStats = dbHelper.getNarutoGameStats;
 const Shinobis = require("./Shinobis");
 const Shinobi = Shinobis.Shinobi;
 const shinobiDetails = Shinobis.shinobiDetails;
+const rankOrder = Shinobis.rankOrder;
 
 const Jutsus = require("./Jutsus").jutsus;
 
 const Shop = require("./Shop.json");
 
 const quitGame = require("./Quit").execute;
+
+const rankDiffPay = 250;
 
 const timeLimit = 60;
 const skipChakraInc = 10;
@@ -274,6 +277,24 @@ async function gameOver(client, msg, player1, player2, serverStats) {
     0,
     // Math.floor(randomNumber(0.2, 0.9) * Math.max(winner.shinobi.fees, 600)),
   ];
+
+  if (
+    rankOrder.indexOf(winner.shinobi.rank) <
+    rankOrder.indexOf(loser.shinobi.rank)
+  ) {
+    winnerAmount +=
+      (rankOrder.indexOf(loser.shinobi.rank) -
+        rankOrder.indexOf(winner.shinobi.rank)) *
+      rankDiffPay;
+  } else if (
+    rankOrder.indexOf(winner.shinobi.rank) >
+    rankOrder.indexOf(loser.shinobi.rank)
+  ) {
+    loserAmount +=
+      (rankOrder.indexOf(winner.shinobi.rank) -
+        rankOrder.indexOf(loser.shinobi.rank)) *
+      rankDiffPay;
+  }
   updateMembersBalPayload[winner.id] = winnerAmount;
   updateMembersBalPayload[loser.id] = loserAmount;
 
@@ -308,7 +329,7 @@ async function sendGameOverMessages(
     `Congratulations! <@${winner.id}>, You have won. <@${loser.id}>, Better luck next time!`
   );
   msg.channel.send(
-    `<@${winner.id}>, You have been awarded with ${winnerAmount}💰!\n\n<@${loser.id}>, You recieved 💩💰`
+    `<@${winner.id}>, You have been awarded with ${winnerAmount}💰!\n\n<@${loser.id}>, You recieved ${loserAmount}💰`
   );
   return true;
 }

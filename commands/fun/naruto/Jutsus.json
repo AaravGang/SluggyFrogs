@@ -284,7 +284,7 @@
     "commandName": "crowclone",
     "power": 100,
     "chakra": 150,
-    "type": "genjutsu",
+    "type": "normal",
     "description": "Summons multiple clones that deal some damage and trap your opponent in a genjutsu.",
     "jutsuBranches": ["attack", "defense"],
     "usageLeft": 2
