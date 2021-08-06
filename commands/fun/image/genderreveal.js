@@ -24,7 +24,7 @@ Canvas.loadImage("commands/fun/image/haha.jpg").then((img) =>
 // setTimeout(()=>console.log(bg),6000)
 
 async function genderReveal(client, msg, params, serverDetails) {
-  let bg = bgOpts[Math.floor(Math.random() * bgOpts.length)];
+  let bg = bgOpts[Math.floor(Math.random() * bgOpts.length)].image;
   const canvas = Canvas.createCanvas(500, 500);
   const context = canvas.getContext("2d");
   // Since the image takes time to load, you should await it
