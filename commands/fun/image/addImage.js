@@ -1,5 +1,7 @@
 const dbHelper = require("../../../DBHelper");
 const addImage = dbHelper.addImage;
+const getImage = dbHelper.getImage;
+
 const Canvas = require("canvas");
 module.exports = {
   name: "addi",
@@ -24,7 +26,7 @@ async function addImageToDB(client, msg, params, serverDetail) {
     avatarY,
     msg
   );
-//   console.log(addRequest);
+  //   console.log(addRequest);
   if (addRequest == false) return;
 
   let addStatus = await addImage(
@@ -43,6 +45,10 @@ async function addImageToDB(client, msg, params, serverDetail) {
 
 async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
   if (name && !isNaN(avatarSize) && !isNaN(avatarX) && !isNaN(avatarY)) {
+    if (await getImage(name)) {
+      msg.reply("This image already exists, update command will come soon!");
+      return false;
+    }
     var image;
 
     try {

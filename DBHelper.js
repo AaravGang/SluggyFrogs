@@ -195,6 +195,10 @@ async function getImages() {
   return await imageModel.find({});
 }
 
+async function getImage(name) {
+  return await imageModel.findOne({ name: name });
+}
+
 module.exports = {
   onGuildJoin: onGuildJoin,
   onGuildLeave: onGuildLeave,
@@ -210,4 +214,5 @@ module.exports = {
   updateMemberPrevShinobi: updateMemberPrevShinobi,
   addImage: addImage,
   getImages: getImages,
+  getImage:getImage
 };
