@@ -23,7 +23,8 @@ const Shop = require("./Shop.json");
 
 const quitGame = require("./Quit").execute;
 
-const rankDiffPay = 250;
+const rankDiffWinPay = 1000;
+const rankDiffLoosePay = 500;
 
 const timeLimit = 60;
 const skipChakraInc = 10;
@@ -278,6 +279,8 @@ async function gameOver(client, msg, player1, player2, serverStats) {
     // Math.floor(randomNumber(0.2, 0.9) * Math.max(winner.shinobi.fees, 600)),
   ];
 
+  console.log(winnerAmount, loserAmount);
+
   if (
     rankOrder.indexOf(winner.shinobi.rank) <
     rankOrder.indexOf(loser.shinobi.rank)
@@ -285,7 +288,7 @@ async function gameOver(client, msg, player1, player2, serverStats) {
     winnerAmount +=
       (rankOrder.indexOf(loser.shinobi.rank) -
         rankOrder.indexOf(winner.shinobi.rank)) *
-      rankDiffPay;
+      rankDiffWinPay;
   } else if (
     rankOrder.indexOf(winner.shinobi.rank) >
     rankOrder.indexOf(loser.shinobi.rank)
@@ -293,8 +296,10 @@ async function gameOver(client, msg, player1, player2, serverStats) {
     loserAmount +=
       (rankOrder.indexOf(winner.shinobi.rank) -
         rankOrder.indexOf(loser.shinobi.rank)) *
-      rankDiffPay;
+      rankDiffLoosePay;
   }
+  console.log(winnerAmount, loserAmount);
+
   updateMembersBalPayload[winner.id] = winnerAmount;
   updateMembersBalPayload[loser.id] = loserAmount;
 
