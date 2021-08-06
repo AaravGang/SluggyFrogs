@@ -38,7 +38,7 @@ const serverSchema = new mongoose.Schema({
 const serverModel = mongoose.model("server-models", serverSchema);
 
 const imageSchema = new mongoose.Schema({
-  image: { type: Buffer, require: true },
+  url: { type: String, require: true },
   name: { type: String, require: true, unique: true },
   avatarSize: { type: Number, require: true },
   avatarX: { type: Number, require: true },

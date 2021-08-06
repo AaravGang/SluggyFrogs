@@ -177,11 +177,11 @@ async function updateMemberPrevShinobi(guild, memberId, newShinobi) {
   }
 }
 
-async function addImage(name, imageBuffer, avatarSize, avatarX, avatarY) {
+async function addImage(name, url, avatarSize, avatarX, avatarY) {
   try {
     return await imageModel.create({
-      image: imageBuffer,
       name: name,
+      url: url,
       avatarSize: avatarSize,
       avatarX: avatarX,
       avatarY: avatarY,
@@ -189,6 +189,10 @@ async function addImage(name, imageBuffer, avatarSize, avatarX, avatarY) {
   } catch (err) {
     console.log(err);
   }
+}
+
+async function getImages() {
+  return await imageModel.find({});
 }
 
 module.exports = {
@@ -205,4 +209,5 @@ module.exports = {
   getInventory: getInventory,
   updateMemberPrevShinobi: updateMemberPrevShinobi,
   addImage: addImage,
+  getImages: getImages,
 };

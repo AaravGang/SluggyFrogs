@@ -15,7 +15,6 @@ const prefix = process.env.PREFIX;
 async function addImageToDB(client, msg, params, serverDetail) {
   // name url avatarSize avatarX avatarY
   const [name, url, avatarSize, avatarX, avatarY] = params.slice(0, 5);
-  console.log(name, url, avatarSize, avatarX, avatarY);
 
   const addRequest = await validateParams(
     name,
@@ -25,12 +24,12 @@ async function addImageToDB(client, msg, params, serverDetail) {
     avatarY,
     msg
   );
-  console.log(addRequest);
+//   console.log(addRequest);
   if (addRequest == false) return;
 
   let addStatus = await addImage(
     addRequest.name,
-    addRequest.image,
+    addRequest.url,
     addRequest.avatarSize,
     addRequest.avatarX,
     addRequest.avatarY
@@ -45,7 +44,7 @@ async function addImageToDB(client, msg, params, serverDetail) {
 async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
   if (name && !isNaN(avatarSize) && !isNaN(avatarX) && !isNaN(avatarY)) {
     var image;
-    var imageBuffer;
+
     try {
       image = await Canvas.loadImage(url);
 
@@ -53,10 +52,6 @@ async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
         msg.reply(`No image!`);
         return false;
       }
-      const canvas = Canvas.createCanvas(500, 500);
-      const context = canvas.getContext("2d");
-      context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      imageBuffer = canvas.toBuffer();
     } catch (err) {
       msg.reply(`Exception while trying to load image from url`);
       console.log(err);
@@ -64,7 +59,7 @@ async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
     }
     return {
       name: name,
-      image: imageBuffer,
+      url: url,
       avatarSize: parseInt(avatarSize),
       avatarX: parseInt(avatarX),
       avatarY: parseInt(avatarY),
