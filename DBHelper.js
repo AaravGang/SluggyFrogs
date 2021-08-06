@@ -199,6 +199,14 @@ async function getImage(name) {
   return await imageModel.findOne({ name: name });
 }
 
+async function updateImage(name, data) {
+  return await imageModel.findOneAndUpdate({ name: name }, { $set: data });
+}
+
+async function deleteImage(name) {
+  return await imageModel.findOneAndDelete({ name: name });
+}
+
 module.exports = {
   onGuildJoin: onGuildJoin,
   onGuildLeave: onGuildLeave,
@@ -214,5 +222,7 @@ module.exports = {
   updateMemberPrevShinobi: updateMemberPrevShinobi,
   addImage: addImage,
   getImages: getImages,
-  getImage:getImage
+  getImage: getImage,
+  updateImage: updateImage,
+  deleteImage: deleteImage,
 };
