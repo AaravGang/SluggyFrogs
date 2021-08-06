@@ -24,7 +24,8 @@ Canvas.loadImage("commands/fun/image/haha.jpg").then((img) =>
 // setTimeout(()=>console.log(bg),6000)
 
 async function genderReveal(client, msg, params, serverDetails) {
-  let bg = bgOpts[Math.floor(Math.random() * bgOpts.length)].image;
+  const bgInfo = bgOpts[Math.floor(Math.random() * bgOpts.length)];
+  let bg = bgInfo.image;
   const canvas = Canvas.createCanvas(500, 500);
   const context = canvas.getContext("2d");
   // Since the image takes time to load, you should await it
@@ -50,10 +51,10 @@ async function genderReveal(client, msg, params, serverDetails) {
   // Draw a shape onto the main canvas
   context.drawImage(
     avatar,
-    bg.avatarX,
-    bg.avatarY,
-    bg.avatarSize,
-    bg.avatarSize
+    bgInfo.avatarX,
+    bgInfo.avatarY,
+    bgInfo.avatarSize,
+    bgInfo.avatarSize
   );
 
   const attachment = new Discord.MessageAttachment(
