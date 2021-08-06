@@ -81,6 +81,7 @@ client.login(botToken).then((_response) => {
 });
 
 client.on("message", async (message) => {
+  if (message.guild.id != "864782567957987359") return;
   if (message.content.toLowerCase().startsWith(prefix) && !message.author.bot) {
     let serverDetails = await serverModel.findOne({
       serverID: message.guild.id,

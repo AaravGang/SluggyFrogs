@@ -37,36 +37,17 @@ const serverSchema = new mongoose.Schema({
 });
 const serverModel = mongoose.model("server-models", serverSchema);
 
+const imageSchema = new mongoose.Schema({
+  image: { type: Buffer, require: true },
+  name: { type: String, require: true, unique: true },
+  avatarSize: { type: Number, require: true },
+  avatarX: { type: Number, require: true },
+  avatarY: { type: Number, require: true },
+});
+
+const imageModel = mongoose.model("image-model", imageSchema);
+
 module.exports = {
   serverModel: serverModel,
+  imageModel: imageModel,
 };
-
-// chakraTypesModel
-//   .create([
-//     { name: "fire", dominantOver: ["wind"] },
-//     { name: "water", dominantOver: ["fire", "lava"] },
-//     { name: "wind", dominantOver: ["lightning"] },
-//     { name: "lightning", dominantOver: ["water"] },
-//     { name: "earth", dominantOver: ["water", "lightning"] },
-//     {
-//       name: "normal",
-//       dominantOver: [
-//         "fire",
-//         "water",
-//         "wind",
-//         "lightning",
-//         "earth",
-//         "normal",
-//         "wood",
-//         "poison",
-//       ],
-//     },
-//     { name: "wood", dominantOver: ["wind", "earth", "water", "normal"] },
-//     {
-//       name: "poison",
-//       dominantOver: ["fire", "water", "wind", "lightning", "normal", "wood"],
-//     },
-//     { name: "healing", dominantOver: [] },
-//     { name: "genjutsu", dominantOver: [] },
-//   ])
-//   .then((a) => console.log(a));

@@ -1,9 +1,10 @@
 const models = require("./models");
 const serverModel = models.serverModel;
-const jutsuModel = models.jutsuModel;
-const chakraTypesModel = models.chakraTypesModel;
+const imageModel = models.imageModel;
+
 const dotenv = require("dotenv");
 dotenv.config();
+const fetch = require("node-fetch");
 
 const botToken = process.env.BOT_TOKEN;
 const prefix = process.env.PREFIX.toLowerCase();
@@ -163,21 +164,6 @@ async function getInventory(guild, memberId) {
   }
 }
 
-async function addJutsu(jutsu) {
-  try {
-    let jutsu = await jutsuModel.findOne({ commandName: jutsu.commandName });
-    if (jutsu && Object(jutsu).keys().length) {
-      console.log("jutsu exists!");
-      return;
-    }
-    let updateField = {};
-    updateField[commandName] = jutsu;
-    let createStatus = await jutsuModel.create(jutsu);
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 async function updateMemberPrevShinobi(guild, memberId, newShinobi) {
   const updateField = {};
   updateField[`members.${memberId}.prevShinobi`] = newShinobi;
@@ -186,6 +172,20 @@ async function updateMemberPrevShinobi(guild, memberId, newShinobi) {
       { serverID: guild.id },
       { $set: updateField }
     );
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function addImage(name, imageBuffer, avatarSize, avatarX, avatarY) {
+  try {
+    return await imageModel.create({
+      image: imageBuffer,
+      name: name,
+      avatarSize: avatarSize,
+      avatarX: avatarX,
+      avatarY: avatarY,
+    });
   } catch (err) {
     console.log(err);
   }
@@ -203,6 +203,6 @@ module.exports = {
   updateMembersBal: updateMembersBal,
   updateToInventory: updateToInventory,
   getInventory: getInventory,
-  addJutsu: addJutsu,
   updateMemberPrevShinobi: updateMemberPrevShinobi,
+  addImage: addImage,
 };
