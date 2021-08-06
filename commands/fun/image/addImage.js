@@ -56,7 +56,7 @@ async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
       const canvas = Canvas.createCanvas(500, 500);
       const context = canvas.getContext("2d");
       context.drawImage(image, 0, 0, canvas.width, canvas.height);
-      imageBuffer = context.toBuffer();
+      imageBuffer = canvas.toBuffer();
     } catch (err) {
       msg.reply(`Exception while trying to load image from url`);
       console.log(err);
