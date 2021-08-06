@@ -279,8 +279,6 @@ async function gameOver(client, msg, player1, player2, serverStats) {
     // Math.floor(randomNumber(0.2, 0.9) * Math.max(winner.shinobi.fees, 600)),
   ];
 
-  console.log(winnerAmount, loserAmount);
-
   if (
     rankOrder.indexOf(winner.shinobi.rank) <
     rankOrder.indexOf(loser.shinobi.rank)
@@ -298,7 +296,6 @@ async function gameOver(client, msg, player1, player2, serverStats) {
         rankOrder.indexOf(loser.shinobi.rank)) *
       rankDiffLoosePay;
   }
-  console.log(winnerAmount, loserAmount);
 
   updateMembersBalPayload[winner.id] = winnerAmount;
   updateMembersBalPayload[loser.id] = loserAmount;
