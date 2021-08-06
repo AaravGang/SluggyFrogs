@@ -45,6 +45,8 @@ async function genderReveal(client, msg, params, serverDetails) {
     );
   }
 
+  console.log(bg);
+
   // Draw a shape onto the main canvas
   context.drawImage(
     avatar,
