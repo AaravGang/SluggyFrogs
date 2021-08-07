@@ -3,10 +3,12 @@ const addImage = dbHelper.addImage;
 const getImage = dbHelper.getImage;
 const updateImage = dbHelper.updateImage;
 
+const Discord = require("discord.js");
+
 const Canvas = require("canvas");
 module.exports = {
   name: "addi",
-  aliases: ["addimage", "add_image","update_image"],
+  aliases: ["addimage", "add_image", "update_image"],
   description: `Add an image to the DB!`,
   execute: addImageToDB,
 };
@@ -14,6 +16,11 @@ module.exports = {
 const dotenv = require("dotenv");
 dotenv.config();
 const prefix = process.env.PREFIX;
+
+var previewAvatar;
+Canvas.loadImage("commands/fun/image/maya.png").then(
+  (img) => (previewAvatar = img)
+);
 
 async function addImageToDB(client, msg, params, serverDetail) {
   // name url avatarSize avatarX avatarY
@@ -30,15 +37,11 @@ async function addImageToDB(client, msg, params, serverDetail) {
   //   console.log(addRequest);
   if (addRequest == false) return;
 
-  let addStatus = await addImage(
-    addRequest.name,
-    addRequest.url,
-    addRequest.avatarSize,
-    addRequest.avatarX,
-    addRequest.avatarY
-  );
+  let addStatus = await addImage(...addRequest);
   if (addStatus) {
     msg.reply("Added successfully!");
+    sendPreview(addRequest, previewAvatar, msg);
+
     return;
   }
   msg.reply("Error");
@@ -57,7 +60,7 @@ async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
       }
     } catch (err) {
       msg.reply(`Exception while trying to load image from url`);
-      console.log(err);
+
       return false;
     }
 
@@ -72,14 +75,17 @@ async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
             .then(async (collected) => {
               let m = collected.first();
               if (m.content != "yes") return false;
-              await updateImage(name, {
+              const imgDetails = {
                 name: name,
                 url: url,
                 avatarSize: avatarSize,
                 avatarX: avatarX,
                 avatarY: avatarY,
-              });
+              };
+
+              await updateImage(name, imgDetails);
               msg.reply("Updated image successfully!");
+              sendPreview(imgDetails, previewAvatar, msg);
             })
             .catch((collected) => console.log(collected))
         );
@@ -99,4 +105,31 @@ async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
     `Recieved invalid params. \`${prefix} addi <name> <url> <avatarSize> <avatarX (topleft)> <avatarY (topleft)>\``
   );
   return false;
+}
+
+async function sendPreview(bgInfo, avatar, msg) {
+  let bg = await Canvas.loadImage(bgInfo.url);
+
+  const canvas = Canvas.createCanvas(500, 500);
+  const context = canvas.getContext("2d");
+  // Since the image takes time to load, you should await it
+
+  // This uses the canvas dimensions to stretch the image onto the entire canvas
+  context.drawImage(bg, 0, 0, canvas.width, canvas.height);
+
+  // Draw a shape onto the main canvas
+  context.drawImage(
+    avatar,
+    bgInfo.avatarX,
+    bgInfo.avatarY,
+    bgInfo.avatarSize,
+    bgInfo.avatarSize
+  );
+
+  const attachment = new Discord.MessageAttachment(
+    canvas.toBuffer(),
+    "welcome-image.png"
+  );
+
+  msg.channel.send(`Preview.`, attachment);
 }
