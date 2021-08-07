@@ -17,7 +17,7 @@ const prefix = process.env.PREFIX.toLowerCase();
 
 function help() {
   let helpEmbed = {
-    title: "Play Naurto Commands",
+    title: "Image Commands",
     description: "",
     fields: [],
     color: "YELLOW",

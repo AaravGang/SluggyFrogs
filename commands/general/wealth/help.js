@@ -17,7 +17,7 @@ const prefix = process.env.PREFIX.toLowerCase();
 
 function help() {
   let helpEmbed = {
-    title: "General Commands",
+    title: "Wealth Commands",
     description: "",
     fields: [],
     color: "YELLOW",
