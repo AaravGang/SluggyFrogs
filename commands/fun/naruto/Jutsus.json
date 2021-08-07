@@ -122,7 +122,7 @@
   "kamui": {
     "name": "Kamui",
     "commandName": "kamui",
-    "power": 250,
+    "power": 550,
     "chakra": 350,
     "type": "spacetime",
     "description": "Space-Time Ninjutsu.",
@@ -143,11 +143,11 @@
     "name": "Deep Forest Bloom",
     "commandName": "dfb",
     "power": 300,
-    "chakra": 200,
+    "chakra": 300,
     "type": "wood",
     "description": "Blossom some very dangerous flowers.",
     "jutsuBranches": ["attack", "genjutsu"],
-    "usageLeft": 2
+    "usageLeft": 1
   },
   "woodclone": {
     "name": "Wood Clone",
@@ -293,11 +293,11 @@
     "name": "Susano",
     "commandName": "susano",
     "power": 350,
-    "chakra": 450,
+    "chakra": 350,
     "type": "normal",
     "description": "The strongest defense that there is.",
     "jutsuBranches": ["attack", "defense"],
-    "usageLeft": 1
+    "usageLeft": 2
   },
   "ts": {
     "name": "Tengai Shinsei",
@@ -437,7 +437,7 @@
     "type": "normal",
     "description": "User becomes XXXXXXXL size!",
     "jutsuBranches": ["attack"],
-    "usageLeft": 4
+    "usageLeft": 5
   },
   "pe": {
     "name": "Partial Expansion Technique",

@@ -37,7 +37,13 @@ async function addImageToDB(client, msg, params, serverDetail) {
   //   console.log(addRequest);
   if (addRequest == false) return;
 
-  let addStatus = await addImage(...addRequest);
+  let addStatus = await addImage(
+    name,
+    url,
+    addRequest.avatarSize,
+    addRequest.avatarX,
+    addRequest.avatarY
+  );
   if (addStatus) {
     msg.reply("Added successfully!");
     sendPreview(addRequest, previewAvatar, msg);
