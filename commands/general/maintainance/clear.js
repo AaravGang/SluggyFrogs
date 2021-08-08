@@ -17,7 +17,7 @@ async function clearMessages(client, msg, params, serverDetails) {
   //   return msg.reply("You do not have permission to use this command!");
   // }
 
-  if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
+  if (!msg.guild.me.hasPermission("ADMINISTRATOR")) {
     msg.reply("IDIOT ADMIN DIDN'T GIVE ME PERMISSIONS.");
     return;
   }
