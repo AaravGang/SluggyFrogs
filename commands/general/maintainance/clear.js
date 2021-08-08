@@ -17,6 +17,11 @@ async function clearMessages(client, msg, params, serverDetails) {
   //   return msg.reply("You do not have permission to use this command!");
   // }
 
+  if (!message.guild.me.hasPermission("ADMINISTRATOR")) {
+    msg.reply("IDIOT ADMIN DIDN'T GIVE ME PERMISSIONS.");
+    return;
+  }
+
   let limit = 100;
   if (params[0] && !isNaN(params[0]) && 1 < params[0] < 100) {
     limit = parseInt(params[0]);
@@ -28,5 +33,5 @@ async function clearMessages(client, msg, params, serverDetails) {
     // .then((_) =>
     //   msg.channel.send(`Deleted past ${limit} messages in this channel!`)
     // )
-    .catch((e) => console.log(e));
+    .catch((e) => msg.reply("ERROR!"));
 }
