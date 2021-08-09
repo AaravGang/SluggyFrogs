@@ -450,7 +450,7 @@ async function sendPlayersStats(msg, player1, player2, firstPlayer) {
       url: await helper.getGif(gifQuery),
     },
     footer: {
-      text: `You have ${timeLimit} seconds to choose your jutsu, If you don't your turn will be skipped.If both of you don't choose a jutsu the game will be tied!\n\nThe one who plays first gets a good boost of power!`,
+      text: `You have **${timeLimit} seconds** to choose your jutsu, If you don't your turn will be skipped.If both of you don't choose a jutsu the game will be tied!\n\nThe one who plays first gets a good boost of power!`,
     },
   };
 
