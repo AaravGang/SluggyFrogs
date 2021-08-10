@@ -43,9 +43,9 @@ async function game(client, msg, gameDetails) {
       "pairio-image.png"
     );
 
-    player.score = 0(
-      await msg.channel.send(`Guess the stuff...`, attachment)
-    ).delete({
+    player.score = 0;
+
+    (await msg.channel.send(`Guess the stuff...`, attachment)).delete({
       timeout: timeTillDelete,
     });
 
@@ -104,7 +104,7 @@ async function game(client, msg, gameDetails) {
   }
 
   const ranks = players.sort((a, b) => b.score - a.score);
-  console.log(ranks)
+  console.log(ranks);
 }
 
 module.exports = {
