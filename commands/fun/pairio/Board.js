@@ -50,16 +50,21 @@ class Board {
           }
           ctx.drawImage(
             img,
-            i * this.boxSize + this.spacerSize,
             j * this.boxSize + this.spacerSize,
-            this.boxSize-this.spacerSize,
-            this.boxSize-this.spacerSize
+            i * this.boxSize + this.spacerSize,
+            this.boxSize - this.spacerSize,
+            this.boxSize - this.spacerSize
           );
-          ctx.fillStyle = "#fff";
+          ctx.fillStyle = "#0000FF";
           ctx.fillText(
             this.plainBoard[i * this.size + j],
-            i * this.boxSize + this.spacerSize,
-            j * this.boxSize + this.spacerSize
+            j * this.boxSize + this.spacerSize,
+            i * this.boxSize + this.boxSize - this.spacerSize
+          );
+          ctx.fillText(
+            i * this.size + j,
+            j * this.boxSize + this.spacerSize,
+            i * this.boxSize + this.spacerSize
           );
         } else {
           let img = noImg;
@@ -72,16 +77,21 @@ class Board {
           }
           ctx.drawImage(
             img,
-            i * this.boxSize + this.spacerSize,
             j * this.boxSize + this.spacerSize,
+            i * this.boxSize + this.spacerSize,
             this.boxSize - this.spacerSize,
             this.boxSize - this.spacerSize
           );
-          ctx.fillStyle = "#fff";
+          ctx.fillStyle = "#0000FF";
           ctx.fillText(
             this.plainBoard[i * this.size + j],
-            i * this.boxSize + this.spacerSize,
-            j * this.boxSize + this.spacerSize
+            j * this.boxSize + this.spacerSize,
+            i * this.boxSize + this.boxSize - this.spacerSize
+          );
+          ctx.fillText(
+            i * this.size + j,
+            j * this.boxSize + this.spacerSize,
+            i * this.boxSize + this.spacerSize
           );
         }
       }
