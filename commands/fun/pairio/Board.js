@@ -20,7 +20,7 @@ class Board {
     this.size = Math.sqrt(board.length);
 
     this.spacerSize = 10;
-    this.boxSize = imageDimensions / this.size - this.spacerSize;
+    this.boxSize = imageDimensions / this.size;
     this.guessed = [];
     this.images = {};
   }
@@ -35,7 +35,7 @@ class Board {
 
     ctx.fillStyle = "#0000FF";
 
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, imageDimensions, imageDimensions);
 
     // draw pics
     for (var i = 0; i < this.size; i++) {
