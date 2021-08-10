@@ -18,6 +18,7 @@ async function addTheme(client, msg, params, serverDetails) {
   let words = params.slice(1);
   let valid = await validateParams(msg, name, words);
   if (!valid) return;
+
   if (valid.update) {
     await updatePairioTheme(name, { name: name, words: words });
     msg.reply("Successfully updated theme!");
@@ -35,7 +36,8 @@ async function validateParams(msg, name, words) {
       );
       return false;
     }
-    if ((await getPairioThemes())[name]) {
+
+    if ((await getPairioThemes()).some((theme) => theme.name == name)) {
       return { name: name, words: words, update: true };
     }
     return { name: name, words: words };
