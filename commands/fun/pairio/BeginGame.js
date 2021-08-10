@@ -53,7 +53,7 @@ async function game(client, msg, gameDetails) {
     const filter = async (m) => {
       return (
         m.content.match(/^[0-9]+ [0-9]+$/) &&
-        m.content.split(" ").filter((a) => parseInt(a) > 0) &&
+        m.content.split(" ").filter((a) => parseInt(a) > 0).length > 0 &&
         m.author.id == player.id &&
         (await getPairioGameStats(msg.guild)).gameID == gameId
       );
@@ -149,6 +149,7 @@ async function game(client, msg, gameDetails) {
           );
         })
         .catch(async (err) => {
+          if ((await getPairioGameStats(msg.guild)).gameID != gameId) return;
           console.log(err);
           console.log("time limit exceeded");
           msg.channel.send(`<@${player.id}>, Time limit exceeded!`);
@@ -156,14 +157,12 @@ async function game(client, msg, gameDetails) {
         });
     }
 
+    if ((await getPairioGameStats(msg.guild)).gameID != gameId) return;
     msg.channel.send(`<@${player.id}>, Your score is ${player.score}`);
   }
 
-  if ((await getPairioGameStats(msg.guild)).gameID != gameId) {
-    return;
-  }
-
-  await handleGameOver(msg, player1, player2);
+  let success = await handleGameOver(msg, player1, player2);
+  console.log(success);
   await quitGame(client, msg, null, null, false);
 }
 
@@ -187,22 +186,26 @@ async function handleGameOver(msg, player1, player2) {
     );
     if (success) {
       await msg.channel.send("This game was tied!");
-      msg.channel.send(
+      await msg.channel.send(
         `<@${player1.id}>, You received ${
           player1.score * rewardPerPoint
         }💰\n<@${player2.id}>, You received ${player2.score * rewardPerPoint}💰`
       );
+      return true;
     }
+    return "tie but no success";
   }
   let winnerAmount = winner.score * rewardPerPoint + winBonus;
   let loserAmount = (loser.score * rewardPerPoint) / 2;
   let success = await updateBal(msg, winner, winnerAmount, loser, loserAmount);
   if (success) {
     await msg.channel.send(`<@${winner.id}>, You have won!`);
-    msg.channel.send(
+    await msg.channel.send(
       `<@${winner.id}>, You won ${winnerAmount}💰\n<@${loser.id}>, You received ${loserAmount}💰`
     );
+    return true;
   }
+  return "winner but no success";
 }
 
 async function updateBal(msg, player1, player1Reward, player2, player2Reward) {

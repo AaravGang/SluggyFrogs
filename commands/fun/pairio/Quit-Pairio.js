@@ -23,9 +23,10 @@ async function quitGame(client, msg, params, _serverDetails, reply = true) {
   const serverDetails = await getServerStats(msg.guild);
   if (
     serverDetails.pairioGame.player1.id != msg.author.id &&
-    serverDetails.pairioGame.player2.id != msg.author.id
+    serverDetails.pairioGame.player2.id != msg.author.id &&
+    reply
   ) {
-    reply ? msg.reply("You need to be in a game to quit it!") : null;
+    msg.reply("You need to be in a game to quit it!");
     return false;
   }
 
@@ -49,12 +50,10 @@ async function quitGame(client, msg, params, _serverDetails, reply = true) {
       player1: {
         id: null,
         name: null,
-        wealth: null,
       },
       player2: {
         id: null,
         name: null,
-        wealth: null,
       },
     };
     let quitStatus = await updatePairioGameStats(msg.guild, newGameStats);
