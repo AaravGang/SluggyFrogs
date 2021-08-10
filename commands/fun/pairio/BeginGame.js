@@ -11,8 +11,8 @@ const words = [
 const maxTries = 10;
 const timeLimit = 30;
 const timeTillDelete = 5000;
-const winBonus = 2000;
-const rewardPerPoint = 500;
+const winBonus = 1000;
+const rewardPerPoint = 100;
 
 const Discord = require("discord.js");
 

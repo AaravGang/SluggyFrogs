@@ -19,7 +19,8 @@ const errorEmbedTemplate = {
 
 module.exports = {
   name: "pairio",
-  description: `Play an awesome ______ game! A grid of images will be sent and deleted shortly after, flex your memory power and earn some sluggy coins!`,
+  aliases:[],
+  description: `Play an awesome guessing game! A grid of images will be sent and deleted shortly after, flex your memory power and earn some sluggy coins!`,
   execute: pairioGame,
 };
 

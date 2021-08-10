@@ -11,7 +11,7 @@ const waitTime = 30;
 
 const errorEmbedTemplate = {
   color: "RED",
-  description: `Use \`${prefix} naruto <@whom_you_wanna_play_with>\``,
+  description: `Use \`${prefix} play_naruto <@whom_you_wanna_play_with>\``,
   footer: {
     text: "Only two people can play. If you provide more than one person in the command, only the first will be considered.",
   },
