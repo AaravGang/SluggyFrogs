@@ -10,6 +10,8 @@ var noImg;
 Canvas.loadImage("commands/fun/pairio/no_image.png").then(
   (img) => (noImg = img)
 );
+
+const fontSize = 10;
 class Board {
   constructor(board) {
     this.plainBoard = board;
@@ -23,33 +25,64 @@ class Board {
   }
 
   async draw() {
-    if (this.image) return this.image;
     const canvas = Canvas.createCanvas(imageDimensions, imageDimensions);
 
     const ctx = canvas.getContext("2d");
     ctx.strokeStyle = "red";
     ctx.lineWidth = this.spacerSize;
+    ctx.font = `${fontSize} "Arial"`;
+
+    // draw pics
     for (var i = 0; i < this.size; i++) {
       for (var j = 0; j < this.size; j++) {
-        let img = noImg;
-        try {
-          img = await Canvas.loadImage(
-            await getPreview(this.plainBoard[i * this.size + j])
+        if (this.guessed.includes(this.plainBoard[i * this.size + j])) {
+          let img = noImg;
+          try {
+            img = await Canvas.loadImage(
+              await getPreview(this.plainBoard[i * this.size + j])
+            );
+          } catch (err) {
+            console.log(err);
+          }
+          ctx.drawImage(
+            img,
+            i * this.boxSize + this.spacerSize,
+            j * this.boxSize + this.spacerSize,
+            this.boxSize,
+            this.boxSize
           );
-        } catch (err) {
-          console.log(err);
+          ctx.fillText(
+            this.plainBoard[i * this.size + j],
+            i * this.boxSize + this.spacerSize,
+            j * this.boxSize + this.spacerSize
+          );
+        } else {
+          let img = noImg;
+          try {
+            img = await Canvas.loadImage(
+              await getPreview(this.plainBoard[i * this.size + j])
+            );
+          } catch (err) {
+            console.log(err);
+          }
+          ctx.drawImage(
+            img,
+            i * this.boxSize + this.spacerSize,
+            j * this.boxSize + this.spacerSize,
+            this.boxSize,
+            this.boxSize
+          );
+          ctx.fillText(
+            this.plainBoard[i * this.size + j],
+            i * this.boxSize + this.spacerSize,
+            j * this.boxSize + this.spacerSize
+          );
         }
-        ctx.drawImage(
-          img,
-          i * this.boxSize + this.spacerSize,
-          j * this.boxSize + this.spacerSize,
-          this.boxSize,
-          this.boxSize
-        );
       }
     }
 
-    for (var i = 0; i < this.size; i++) {
+    // draw lines
+    for (var i = 0; i <= this.size; i++) {
       ctx.beginPath();
       ctx.moveTo(0, i * this.boxSize);
       ctx.lineTo(imageDimensions, i * this.boxSize);

@@ -8,7 +8,7 @@ const Board = require("./Board").Board;
 const Discord = require("discord.js");
 
 function generateBoard(words) {
-  return ["apple","pineapple","apple","pineapple"]
+  return ["apple", "pineapple", "apple", "pineapple"];
 }
 
 function filter(msg) {
@@ -24,16 +24,14 @@ async function game(client, msg, gameDetails) {
   board = new Board(generateBoard({ apple: 2, pineapple: 2 }));
   let boardBuffer = await board.draw();
   const attachment = new Discord.MessageAttachment(
-    (boardBuffer = await board.draw()),
-    "welcome-image.png"
+    boardBuffer,
+    "pairio-image.png"
   );
 
-  msg.channel.send(
-    `Your deepest secrets have been revealed, XD :)!`,
-    attachment
-  );
+  msg.channel.send(`Guess the stuff...`, attachment);
 
   for (let player of players) {
+    msg.channel.send(`<@${player.id}>, You are up now!`);
     for (let i = 1; i <= maxTries; i++) {
       await msg.channel
         .awaitMessages(filter, {
