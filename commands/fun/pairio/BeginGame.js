@@ -44,7 +44,7 @@ async function game(client, msg, gameDetails) {
           msg.channel.send(`You have ${maxTries - i} tries left`);
         })
         .catch(async (collected) => {
-          console.log("ERROR");
+          console.log("time limit exceeded");
           msg.channel.send(`time limit exceeded`);
         });
     }

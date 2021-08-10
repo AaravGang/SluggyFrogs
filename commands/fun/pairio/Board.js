@@ -30,7 +30,7 @@ class Board {
     const ctx = canvas.getContext("2d");
     ctx.strokeStyle = "red";
     ctx.lineWidth = this.spacerSize;
-    ctx.font = `${fontSize} "Arial"`;
+    ctx.font = "30px Arial";
 
     // draw pics
     for (var i = 0; i < this.size; i++) {
@@ -67,7 +67,7 @@ class Board {
           }
           ctx.drawImage(
             img,
-            i * this.boxSize ,
+            i * this.boxSize,
             j * this.boxSize,
             this.boxSize,
             this.boxSize
@@ -84,12 +84,12 @@ class Board {
     // draw lines
     for (var i = 0; i <= this.size; i++) {
       ctx.beginPath();
-      ctx.moveTo(0, i * this.boxSize);
-      ctx.lineTo(imageDimensions, i * this.boxSize);
+      ctx.moveTo(0, i * (this.boxSize + this.spacerSize));
+      ctx.lineTo(imageDimensions, i * (this.boxSize + this.spacerSize));
       ctx.stroke();
       ctx.beginPath();
-      ctx.moveTo(i * this.boxSize, 0);
-      ctx.lineTo(i * this.boxSize, imageDimensions);
+      ctx.moveTo(i * (this.boxSize + this.spacerSize), 0);
+      ctx.lineTo(i * (this.boxSize + this.spacerSize), imageDimensions);
       ctx.stroke();
     }
 
