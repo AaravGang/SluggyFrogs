@@ -97,6 +97,8 @@ async function game(client, msg, gameDetails) {
           let mContent = collected.first().content;
           let givenIndices = mContent.split(" ").map((a) => parseInt(a) - 1);
           if (
+            player.board.plainBoard[givenIndices[0]] !=
+              player.board.plainBoard[givenIndices[1]] &&
             player.board.plainBoard[givenIndices[0]] ==
               player.board.plainBoard[givenIndices[1]] &&
             player.board.plainBoard[givenIndices[0]]
@@ -155,6 +157,10 @@ async function game(client, msg, gameDetails) {
           msg.channel.send(`<@${player.id}>, Time limit exceeded!`);
           playerDone = true;
         });
+      if (player.score == player.plainBoard.length / 2) {
+        msg.channel.send(`Well done! <@${player.id}>`);
+        break;
+      }
     }
 
     if ((await getPairioGameStats(msg.guild)).gameID != gameId) return;
