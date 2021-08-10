@@ -34,12 +34,12 @@ async function game(client, msg, gameDetails) {
     };
     board = new Board(generateBoard({ apple: 2, pineapple: 2 }));
 
-    // const attachment = new Discord.MessageAttachment(
-    //   await board.draw(),
-    //   "pairio-image.png"
-    // );
+    const attachment = new Discord.MessageAttachment(
+      await board.draw(),
+      "pairio-image.png"
+    );
 
-    // await msg.channel.send(`Guess the stuff...`, attachment);
+    await msg.channel.send(`Guess the stuff...`, attachment);
     while (i < maxTries && !playerDone) {
       await msg.channel
         .awaitMessages(filter, {
