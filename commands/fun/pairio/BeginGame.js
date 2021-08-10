@@ -101,10 +101,14 @@ async function game(client, msg, gameDetails) {
           playerDone = true;
         });
     }
+
+    msg.channel.send(`<@${player.id}>, Your score is ${player.score}`);
   }
 
   const ranks = players.sort((a, b) => b.score - a.score);
-  console.log(ranks);
+  msg.channel.send(
+    `<@${ranks[0].id}>, You have won! (score = ${ranks[0].score})`
+  );
 }
 
 module.exports = {
