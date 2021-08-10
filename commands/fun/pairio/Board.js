@@ -71,6 +71,7 @@ class Board {
           );
           
         }
+        ctx.fillStyle = "#FF0000";
         ctx.fillText(
           i * this.size + j,
           j * this.boxSize + 50,
