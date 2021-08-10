@@ -59,10 +59,10 @@ class Board {
           }
           ctx.drawImage(
             img,
-            j * this.boxSize + this.spacerSize,
-            i * this.boxSize + this.spacerSize,
-            this.boxSize,
-            this.boxSize
+            j * this.boxSize,
+            i * this.boxSize,
+            this.boxSize - this.spacerSize,
+            this.boxSize - this.spacerSize
           );
           // ctx.fillStyle = "#0000FF";
           // ctx.fillText(
@@ -73,10 +73,10 @@ class Board {
         } else {
           ctx.fillStyle = "#fff";
           ctx.fillRect(
-            j * this.boxSize + this.spacerSize,
-            i * this.boxSize + this.spacerSize,
-            this.boxSize,
-            this.boxSize
+            j * this.boxSize,
+            i * this.boxSize,
+            this.boxSize - this.spacerSize,
+            this.boxSize - this.spacerSize
           );
         }
         ctx.fillStyle = "#FF0000";
