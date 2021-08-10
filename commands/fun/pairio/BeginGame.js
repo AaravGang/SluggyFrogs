@@ -157,7 +157,7 @@ async function game(client, msg, gameDetails) {
           msg.channel.send(`<@${player.id}>, Time limit exceeded!`);
           playerDone = true;
         });
-      if (player.score == player.plainBoard.length / 2) {
+      if (player.score == player.board.plainBoard.length / 2) {
         msg.channel.send(`Well done! <@${player.id}>`);
         break;
       }
