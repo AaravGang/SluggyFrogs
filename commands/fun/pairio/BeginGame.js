@@ -44,6 +44,7 @@ async function game(client, msg, gameDetails) {
   const players = [player1, player2];
 
   for (let player of players) {
+    if ((await getPairioGameStats(msg.guild)).gameID != gameId) return;
     msg.channel.send(`<@${player.id}>, You are up now!`);
 
     let i = 0;
