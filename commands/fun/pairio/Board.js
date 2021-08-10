@@ -63,8 +63,8 @@ class Board {
           );
           ctx.fillText(
             i * this.size + j,
-            j * this.boxSize + this.spacerSize,
-            i * this.boxSize + this.spacerSize
+            j * this.boxSize + 2 * this.spacerSize,
+            i * this.boxSize + 2 * this.spacerSize
           );
         } else {
           let img = noImg;
@@ -90,8 +90,8 @@ class Board {
           );
           ctx.fillText(
             i * this.size + j,
-            j * this.boxSize + this.spacerSize,
-            i * this.boxSize + this.spacerSize
+            j * this.boxSize + 2 * this.spacerSize,
+            i * this.boxSize + 2 * this.spacerSize
           );
         }
       }
