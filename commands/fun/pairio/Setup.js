@@ -60,7 +60,11 @@ async function pairioGame(client, msg, params, serverDetails) {
   }
 
   const themes = await loadThemes();
-  const theme = themes[Math.floor(Math.random() * themes.length)];
+  const theme =
+    themes.filter((theme) => theme.name == params[1]).length > 0
+      ? themes.filter((theme) => theme.name == params[1])[0]
+      : themes[Math.floor(Math.random() * themes.length)];
+  console.log(theme);
 
   msg.channel.send(
     `Aight, show us your luck - <@${player1.id}> VS <@${player2.id}>\nTheme: ${theme.name}`
@@ -73,7 +77,7 @@ async function pairioGame(client, msg, params, serverDetails) {
 
   // START THE GAME
 
-  game(client, msg, newGameStats,theme);
+  game(client, msg, newGameStats, theme);
 }
 
 async function loadThemes() {
