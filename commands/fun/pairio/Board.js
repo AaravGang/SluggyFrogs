@@ -41,6 +41,7 @@ class Board {
     for (var i = 0; i < this.size; i++) {
       for (var j = 0; j < this.size; j++) {
         if (
+          show == "all" ||
           this.guessed.includes(this.plainBoard[i * this.size + j]) ||
           show.includes(i * this.size + j)
         ) {
@@ -79,7 +80,7 @@ class Board {
             this.boxSize - this.spacerSize
           );
         }
-        ctx.fillStyle = "#FF0000";
+        ctx.fillStyle = "#000000";
         ctx.fillText(
           i * this.size + j,
           j * this.boxSize + 2 * this.spacerSize,

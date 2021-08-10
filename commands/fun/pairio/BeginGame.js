@@ -57,13 +57,19 @@ async function game(client, msg, gameDetails) {
     player.board = new Board(generateBoard(words));
 
     const attachment = new Discord.MessageAttachment(
-      await player.board.draw([1, 4, 6, 9]),
+      await player.board.draw("all"),
       "pairio-image.png"
     );
 
     player.score = 0;
 
-    await msg.channel.send(`Guess the stuff...`, attachment);
+    await (
+      await msg.channel.send(`Hardwire the stuff into your brain...`, attachment)
+    ).delete({
+      timeout: timeTillDelete,
+    });
+
+    msg.channel.send("Start guessing!")
 
     while (i < maxTries && !playerDone) {
       i++;
@@ -87,13 +93,15 @@ async function game(client, msg, gameDetails) {
               )
             ) {
               const attachment = new Discord.MessageAttachment(
-                await player.board.draw(),
+                await player.board.draw(givenIndices),
                 "pairio-image.png"
               );
-              msg.channel.send(
-                `<@${player.id}>, You already guessed that!`,
-                attachment
-              );
+              (
+                await msg.channel.send(
+                  `<@${player.id}>, You already guessed that!`,
+                  attachment
+                )
+              ).delete({ timeout: timeTillDelete });
             } else {
               player.board.guessed.push(
                 player.board.plainBoard[givenIndices[0]]
@@ -110,7 +118,16 @@ async function game(client, msg, gameDetails) {
               ).delete({ timeout: timeTillDelete });
             }
           } else {
-            msg.channel.send(`<@${player.id}>, That aint it!`);
+            const attachment = new Discord.MessageAttachment(
+              await player.board.draw(givenIndices),
+              "pairio-image.png"
+            );
+            (
+              await msg.channel.send(
+                `<@${player.id}>, That aint it!`,
+                attachment
+              )
+            ).delete({ timeout: timeTillDelete });
           }
 
           msg.channel.send(
