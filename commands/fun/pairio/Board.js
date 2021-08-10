@@ -32,6 +32,10 @@ class Board {
     ctx.lineWidth = this.spacerSize;
     ctx.font = "30px Arial";
 
+    ctx.fillStyle = "#fff";
+
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     // draw pics
     for (var i = 0; i < this.size; i++) {
       for (var j = 0; j < this.size; j++) {
@@ -48,8 +52,8 @@ class Board {
             img,
             i * this.boxSize + this.spacerSize,
             j * this.boxSize + this.spacerSize,
-            this.boxSize,
-            this.boxSize
+            this.boxSize-this.spacerSize,
+            this.boxSize-this.spacerSize
           );
           ctx.fillText(
             this.plainBoard[i * this.size + j],
@@ -67,10 +71,10 @@ class Board {
           }
           ctx.drawImage(
             img,
-            i * this.boxSize,
-            j * this.boxSize,
-            this.boxSize,
-            this.boxSize
+            i * this.boxSize + this.spacerSize,
+            j * this.boxSize + this.spacerSize,
+            this.boxSize - this.spacerSize,
+            this.boxSize - this.spacerSize
           );
           ctx.fillText(
             this.plainBoard[i * this.size + j],
@@ -79,18 +83,6 @@ class Board {
           );
         }
       }
-    }
-
-    // draw lines
-    for (var i = 0; i <= this.size; i++) {
-      ctx.beginPath();
-      ctx.moveTo(0, i * (this.boxSize + this.spacerSize));
-      ctx.lineTo(imageDimensions, i * (this.boxSize + this.spacerSize));
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(i * (this.boxSize + this.spacerSize), 0);
-      ctx.lineTo(i * (this.boxSize + this.spacerSize), imageDimensions);
-      ctx.stroke();
     }
 
     this.image = canvas.toBuffer();
