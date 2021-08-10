@@ -6,6 +6,11 @@ const getPairioThemes = dbHelper.getPairioThemes;
 
 const validLengths = [2, 8, 32];
 
+const dotenv = require("dotenv");
+dotenv.config();
+
+const prefix = process.env.PREFIX.toLowerCase();
+
 module.exports = {
   name: "add-theme",
   aliases: ["update-theme", "at", "ut"],
@@ -42,6 +47,8 @@ async function validateParams(msg, name, words) {
     }
     return { name: name, words: words };
   }
-  msg.reply("Did not receive <theme_name> or/and <words>");
+  msg.reply(
+    `Did not receive <theme_name> or/and <words>\n\`${prefix} at <theme_name> <theme_words ( separated by spaces )>\``
+  );
   return false;
 }
