@@ -11,13 +11,18 @@ const words = [
 const maxTries = 10;
 const timeLimit = 30;
 const timeTillDelete = 5000;
+const winBonus = 2000;
+const rewardPerPoint = 500;
+
+const Discord = require("discord.js");
 
 const Board = require("./Board").Board;
 
 const dbHelper = require("../../../DBHelper");
 const getPairioGameStats = dbHelper.getPairioGameStats;
+const updateMembersBal = dbHelper.updateMembersBal;
 
-const Discord = require("discord.js");
+const quitGame = require("./Quit-Pairio").execute;
 
 function generateBoard(words) {
   var board = words.concat(words);
@@ -29,8 +34,6 @@ function generateBoard(words) {
   }
   return board;
 }
-
-const quitGame = require("./Quit-Pairio").execute;
 
 async function game(client, msg, gameDetails) {
   const player1 = gameDetails.player1;
@@ -151,11 +154,54 @@ async function game(client, msg, gameDetails) {
     msg.channel.send(`<@${player.id}>, Your score is ${player.score}`);
   }
 
-  const ranks = players.sort((a, b) => b.score - a.score);
-  msg.channel.send(
-    `<@${ranks[0].id}>, You have won! (score = ${ranks[0].score})`
-  );
+  await handleGameOver(msg, player1, player2);
   await quitGame(client, msg, null, null, false);
+}
+
+async function handleGameOver(msg, player1, player2) {
+  let winner;
+  let loser;
+  if (player1.score > player2.score) {
+    winner = player1;
+    loser = player2;
+  } else if (player1.score < player2.score) {
+    winner = player2;
+    loser = player1;
+  } else {
+    // tie
+    let success = await updateBal(
+      msg,
+      player1,
+      player1.score * rewardPerPoint,
+      player2,
+      player2Reward.score * rewardPerPoint
+    );
+    if (success) {
+      await msg.channel.send("This game was tied!");
+      msg.channel.send(
+        `<@${player1.id}>, You received ${
+          player1.score * rewardPerPoint
+        }💰\n<@${player2.id}>, You received ${player2.score * rewardPerPoint}💰`
+      );
+    }
+  }
+  let winnerAmount = winner.score * rewardPerPoint + winBonus;
+  let loserAmount = (loser.score * rewardPerPoint) / 2;
+  let success = await updateBal(msg, winner, winnerAmount, loser, loserAmount);
+  if (success) {
+    await msg.channel.send(`<@${winner.id}>, You have won!`);
+    msg.channel.send(
+      `<@${winner.id}>, You won ${winnerAmount}💰\n<@${loser.id}>, You received ${loserAmount}💰`
+    );
+  }
+}
+
+async function updateBal(msg, player1, player1Reward, player2, player2Reward) {
+  const payload = {};
+  payload[player1.id] = player1Reward;
+  payload[player2.id] = player2Reward;
+  let success = await updateMembersBal(msg.guild, payload);
+  return success;
 }
 
 module.exports = {
