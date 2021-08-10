@@ -1,4 +1,13 @@
-const words = { cat: 2, dog: 2, elephant: 2, monkey: 2 };
+const words = [
+  "apple",
+  "orange",
+  "pineapple",
+  "banana",
+  "grape",
+  "tomato",
+  "pear",
+  "balls",
+];
 const maxTries = 2;
 const timeLimit = 30;
 const timeTillDelete = 5000;
@@ -11,7 +20,14 @@ const getPairioGameStats = dbHelper.getPairioGameStats;
 const Discord = require("discord.js");
 
 function generateBoard(words) {
-  return ["apple", "pineapple", "apple", "pineapple"];
+  var board = words.concat(words);
+  for (let i = 0; i < board.length; i++) {
+    let randomInd = Math.floor(Math.random() * board.length);
+    let temp = board[i];
+    board[i] = board[randomInd];
+    board[randomInd] = temp;
+  }
+  return board;
 }
 
 const quitGame = require("./Quit-Pairio").execute;
@@ -38,7 +54,7 @@ async function game(client, msg, gameDetails) {
       );
     };
 
-    player.board = new Board(generateBoard({ apple: 2, pineapple: 2 }));
+    player.board = new Board(generateBoard(words));
 
     const attachment = new Discord.MessageAttachment(
       await player.board.draw(),
