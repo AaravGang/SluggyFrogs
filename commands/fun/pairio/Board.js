@@ -33,7 +33,7 @@ class Board {
     ctx.lineWidth = this.spacerSize;
     ctx.font = "30px Arial";
 
-    ctx.fillStyle = "#000000";
+    ctx.fillStyle = "#0000FF";
 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -61,8 +61,8 @@ class Board {
             img,
             j * this.boxSize + this.spacerSize,
             i * this.boxSize + this.spacerSize,
-            this.boxSize - this.spacerSize/2,
-            this.boxSize - this.spacerSize/2
+            this.boxSize,
+            this.boxSize
           );
           // ctx.fillStyle = "#0000FF";
           // ctx.fillText(
@@ -75,15 +75,15 @@ class Board {
           ctx.fillRect(
             j * this.boxSize + this.spacerSize,
             i * this.boxSize + this.spacerSize,
-            this.boxSize - this.spacerSize/2,
-            this.boxSize - this.spacerSize/2
+            this.boxSize,
+            this.boxSize
           );
         }
         ctx.fillStyle = "#FF0000";
         ctx.fillText(
           i * this.size + j,
           j * this.boxSize + 2 * this.spacerSize,
-          i * this.boxSize + 2 * this.spacerSize
+          i * this.boxSize + 5 * this.spacerSize
         );
       }
     }
