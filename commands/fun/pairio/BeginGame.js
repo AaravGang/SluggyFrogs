@@ -53,10 +53,7 @@ async function game(client, msg, gameDetails) {
     const filter = async (m) => {
       return (
         m.content.match(/^[0-9]+ [0-9]+$/) &&
-        m.content
-          .match(/^[0-9]+ [0-9]+$/)
-          .split(" ")
-          .filter((a) => parseInt(a) > 0) &&
+        m.content.split(" ").filter((a) => parseInt(a) > 0) &&
         m.author.id == player.id &&
         (await getPairioGameStats(msg.guild)).gameID == gameId
       );

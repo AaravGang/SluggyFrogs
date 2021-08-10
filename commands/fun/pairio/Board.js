@@ -60,22 +60,17 @@ class Board {
           }
           ctx.drawImage(
             img,
-            j * this.boxSize,
-            i * this.boxSize,
+            j * this.boxSize + this.spacerSize / 2,
+            i * this.boxSize + this.spacerSize / 2,
             this.boxSize - this.spacerSize,
             this.boxSize - this.spacerSize
           );
-          // ctx.fillStyle = "#0000FF";
-          // ctx.fillText(
-          //   this.plainBoard[i * this.size + j],
-          //   j * this.boxSize + this.spacerSize,
-          //   i * this.boxSize + this.boxSize - this.spacerSize
-          // );
+          
         } else {
           ctx.fillStyle = "#fff";
           ctx.fillRect(
-            j * this.boxSize,
-            i * this.boxSize,
+            j * this.boxSize + this.spacerSize / 2,
+            i * this.boxSize + this.spacerSize / 2,
             this.boxSize - this.spacerSize,
             this.boxSize - this.spacerSize
           );
