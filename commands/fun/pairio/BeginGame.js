@@ -97,8 +97,7 @@ async function game(client, msg, gameDetails) {
           let mContent = collected.first().content;
           let givenIndices = mContent.split(" ").map((a) => parseInt(a) - 1);
           if (
-            player.board.plainBoard[givenIndices[0]] !=
-              player.board.plainBoard[givenIndices[1]] &&
+            givenIndices[0] != givenIndices[1] &&
             player.board.plainBoard[givenIndices[0]] ==
               player.board.plainBoard[givenIndices[1]] &&
             player.board.plainBoard[givenIndices[0]]
