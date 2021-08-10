@@ -12,13 +12,15 @@ const dbHelper = require("../../../DBHelper");
 const updateMembersBal = dbHelper.updateMembersBal;
 
 const updatePairioGameStats = dbHelper.updatePairioGameStats;
+const getServerStats = dbHelper.getServerStats;
 
 function randomNumber(min, max) {
   // min and max included
   return Math.random() * (max - min) + min;
 }
 
-async function quitGame(client, msg, params, serverDetails, reply = true) {
+async function quitGame(client, msg, params, _serverDetails, reply = true) {
+  const serverDetails = await getServerStats(msg.guild);
   if (
     serverDetails.pairioGame.player1.id != msg.author.id &&
     serverDetails.pairioGame.player2.id != msg.author.id

@@ -14,6 +14,8 @@ function generateBoard(words) {
   return ["apple", "pineapple", "apple", "pineapple"];
 }
 
+const quitGame = require("./Quit-Pairio").execute;
+
 async function game(client, msg, gameDetails) {
   const player1 = gameDetails.player1;
   const player2 = gameDetails.player2;
@@ -109,6 +111,7 @@ async function game(client, msg, gameDetails) {
   msg.channel.send(
     `<@${ranks[0].id}>, You have won! (score = ${ranks[0].score})`
   );
+  await quitGame(client, msg, null, null, false);
 }
 
 module.exports = {
