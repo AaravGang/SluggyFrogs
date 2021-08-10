@@ -22,6 +22,7 @@ class Board {
     this.spacerSize = 10;
     this.boxSize = imageDimensions / this.size - this.spacerSize;
     this.guessed = [];
+    this.images = {};
   }
 
   async draw() {
@@ -41,12 +42,17 @@ class Board {
       for (var j = 0; j < this.size; j++) {
         if (this.guessed.includes(this.plainBoard[i * this.size + j])) {
           let img = noImg;
-          try {
-            img = await Canvas.loadImage(
-              await getPreview(this.plainBoard[i * this.size + j])
-            );
-          } catch (err) {
-            console.log(err);
+          if (this.images[this.plainBoard[i * this.size + j]]) {
+            img = this.images[this.plainBoard[i * this.size + j]];
+          } else {
+            try {
+              img = await Canvas.loadImage(
+                await getPreview(this.plainBoard[i * this.size + j])
+              );
+              this.images[this.plainBoard[i * this.size + j]] = img;
+            } catch (err) {
+              console.log(err);
+            }
           }
           ctx.drawImage(
             img,
@@ -62,14 +68,13 @@ class Board {
             i * this.boxSize + this.boxSize - this.spacerSize
           );
         } else {
-          ctx.fillStyle = "#fff"
+          ctx.fillStyle = "#fff";
           ctx.fillRect(
             j * this.boxSize + this.spacerSize,
             i * this.boxSize + this.spacerSize,
             this.boxSize - this.spacerSize,
             this.boxSize - this.spacerSize
           );
-          
         }
         ctx.fillStyle = "#FF0000";
         ctx.fillText(

@@ -29,7 +29,7 @@ async function game(client, msg, gameDetails) {
       console.log(
         m.content.match(/^[0-9]+ [0-9]+$/),
         m.author.id == player.id,
-        (await getPairioGameStats).gameID == gameId
+        (await getPairioGameStats(msg.guild)).gameID == gameId
       );
       return (
         m.content.match(/^[0-9]+ [0-9]+$/) &&
