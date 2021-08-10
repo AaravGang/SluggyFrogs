@@ -82,7 +82,7 @@ class Board {
         }
         ctx.fillStyle = "#000000";
         ctx.fillText(
-          i * this.size + j,
+          i * this.size + j + 1,
           j * this.boxSize + 2 * this.spacerSize,
           i * this.boxSize + 5 * this.spacerSize
         );

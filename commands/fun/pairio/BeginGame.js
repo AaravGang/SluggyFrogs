@@ -52,7 +52,7 @@ async function game(client, msg, gameDetails) {
 
     const filter = async (m) => {
       return (
-        m.content.match(/^[0-9]+ [0-9]+$/) &&
+        m.content.match(/^[1-9]+ [1-9]+$/) &&
         m.author.id == player.id &&
         (await getPairioGameStats(msg.guild)).gameID == gameId
       );
@@ -73,7 +73,7 @@ async function game(client, msg, gameDetails) {
         attachment
       )
     ).delete({
-      timeout: timeTillDelete,
+      timeout: 3000,
     });
     attachment = new Discord.MessageAttachment(
       await player.board.draw(),
@@ -94,7 +94,7 @@ async function game(client, msg, gameDetails) {
         })
         .then(async (collected) => {
           let mContent = collected.first().content;
-          let givenIndices = mContent.split(" ").map((a) => parseInt(a));
+          let givenIndices = mContent.split(" ").map((a) => parseInt(a) - 1);
           if (
             player.board.plainBoard[givenIndices[0]] ==
               player.board.plainBoard[givenIndices[1]] &&
@@ -158,7 +158,7 @@ async function game(client, msg, gameDetails) {
     msg.channel.send(`<@${player.id}>, Your score is ${player.score}`);
   }
 
-  if ((await getPairioGameStats(msg.guild)).id != gameId) {
+  if ((await getPairioGameStats(msg.guild)).gameID != gameId) {
     return;
   }
 
