@@ -11,7 +11,7 @@ Canvas.loadImage("commands/fun/pairio/no_image.png").then(
   (img) => (noImg = img)
 );
 
-const fontSize = 10;
+const fontSize = 30;
 class Board {
   constructor(board) {
     this.plainBoard = board;
@@ -19,7 +19,7 @@ class Board {
     this.image = null;
     this.size = Math.sqrt(board.length);
 
-    this.spacerSize = 10;
+    this.spacerSize = 30;
     this.boxSize = imageDimensions / this.size - this.spacerSize;
     this.guessed = [];
   }
@@ -84,8 +84,8 @@ class Board {
     // draw lines
     for (var i = 0; i <= this.size; i++) {
       ctx.beginPath();
-      ctx.moveTo(0, i * this.boxSize);
-      ctx.lineTo(imageDimensions, i * this.boxSize);
+      ctx.moveTo(0, i * this.boxSize+this.spacerSize);
+      ctx.lineTo(imageDimensions, i * this.boxSize+this.spacerSize);
       ctx.stroke();
       ctx.beginPath();
       ctx.moveTo(i * this.boxSize, 0);
