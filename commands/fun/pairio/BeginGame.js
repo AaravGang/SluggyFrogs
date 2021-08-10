@@ -56,7 +56,7 @@ async function game(client, msg, gameDetails) {
 
     player.board = new Board(generateBoard(words));
 
-    const attachment = new Discord.MessageAttachment(
+    let attachment = new Discord.MessageAttachment(
       await player.board.draw("all"),
       "pairio-image.png"
     );
@@ -64,12 +64,18 @@ async function game(client, msg, gameDetails) {
     player.score = 0;
 
     await (
-      await msg.channel.send(`Hardwire the stuff into your brain...`, attachment)
+      await msg.channel.send(
+        `Hardwire the stuff into your brain...`,
+        attachment
+      )
     ).delete({
       timeout: timeTillDelete,
     });
-
-    msg.channel.send("Start guessing!")
+    attachment = new Discord.MessageAttachment(
+      await player.board.draw(),
+      "pairio-image.png"
+    );
+    await msg.channel.send("Start guessing!", attachment);
 
     while (i < maxTries && !playerDone) {
       i++;
@@ -92,7 +98,7 @@ async function game(client, msg, gameDetails) {
                 player.board.plainBoard[givenIndices[0]]
               )
             ) {
-              const attachment = new Discord.MessageAttachment(
+              let attachment = new Discord.MessageAttachment(
                 await player.board.draw(givenIndices),
                 "pairio-image.png"
               );
@@ -107,7 +113,7 @@ async function game(client, msg, gameDetails) {
                 player.board.plainBoard[givenIndices[0]]
               );
 
-              const attachment = new Discord.MessageAttachment(
+              let attachment = new Discord.MessageAttachment(
                 await player.board.draw(givenIndices),
                 "pairio-image.png"
               );
@@ -118,7 +124,7 @@ async function game(client, msg, gameDetails) {
               ).delete({ timeout: timeTillDelete });
             }
           } else {
-            const attachment = new Discord.MessageAttachment(
+            let attachment = new Discord.MessageAttachment(
               await player.board.draw(givenIndices),
               "pairio-image.png"
             );
