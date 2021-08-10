@@ -222,6 +222,10 @@ async function updatePairioGameStats(guild, newGameStats) {
   }
 }
 
+async function getPairioGameStats(guild) {
+  return await serverModel.findOne({ serverID: guild.id });
+}
+
 module.exports = {
   onGuildJoin: onGuildJoin,
   onGuildLeave: onGuildLeave,
@@ -241,4 +245,5 @@ module.exports = {
   updateImage: updateImage,
   deleteImage: deleteImage,
   updatePairioGameStats: updatePairioGameStats,
+  getPairioGameStats: getPairioGameStats,
 };

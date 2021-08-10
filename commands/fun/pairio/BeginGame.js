@@ -1,9 +1,11 @@
-const size = 8;
 const words = { cat: 2, dog: 2, elephant: 2, monkey: 2 };
-const maxTries = 10;
+const maxTries = 2;
 const timeLimit = 30;
 
 const Board = require("./Board").Board;
+
+const dbHelper = require("../../../DBHelper");
+const getPairioGameStats = dbHelper.getPairioGameStats;
 
 const Discord = require("discord.js");
 
@@ -11,28 +13,34 @@ function generateBoard(words) {
   return ["apple", "pineapple", "apple", "pineapple"];
 }
 
-function filter(msg) {
-  return msg.content.match(/^[1-9]+ [1-9]+$/);
-}
-
 async function game(client, msg, gameDetails) {
-  player1 = gameDetails.player1;
-  player2 = gameDetails.player2;
-  gameId = gameDetails.gameID;
+  const player1 = gameDetails.player1;
+  const player2 = gameDetails.player2;
+  const gameId = gameDetails.gameID;
+  console.log(gameId);
 
-  players = [player1, player2];
-  board = new Board(generateBoard({ apple: 2, pineapple: 2 }));
-  let boardBuffer = await board.draw();
-  const attachment = new Discord.MessageAttachment(
-    boardBuffer,
-    "pairio-image.png"
-  );
-
-  msg.channel.send(`Guess the stuff...`, attachment);
+  const players = [player1, player2];
 
   for (let player of players) {
     msg.channel.send(`<@${player.id}>, You are up now!`);
-    for (let i = 1; i <= maxTries; i++) {
+    let i = 1;
+    let playerDone = false;
+    function filter(m) {
+      return (
+        m.content.match(/^[0-9]+ [0-9]+$/) &&
+        m.author.id == player.id &&
+        await(getPairioGameStats).gameID == gameId
+      );
+    }
+    board = new Board(generateBoard({ apple: 2, pineapple: 2 }));
+
+    const attachment = new Discord.MessageAttachment(
+      await board.draw(),
+      "pairio-image.png"
+    );
+
+    await msg.channel.send(`Guess the stuff...`, attachment);
+    while (i < maxTries && !playerDone) {
       await msg.channel
         .awaitMessages(filter, {
           max: 1,
@@ -40,13 +48,30 @@ async function game(client, msg, gameDetails) {
           errors: ["time"],
         })
         .then(async (collected) => {
-          console.log(collected.first());
+          let mContent = collected.first().content;
+          let givenIndices = mContent.split(" ").map((a) => parseInt(a));
+          if (
+            board.plainBoard[givenIndices[0]] ==
+              board.plainBoard[givenIndices[1]] &&
+            board.plainBoard[givenIndices[0]]
+          ) {
+            board.guessed.push(board.plainBoard[givenIndices[0]]);
+
+            const attachment = new Discord.MessageAttachment(
+              await board.draw(),
+              "pairio-image.png"
+            );
+
+            await msg.channel.send(`You guessed it right!`, attachment);
+          }
           msg.channel.send(`You have ${maxTries - i} tries left`);
         })
         .catch(async (collected) => {
           console.log("time limit exceeded");
           msg.channel.send(`time limit exceeded`);
+          playerDone = true;
         });
+      i--;
     }
   }
 }

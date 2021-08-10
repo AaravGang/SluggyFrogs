@@ -61,39 +61,21 @@ class Board {
             j * this.boxSize + this.spacerSize,
             i * this.boxSize + this.boxSize - this.spacerSize
           );
-          ctx.fillText(
-            i * this.size + j,
-            j * this.boxSize + 2 * this.spacerSize,
-            i * this.boxSize + 2 * this.spacerSize
-          );
         } else {
-          let img = noImg;
-          try {
-            img = await Canvas.loadImage(
-              await getPreview(this.plainBoard[i * this.size + j])
-            );
-          } catch (err) {
-            console.log(err);
-          }
-          ctx.drawImage(
-            img,
+          ctx.fillStyle = "#fff"
+          ctx.fillRect(
             j * this.boxSize + this.spacerSize,
             i * this.boxSize + this.spacerSize,
             this.boxSize - this.spacerSize,
             this.boxSize - this.spacerSize
           );
-          ctx.fillStyle = "#0000FF";
-          ctx.fillText(
-            this.plainBoard[i * this.size + j],
-            j * this.boxSize + this.spacerSize,
-            i * this.boxSize + this.boxSize - this.spacerSize
-          );
-          ctx.fillText(
-            i * this.size + j,
-            j * this.boxSize + 2 * this.spacerSize,
-            i * this.boxSize + 2 * this.spacerSize
-          );
+          
         }
+        ctx.fillText(
+          i * this.size + j,
+          j * this.boxSize + 50,
+          i * this.boxSize + 50
+        );
       }
     }
 
