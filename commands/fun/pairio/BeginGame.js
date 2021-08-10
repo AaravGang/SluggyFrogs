@@ -26,6 +26,11 @@ async function game(client, msg, gameDetails) {
     let i = 1;
     let playerDone = false;
     const filter = async (m) => {
+      console.log(
+        m.content.match(/^[0-9]+ [0-9]+$/),
+        m.author.id == player.id,
+        (await getPairioGameStats.gameID) == gameId
+      );
       return (
         m.content.match(/^[0-9]+ [0-9]+$/) &&
         m.author.id == player.id &&
@@ -50,6 +55,7 @@ async function game(client, msg, gameDetails) {
         .then(async (collected) => {
           let mContent = collected.first().content;
           let givenIndices = mContent.split(" ").map((a) => parseInt(a));
+          console.log("given indiced:", givenIndices);
           if (
             board.plainBoard[givenIndices[0]] ==
               board.plainBoard[givenIndices[1]] &&
