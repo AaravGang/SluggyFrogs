@@ -61,29 +61,29 @@ class Board {
             img,
             j * this.boxSize + this.spacerSize,
             i * this.boxSize + this.spacerSize,
-            this.boxSize,
-            this.boxSize
+            this.boxSize - this.spacerSize,
+            this.boxSize - this.spacerSize
           );
-          ctx.fillStyle = "#0000FF";
-          ctx.fillText(
-            this.plainBoard[i * this.size + j],
-            j * this.boxSize + this.spacerSize,
-            i * this.boxSize + this.boxSize - this.spacerSize
-          );
+          // ctx.fillStyle = "#0000FF";
+          // ctx.fillText(
+          //   this.plainBoard[i * this.size + j],
+          //   j * this.boxSize + this.spacerSize,
+          //   i * this.boxSize + this.boxSize - this.spacerSize
+          // );
         } else {
           ctx.fillStyle = "#fff";
           ctx.fillRect(
             j * this.boxSize + this.spacerSize,
             i * this.boxSize + this.spacerSize,
-            this.boxSize,
-            this.boxSize
+            this.boxSize - this.spacerSize,
+            this.boxSize - this.spacerSize
           );
         }
         ctx.fillStyle = "#FF0000";
         ctx.fillText(
           i * this.size + j,
-          j * this.boxSize + 50,
-          i * this.boxSize + 50
+          j * (this.boxSize + this.spacerSize) + this.spacerSize,
+          i * (this.boxSize + this.spacerSize) + this.spacerSize
         );
       }
     }
