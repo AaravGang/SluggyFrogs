@@ -52,7 +52,11 @@ async function game(client, msg, gameDetails) {
 
     const filter = async (m) => {
       return (
-        m.content.match(/^[1-9]+ [1-9]+$/) &&
+        m.content.match(/^[0-9]+ [0-9]+$/) &&
+        m.content
+          .match(/^[0-9]+ [0-9]+$/)
+          .split(" ")
+          .filter((a) => parseInt(a) > 0) &&
         m.author.id == player.id &&
         (await getPairioGameStats(msg.guild)).gameID == gameId
       );
@@ -182,7 +186,7 @@ async function handleGameOver(msg, player1, player2) {
       player1,
       player1.score * rewardPerPoint,
       player2,
-      player2Reward.score * rewardPerPoint
+      player2.score * rewardPerPoint
     );
     if (success) {
       await msg.channel.send("This game was tied!");
