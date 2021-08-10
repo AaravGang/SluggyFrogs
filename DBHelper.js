@@ -1,6 +1,7 @@
 const models = require("./models");
 const serverModel = models.serverModel;
 const imageModel = models.imageModel;
+const pairioThemeModel = models.pairioThemeModel;
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -226,6 +227,25 @@ async function getPairioGameStats(guild) {
   return (await serverModel.findOne({ serverID: guild.id })).pairioGame;
 }
 
+async function getPairioThemes() {
+  return await pairioThemeModel.find({});
+}
+
+async function addPairioTheme(theme) {
+  return await pairioThemeModel.create(theme);
+}
+
+async function updatePairioTheme(name, theme) {
+  return await pairioThemeModel.findOneAndUpdate(
+    { name: name },
+    { $set: theme }
+  );
+}
+
+async function delPairioTheme(name) {
+  return await pairioThemeModel.findOneAndDelete({ name: name });
+}
+
 module.exports = {
   onGuildJoin: onGuildJoin,
   onGuildLeave: onGuildLeave,
@@ -246,4 +266,8 @@ module.exports = {
   deleteImage: deleteImage,
   updatePairioGameStats: updatePairioGameStats,
   getPairioGameStats: getPairioGameStats,
+  addPairioTheme: addPairioTheme,
+  updatePairioTheme: updatePairioTheme,
+  delPairioTheme: delPairioTheme,
+  getPairioThemes: getPairioThemes,
 };

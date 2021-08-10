@@ -1,13 +1,3 @@
-const words = [
-  "apple",
-  "orange",
-  "pineapple",
-  "banana",
-  "grape",
-  "tomato",
-  "pear",
-  "balls",
-];
 const maxTries = 10;
 const timeLimit = 30;
 const timeTillDelete = 5000;
@@ -35,13 +25,14 @@ function generateBoard(words) {
   return board;
 }
 
-async function game(client, msg, gameDetails) {
+async function game(client, msg, gameDetails, theme) {
   const player1 = gameDetails.player1;
   const player2 = gameDetails.player2;
   const gameId = gameDetails.gameID;
-  console.log(gameId);
 
   const players = [player1, player2];
+
+  const words = theme.words;
 
   for (let player of players) {
     if ((await getPairioGameStats(msg.guild)).gameID != gameId) return;

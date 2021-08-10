@@ -4,6 +4,8 @@ const prefix = process.env.PREFIX;
 
 const dbHelper = require("../../../DBHelper.js");
 const updatePairioGameStats = dbHelper.updatePairioGameStats;
+const getPairioThemes = dbHelper.getPairioThemes;
+
 const BeginGame = require("./BeginGame");
 const game = BeginGame.game;
 
@@ -19,7 +21,7 @@ const errorEmbedTemplate = {
 
 module.exports = {
   name: "pairio",
-  aliases:[],
+  aliases: [],
   description: `Play an awesome guessing game! A grid of images will be sent and deleted shortly after, flex your memory power and earn some sluggy coins!`,
   execute: pairioGame,
 };
@@ -53,12 +55,15 @@ async function pairioGame(client, msg, params, serverDetails) {
 
   let updateStatus = await updatePairioGameStats(msg.guild, newGameStats);
   if (!updateStatus) {
-    console.log("ERROR WHILE UPDATING GAME STATUS, setup.js");
+    console.log("ERROR WHILE UPDATING GAME STATUS, setup.js pairio");
     return;
   }
 
+  const themes = await loadThemes();
+  const theme = themes[Math.floor(Math.random() * themes.length)];
+
   msg.channel.send(
-    `Okie, let the clash begin - <@${player1.id}> VS <@${player2.id}>`
+    `Aight, show us your luck - <@${player1.id}> VS <@${player2.id}>\nTheme: ${theme.name}`
   );
   msg.channel.send(
     `Type \`${prefix} quit-pairio\` to quit the game at anytime!( and suffer a great loss )`
@@ -68,12 +73,11 @@ async function pairioGame(client, msg, params, serverDetails) {
 
   // START THE GAME
 
-  game(client, msg, newGameStats);
+  game(client, msg, newGameStats,theme);
+}
 
-  //set a status
-  // client.user.setActivity(`${player1.name} vs ${player2.name}`, {
-  //   type: "WATCHING",
-  // });
+async function loadThemes() {
+  return await getPairioThemes();
 }
 
 async function validatePlayers(client, guild, msg, params, serverDetails) {

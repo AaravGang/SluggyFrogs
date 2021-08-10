@@ -61,7 +61,18 @@ const imageSchema = new mongoose.Schema({
 
 const imageModel = mongoose.model("image-model", imageSchema);
 
+const pairioThemeSchema = new mongoose.Schema({
+  name: { type: String, require: true, unique: true },
+  words: { type: Array, require: true },
+});
+
+const pairioThemeModel = mongoose.model(
+  "pairio-theme-model",
+  pairioThemeSchema
+);
+
 module.exports = {
   serverModel: serverModel,
   imageModel: imageModel,
+  pairioThemeModel: pairioThemeModel,
 };
