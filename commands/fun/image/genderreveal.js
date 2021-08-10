@@ -14,10 +14,8 @@ const creators = process.env.CREATOR_IDS.split(" ");
 // var bgOpts = [];
 
 // Canvas.loadImage(
-//   "https://64.media.tumblr.com/202c1955cb2c42045142656a81107657/tumblr_nx29y66Y2y1tmbsp5o1_1280.jpg"
-// ).then((img) =>
-//   bgOpts.push({ image: img, avatarSize: 130, avatarX: 40, avatarY: 80 })
-// );
+//   "https://media.tenor.com/images/fb2fdc0aab9f6f65c194d8425e1e224c/raw"
+// ).then((img) => console.log(img));
 
 // Canvas.loadImage("commands/fun/image/haha.jpg").then((img) =>
 //   bgOpts.push({ image: img, avatarSize: 130, avatarX: 60, avatarY: 120 })
@@ -39,6 +37,7 @@ async function genderReveal(client, msg, params, serverDetails) {
 
   // This uses the canvas dimensions to stretch the image onto the entire canvas
   context.drawImage(bg, 0, 0, canvas.width, canvas.height);
+
   var avatar;
   if (
     msg.mentions.members.first() &&

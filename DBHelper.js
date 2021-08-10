@@ -207,6 +207,21 @@ async function deleteImage(name) {
   return await imageModel.findOneAndDelete({ name: name });
 }
 
+async function updatePairioGameStats(guild, newGameStats) {
+  try {
+    return await serverModel.findOneAndUpdate(
+      { serverID: guild.id },
+      {
+        $set: {
+          pairioGame: newGameStats,
+        },
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   onGuildJoin: onGuildJoin,
   onGuildLeave: onGuildLeave,
@@ -225,4 +240,5 @@ module.exports = {
   getImage: getImage,
   updateImage: updateImage,
   deleteImage: deleteImage,
+  updatePairioGameStats: updatePairioGameStats,
 };

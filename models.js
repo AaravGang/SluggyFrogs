@@ -34,6 +34,20 @@ const serverSchema = new mongoose.Schema({
       gameID: null,
     },
   },
+  pairioGame: {
+    type: Object,
+    default: {
+      player1: {
+        id: null,
+        name: null,
+      },
+      player2: {
+        id: null,
+        name: null,
+      },
+      gameID: null,
+    },
+  },
 });
 const serverModel = mongoose.model("server-models", serverSchema);
 
