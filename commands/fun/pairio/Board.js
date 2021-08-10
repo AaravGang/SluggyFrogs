@@ -51,7 +51,9 @@ class Board {
           } else {
             try {
               img = await Canvas.loadImage(
-                await getPreview(this.plainBoard[i * this.size + j])
+                await getPreview(
+                  `animated ${this.plainBoard[i * this.size + j]}`
+                )
               );
               this.images[this.plainBoard[i * this.size + j]] = img;
             } catch (err) {
@@ -65,7 +67,6 @@ class Board {
             this.boxSize - this.spacerSize,
             this.boxSize - this.spacerSize
           );
-          
         } else {
           ctx.fillStyle = "#fff";
           ctx.fillRect(
