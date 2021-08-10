@@ -28,12 +28,13 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
   }
 
   try {
-    msg.reply("You have resigned!");
-    let winner =
-      serverDetails.pairioGame.player1.id == msg.author.id
-        ? serverDetails.pairioGame.player2
-        : serverDetails.pairioGame.player1;
-
+    if (reply) {
+      msg.reply("You have resigned!");
+      let winner =
+        serverDetails.pairioGame.player1.id == msg.author.id
+          ? serverDetails.pairioGame.player2
+          : serverDetails.pairioGame.player1;
+    }
     let newGameStats = {
       gameID: null,
       player1: {
