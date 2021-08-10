@@ -13,6 +13,7 @@ Canvas.loadImage("commands/fun/pairio/no_image.png").then(
 class Board {
   constructor(board) {
     this.plainBoard = board;
+
     this.image = null;
     this.size = Math.sqrt(board.length);
 
@@ -26,6 +27,8 @@ class Board {
     const canvas = Canvas.createCanvas(imageDimensions, imageDimensions);
 
     const ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = this.spacerSize;
     for (var i = 0; i < this.size; i++) {
       for (var j = 0; j < this.size; j++) {
         let img = noImg;
@@ -45,12 +48,22 @@ class Board {
         );
       }
     }
+
+    for (var i = 0; i < this.size; i++) {
+      ctx.beginPath();
+      ctx.moveTo(0, i * this.boxSize);
+      ctx.lineTo(imageDimensions, i * this.boxSize);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(i * this.boxSize, 0);
+      ctx.lineTo(i * this.boxSize, imageDimensions);
+      ctx.stroke();
+    }
+
     this.image = canvas.toBuffer();
     return this.image;
   }
 }
-
-
 
 module.exports = {
   Board: Board,
