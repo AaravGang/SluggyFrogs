@@ -19,7 +19,7 @@ class Board {
     this.image = null;
     this.size = Math.sqrt(board.length);
 
-    this.spacerSize = 30;
+    this.spacerSize = 10;
     this.boxSize = imageDimensions / this.size - this.spacerSize;
     this.guessed = [];
   }
@@ -67,8 +67,8 @@ class Board {
           }
           ctx.drawImage(
             img,
-            i * this.boxSize + this.spacerSize,
-            j * this.boxSize + this.spacerSize,
+            i * this.boxSize ,
+            j * this.boxSize,
             this.boxSize,
             this.boxSize
           );
@@ -84,8 +84,8 @@ class Board {
     // draw lines
     for (var i = 0; i <= this.size; i++) {
       ctx.beginPath();
-      ctx.moveTo(0, i * this.boxSize+this.spacerSize);
-      ctx.lineTo(imageDimensions, i * this.boxSize+this.spacerSize);
+      ctx.moveTo(0, i * this.boxSize);
+      ctx.lineTo(imageDimensions, i * this.boxSize);
       ctx.stroke();
       ctx.beginPath();
       ctx.moveTo(i * this.boxSize, 0);
