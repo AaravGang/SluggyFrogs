@@ -8,7 +8,7 @@ const words = [
   "pear",
   "balls",
 ];
-const maxTries = 2;
+const maxTries = 10;
 const timeLimit = 30;
 const timeTillDelete = 5000;
 
@@ -57,7 +57,7 @@ async function game(client, msg, gameDetails) {
     player.board = new Board(generateBoard(words));
 
     const attachment = new Discord.MessageAttachment(
-      await player.board.draw(),
+      await player.board.draw([1, 4, 6, 9]),
       "pairio-image.png"
     );
 
@@ -86,14 +86,21 @@ async function game(client, msg, gameDetails) {
                 player.board.plainBoard[givenIndices[0]]
               )
             ) {
-              msg.channel.send(`<@${player.id}>, You already guessed that!`);
+              const attachment = new Discord.MessageAttachment(
+                await player.board.draw(),
+                "pairio-image.png"
+              );
+              msg.channel.send(
+                `<@${player.id}>, You already guessed that!`,
+                attachment
+              );
             } else {
               player.board.guessed.push(
                 player.board.plainBoard[givenIndices[0]]
               );
 
               const attachment = new Discord.MessageAttachment(
-                await player.board.draw(),
+                await player.board.draw(givenIndices),
                 "pairio-image.png"
               );
               player.score++;

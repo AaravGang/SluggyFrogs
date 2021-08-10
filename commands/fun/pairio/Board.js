@@ -25,7 +25,7 @@ class Board {
     this.images = {};
   }
 
-  async draw() {
+  async draw(show = []) {
     const canvas = Canvas.createCanvas(imageDimensions, imageDimensions);
 
     const ctx = canvas.getContext("2d");
@@ -40,7 +40,10 @@ class Board {
     // draw pics
     for (var i = 0; i < this.size; i++) {
       for (var j = 0; j < this.size; j++) {
-        if (this.guessed.includes(this.plainBoard[i * this.size + j])) {
+        if (
+          this.guessed.includes(this.plainBoard[i * this.size + j]) ||
+          show.includes(i * this.size + j)
+        ) {
           let img = noImg;
           if (this.images[this.plainBoard[i * this.size + j]]) {
             img = this.images[this.plainBoard[i * this.size + j]];
@@ -58,8 +61,8 @@ class Board {
             img,
             j * this.boxSize + this.spacerSize,
             i * this.boxSize + this.spacerSize,
-            this.boxSize - this.spacerSize,
-            this.boxSize - this.spacerSize
+            this.boxSize,
+            this.boxSize
           );
           ctx.fillStyle = "#0000FF";
           ctx.fillText(
@@ -72,8 +75,8 @@ class Board {
           ctx.fillRect(
             j * this.boxSize + this.spacerSize,
             i * this.boxSize + this.spacerSize,
-            this.boxSize - this.spacerSize,
-            this.boxSize - this.spacerSize
+            this.boxSize,
+            this.boxSize
           );
         }
         ctx.fillStyle = "#FF0000";
