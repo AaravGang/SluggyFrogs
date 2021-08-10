@@ -9,7 +9,7 @@ dotenv.config();
 const creators = process.env.CREATOR_IDS.split(" ");
 
 const dbHelper = require("../../../DBHelper");
-const updateMembersBal = dbHelper.updateMembersBal;
+const updateMemberBal = dbHelper.updateMemberBal;
 
 const updatePairioGameStats = dbHelper.updatePairioGameStats;
 const getServerStats = dbHelper.getServerStats;
@@ -36,6 +36,13 @@ async function quitGame(client, msg, params, _serverDetails, reply = true) {
         serverDetails.pairioGame.player1.id == msg.author.id
           ? serverDetails.pairioGame.player2
           : serverDetails.pairioGame.player1;
+
+      let success = await updateMemberBal(msg.guild, winner.id, 2000);
+      if (success) {
+        msg.channel.send(`<@${winner.id}>, You received ${2000}💰`);
+      } else {
+        msg.channel.send(`<@${winner.id}>, Unable to update your balance`);
+      }
     }
     let newGameStats = {
       gameID: null,

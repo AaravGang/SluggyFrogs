@@ -154,6 +154,10 @@ async function game(client, msg, gameDetails) {
     msg.channel.send(`<@${player.id}>, Your score is ${player.score}`);
   }
 
+  if ((await getPairioGameStats(msg.guild)).id != gameId) {
+    return;
+  }
+
   await handleGameOver(msg, player1, player2);
   await quitGame(client, msg, null, null, false);
 }
