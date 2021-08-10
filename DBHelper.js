@@ -223,7 +223,7 @@ async function updatePairioGameStats(guild, newGameStats) {
 }
 
 async function getPairioGameStats(guild) {
-  return await serverModel.findOne({ serverID: guild.id });
+  return (await serverModel.findOne({ serverID: guild.id })).pairioGame;
 }
 
 module.exports = {

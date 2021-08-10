@@ -26,25 +26,20 @@ async function game(client, msg, gameDetails) {
     let i = 1;
     let playerDone = false;
     const filter = async (m) => {
-      console.log(
-        m.content.match(/^[0-9]+ [0-9]+$/),
-        m.author.id == player.id,
-        (await getPairioGameStats(msg.guild)).gameID == gameId
-      );
       return (
         m.content.match(/^[0-9]+ [0-9]+$/) &&
         m.author.id == player.id &&
-        (await getPairioGameStats.gameID) == gameId
+        (await getPairioGameStats(msg.guild)).gameID == gameId
       );
     };
     board = new Board(generateBoard({ apple: 2, pineapple: 2 }));
 
-    const attachment = new Discord.MessageAttachment(
-      await board.draw(),
-      "pairio-image.png"
-    );
+    // const attachment = new Discord.MessageAttachment(
+    //   await board.draw(),
+    //   "pairio-image.png"
+    // );
 
-    await msg.channel.send(`Guess the stuff...`, attachment);
+    // await msg.channel.send(`Guess the stuff...`, attachment);
     while (i < maxTries && !playerDone) {
       await msg.channel
         .awaitMessages(filter, {
@@ -69,15 +64,20 @@ async function game(client, msg, gameDetails) {
             );
 
             await msg.channel.send(`You guessed it right!`, attachment);
+          } else {
+            msg.channel.send(`<@${player.id}>, That aint it!`);
           }
-          msg.channel.send(`You have ${maxTries - i} tries left`);
+          msg.channel.send(
+            `<@${player.id}>, You have ${maxTries - i} tries left`
+          );
         })
-        .catch(async (collected) => {
+        .catch(async (err) => {
+          console.log(err);
           console.log("time limit exceeded");
-          msg.channel.send(`time limit exceeded`);
+          msg.channel.send(`Time limit exceeded!`);
           playerDone = true;
         });
-      i--;
+      i++;
     }
   }
 }
