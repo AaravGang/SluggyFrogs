@@ -79,7 +79,10 @@ async function game(client, msg, gameDetails) {
       await player.board.draw(),
       "pairio-image.png"
     );
-    await msg.channel.send("Start guessing!", attachment);
+    await msg.channel.send(
+      "Start guessing! Type the indices of two images that you think are the same, separated by a space.",
+      attachment
+    );
 
     while (i < maxTries && !playerDone) {
       i++;
