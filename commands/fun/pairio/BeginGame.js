@@ -25,13 +25,13 @@ async function game(client, msg, gameDetails) {
     msg.channel.send(`<@${player.id}>, You are up now!`);
     let i = 1;
     let playerDone = false;
-    function filter(m) {
+    const filter = async (m) => {
       return (
         m.content.match(/^[0-9]+ [0-9]+$/) &&
         m.author.id == player.id &&
-        await(getPairioGameStats).gameID == gameId
+        (await getPairioGameStats.gameID) == gameId
       );
-    }
+    };
     board = new Board(generateBoard({ apple: 2, pineapple: 2 }));
 
     const attachment = new Discord.MessageAttachment(
