@@ -47,9 +47,7 @@ async function game(client, msg, gameDetails) {
 
     player.score = 0;
 
-    (await msg.channel.send(`Guess the stuff...`, attachment)).delete({
-      timeout: timeTillDelete,
-    });
+    await msg.channel.send(`Guess the stuff...`, attachment);
 
     while (i < maxTries && !playerDone) {
       i++;
