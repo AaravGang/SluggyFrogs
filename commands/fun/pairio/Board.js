@@ -32,7 +32,7 @@ class Board {
     ctx.lineWidth = this.spacerSize;
     ctx.font = "30px Arial";
 
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = "#000000";
 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -55,6 +55,7 @@ class Board {
             this.boxSize-this.spacerSize,
             this.boxSize-this.spacerSize
           );
+          ctx.fillStyle = "#fff";
           ctx.fillText(
             this.plainBoard[i * this.size + j],
             i * this.boxSize + this.spacerSize,
@@ -76,6 +77,7 @@ class Board {
             this.boxSize - this.spacerSize,
             this.boxSize - this.spacerSize
           );
+          ctx.fillStyle = "#fff";
           ctx.fillText(
             this.plainBoard[i * this.size + j],
             i * this.boxSize + this.spacerSize,
