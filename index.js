@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const fetch = require("node-fetch");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -81,21 +82,18 @@ client.login(botToken).then((_response) => {
 });
 
 client.on("message", async (message) => {
-    if (
-      message.content.toLowerCase().startsWith(prefix) &&
-      !message.author.bot
-    ) {
-      let serverDetails = await serverModel.findOne({
-        serverID: message.guild.id,
-      });
-      if (!serverDetails) {
-        serverDetails = await onGuildJoin(message.guild);
-      }
-
-      // console.log("THIS IS SERVER WAS CREATED WHEN SOMEONE TEXTED:", serverDetails);
-
-      return handleCommands(client, message, serverDetails);
+  if (message.content.toLowerCase().startsWith(prefix) && !message.author.bot) {
+    let serverDetails = await serverModel.findOne({
+      serverID: message.guild.id,
+    });
+    if (!serverDetails) {
+      serverDetails = await onGuildJoin(message.guild);
     }
+
+    // console.log("THIS IS SERVER WAS CREATED WHEN SOMEONE TEXTED:", serverDetails);
+
+    return handleCommands(client, message, serverDetails);
+  }
 });
 
 function handleCommands(client, msg, serverDetails) {

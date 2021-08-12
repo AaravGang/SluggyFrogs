@@ -23,12 +23,13 @@ const creators = process.env.CREATOR_IDS.split(" ");
 
 const dbHelper = require("../../../DBHelper");
 const getImages = dbHelper.getImages;
+const getProfilePics = dbHelper.getProfilePics;
 
 async function genderReveal(client, msg, params, serverDetails) {
   const bgOpts = await getImages();
-  // console.log(bgOpts);
+
   const bgInfo = bgOpts[Math.floor(Math.random() * bgOpts.length)];
-  console.log(bgInfo);
+
   let bg = await Canvas.loadImage(bgInfo.url);
 
   const canvas = Canvas.createCanvas(500, 500);
@@ -41,18 +42,32 @@ async function genderReveal(client, msg, params, serverDetails) {
   var avatar;
   if (
     msg.mentions.members.first() &&
-    !creators.includes(msg.mentions.members.first().user.id)
+    !creators.includes(msg.mentions.members.first().id)
   ) {
-    avatar = await Canvas.loadImage(
-      msg.mentions.members.first().user.displayAvatarURL({ format: "jpg" })
+    const profilePics = await getProfilePics(
+      msg.guild,
+      msg.mentions.members.first().id
     );
-  } else {
-    avatar = await Canvas.loadImage(
-      msg.author.displayAvatarURL({ format: "jpg" })
-    );
-  }
 
-  console.log(bg);
+    var url = msg.mentions.members
+      .first()
+      .user.displayAvatarURL({ format: "jpg" });
+
+    if (profilePics && profilePics.length > 0) {
+      url = profilePics[Math.floor(Math.random() * profilePics.length)];
+    }
+    console.log(url);
+
+    avatar = await Canvas.loadImage(url);
+  } else {
+    const profilePics = await getProfilePics(msg.guild, msg.author.id);
+    var url = msg.author.displayAvatarURL({ format: "jpg" });
+    if (profilePics && profilePics.length > 0) {
+      url = profilePics[Math.floor(Math.random() * profilePics.length)];
+    }
+    console.log(url);
+    avatar = await Canvas.loadImage(url);
+  }
 
   // Draw a shape onto the main canvas
   context.drawImage(

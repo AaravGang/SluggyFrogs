@@ -246,6 +246,33 @@ async function delPairioTheme(name) {
   return await pairioThemeModel.findOneAndDelete({ name: name });
 }
 
+async function addProfilePic(guild, memberId, imageLink) {
+  const serverDetails = await getServerStats(guild);
+  var member = serverDetails.members[memberId];
+  const profilePics = member.profilePics ? member.profilePics : [];
+  console.log(imageLink)
+  profilePics.push(imageLink)
+  const setField = {};
+  setField[`members.${memberId}.profilePics`] = profilePics;
+  return await serverModel.findOneAndUpdate(
+    { serverID: guild.id },
+    { $set: setField }
+  );
+}
+
+async function clearProfilePics(guild, memberId) {
+  const setField = {};
+  setField[`members.${memberId}.profilePics`] = [];
+  return await serverModel.findOneAndUpdate(
+    { serverID: guild.id },
+    { $set: setField }
+  );
+}
+
+async function getProfilePics(guild, memberId) {
+  return (await getServerStats(guild)).members[memberId].profilePics;
+}
+
 module.exports = {
   onGuildJoin: onGuildJoin,
   onGuildLeave: onGuildLeave,
@@ -270,4 +297,7 @@ module.exports = {
   updatePairioTheme: updatePairioTheme,
   delPairioTheme: delPairioTheme,
   getPairioThemes: getPairioThemes,
+  addProfilePic: addProfilePic,
+  getProfilePics: getProfilePics,
+  clearProfilePics: clearProfilePics,
 };
