@@ -8,7 +8,15 @@ module.exports = {
 const dbHelper = require("../../../DBHelper");
 const clearProfilePics = dbHelper.clearProfilePics;
 
+const dotenv = require("dotenv");
+dotenv.config();
+const creators = process.env.CREATOR_IDS.split(" ");
+
 async function clearPics(client, msg, params, serverDetails) {
+  if (!creators.includes(msg.author.id)) {
+    return msg.reply("You do not have permission to delete profile pics!");
+  }
+
   const mentioned = msg.mentions.members.first();
   if (!mentioned)
     return msg.reply(
