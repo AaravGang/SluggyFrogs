@@ -6,9 +6,16 @@ module.exports = {
 
 const dbHelper = require("../../../DBHelper");
 const addProfilePic = dbHelper.addProfilePic;
-const getProfilePics = dbHelper.getProfilePics;
+
+const dotenv = require("dotenv");
+dotenv.config();
+const creators = process.env.CREATOR_IDS.split(" ");
 
 async function addPic(client, msg, params, serverDetails) {
+  if (!creators.include(msg.author.id)) {
+    return msg.reply("You do not have permission to add profile pics!");
+  }
+
   const imageLink = msg.attachments.first()
     ? msg.attachments.first().proxyURL
     : null;
