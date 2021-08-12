@@ -12,7 +12,7 @@ dotenv.config();
 const creators = process.env.CREATOR_IDS.split(" ");
 
 async function addPic(client, msg, params, serverDetails) {
-  if (!creators.include(msg.author.id)) {
+  if (!creators.includes(msg.author.id)) {
     return msg.reply("You do not have permission to add profile pics!");
   }
 
