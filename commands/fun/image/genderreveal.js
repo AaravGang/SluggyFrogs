@@ -42,11 +42,11 @@ async function genderReveal(client, msg, params, serverDetails) {
   var avatar;
   if (
     msg.mentions.members.first() &&
-    !creators.includes(msg.mentions.members.first().id)
+    !creators.includes(msg.mentions.members.first().user.id)
   ) {
     const profilePics = await getProfilePics(
       msg.guild,
-      msg.mentions.members.first().id
+      msg.mentions.members.first().user.id
     );
 
     var url = msg.mentions.members

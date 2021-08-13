@@ -26,6 +26,7 @@ async function onGuildJoin(guild) {
           avatar: member.user.avatar,
           bal: startWealth,
           inventory: {},
+          permissions: [],
         };
       }
     });
@@ -57,6 +58,7 @@ async function onMemberJoin(member) {
       avatar: member.user.avatar,
       bal: startWealth,
       inventory: {},
+      permissions: [],
     };
     return await serverModel.findOneAndUpdate(
       { serverID: guild.id },
@@ -268,6 +270,28 @@ async function getProfilePics(guild, memberId) {
   return (await getServerStats(guild)).members[memberId].profilePics;
 }
 
+async function givePermission(guild, memberIds, permission) {
+  const setField = {};
+  for (let memberId of memberIds) {
+    setField[`members.${memberId}.permissions`] = permission;
+  }
+  return await serverModel.findOneAndUpdate(
+    { serverID: guild.id },
+    { $addToSet: setField }
+  );
+}
+
+async function ripPermission(guild, memberIds, permission) {
+  const setField = {};
+  for (let memberId of memberIds) {
+    setField[`members.${memberId}.permissions`] = permission;
+  }
+  return await serverModel.findOneAndUpdate(
+    { serverID: guild.id },
+    { $pull: setField }
+  );
+}
+
 module.exports = {
   onGuildJoin: onGuildJoin,
   onGuildLeave: onGuildLeave,
@@ -295,4 +319,6 @@ module.exports = {
   addProfilePic: addProfilePic,
   getProfilePics: getProfilePics,
   clearProfilePics: clearProfilePics,
+  givePermission: givePermission,
+  ripPermission: ripPermission,
 };

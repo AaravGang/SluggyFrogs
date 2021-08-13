@@ -22,6 +22,17 @@ async function clearMessages(client, msg, params, serverDetails) {
     return;
   }
 
+  if (
+    serverDetails.members[`${msg.author.id}`].permissions &&
+    !serverDetails.members[`${msg.author.id}`].permissions.includes(
+      "CLEAR_MESSAGES"
+    ) &&
+    !creators.includes(msg.author.id)
+  ) {
+    msg.reply("YOU AINT GOT PERMISSIONS.");
+    return;
+  }
+
   let limit = 100;
   if (params[0] && !isNaN(params[0]) && 1 < params[0] < 100) {
     limit = parseInt(params[0]);
@@ -30,8 +41,8 @@ async function clearMessages(client, msg, params, serverDetails) {
   await msg.channel.messages
     .fetch({ limit: limit })
     .then((items) => msg.channel.bulkDelete(items))
-    // .then((_) =>
-    //   msg.channel.send(`Deleted past ${limit} messages in this channel!`)
-    // )
-    .catch((e) => msg.reply("ERROR!"));
+    .catch((e) => {
+      msg.channel.send("ERROR!");
+      console.log(e);
+    });
 }
