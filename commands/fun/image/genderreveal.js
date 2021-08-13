@@ -58,7 +58,13 @@ async function genderReveal(client, msg, params, serverDetails) {
     }
     console.log(url);
 
-    avatar = await Canvas.loadImage(url);
+    try {
+      avatar = await Canvas.loadImage(url);
+    } catch (err) {
+      avatar = null;
+      return msg.reply("Error");
+    }
+    if (!avatar) return false;
   } else {
     const profilePics = await getProfilePics(msg.guild, msg.author.id);
     var url = msg.author.displayAvatarURL({ format: "jpg" });
@@ -66,7 +72,13 @@ async function genderReveal(client, msg, params, serverDetails) {
       url = profilePics[Math.floor(Math.random() * profilePics.length)];
     }
     console.log(url);
-    avatar = await Canvas.loadImage(url);
+    try {
+      avatar = await Canvas.loadImage(url);
+    } catch (err) {
+      avatar = null;
+      return msg.reply("Error");
+    }
+    if (!avatar) return false;
   }
 
   // Draw a shape onto the main canvas
