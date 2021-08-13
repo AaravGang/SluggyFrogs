@@ -1,7 +1,7 @@
 module.exports = {
-  name: "rip_cc_perm",
-  aliases: ["rccp"],
-  description: `Strip a member's permission to clear messages!`,
+  name: "rip_perm",
+  aliases: ["rp"],
+  description: `Strip a member's permission!`,
   execute: ripClearPerm,
 };
 
@@ -12,6 +12,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const creators = process.env.CREATOR_IDS.split(" ");
 const prefix = process.env.PREFIX;
+
+const validPermissions = process.env.PERMISSIONS.split(" ");
 
 async function ripClearPerm(client, msg, params, serverDetails) {
   if (!creators.includes(msg.author.id)) {
@@ -26,6 +28,13 @@ async function ripClearPerm(client, msg, params, serverDetails) {
       "You need to mention the user(s) whose permission you wanna take away."
     );
 
+  const permission = params[0].toUpperCase();
+  if (!validPermissions.includes(permission)) {
+    return msg.reply(
+      `Invlaid permission string.\nChoose from: [${validPermissions}]`
+    );
+  }
+
   const memberIds = [];
 
   for (var member of mentioned) {
@@ -33,11 +42,11 @@ async function ripClearPerm(client, msg, params, serverDetails) {
   }
 
   try {
-    await ripPermission(msg.guild, memberIds, "CLEAR_MESSAGES");
+    await ripPermission(msg.guild, memberIds, permission);
     msg.channel.send(
       `${mentioned.map(
         (member) => member.user.username
-      )}\nRipped permission to clear chats from above members.`
+      )}\nRipped permission \`${permission}\` from above members.`
     );
   } catch (err) {
     console.log(err);
