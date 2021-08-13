@@ -44,7 +44,7 @@ async function givPerm(client, msg, params, serverDetails) {
     msg.channel.send(
       `${mentioned.map(
         (member) => member.user.username
-      )}\nThese members can now have ${permission} permision`
+      )}\nThese members can now have \`${permission}\` permision.`
     );
   } catch (err) {
     console.log(err);
