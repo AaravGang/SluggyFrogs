@@ -247,16 +247,11 @@ async function delPairioTheme(name) {
 }
 
 async function addProfilePic(guild, memberId, imageLink) {
-  const serverDetails = await getServerStats(guild);
-  var member = serverDetails.members[memberId];
-  const profilePics = member.profilePics ? member.profilePics : [];
-  console.log(imageLink)
-  profilePics.push(imageLink)
   const setField = {};
-  setField[`members.${memberId}.profilePics`] = profilePics;
+  setField[`members.${memberId}.profilePics`] = imageLink;
   return await serverModel.findOneAndUpdate(
     { serverID: guild.id },
-    { $set: setField }
+    { $push: setField }
   );
 }
 
