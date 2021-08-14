@@ -36,9 +36,16 @@ async function ripClearPerm(client, msg, params, serverDetails) {
   }
 
   const memberIds = [];
+  const allMemberIds = Object.keys(serverDetails.members);
 
   for (var member of mentioned) {
-    memberIds.push(member[0]);
+    if (allMemberIds.includes(member[0])) {
+      memberIds.push(member[0]);
+    }
+  }
+
+  if (memberIds.length == 0) {
+    return msg.reply("The mentioned user are not in the data base.")
   }
 
   try {

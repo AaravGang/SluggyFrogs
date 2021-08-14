@@ -1,6 +1,6 @@
 module.exports = {
-  name: "giv_perm",
-  aliases: ["gp"],
+  name: "give_perm",
+  aliases: ["gp", "giv_perm"],
   description: `Give a member a specific permission!`,
   execute: givPerm,
 };
@@ -25,19 +25,29 @@ async function givPerm(client, msg, params, serverDetails) {
   const mentioned = msg.mentions.members;
   if (!mentioned.first())
     return msg.reply(
-      `You need to mention the user(s) to whom u wanna give clearing permissions.\n\`${prefix} giveperm <PERMISSON> <@member>\``
+      `You need to mention the user(s) to whom u wanna give clearing permissions.\n\`${prefix} give_perm <PERMISSON> <@member>\``
     );
 
   const permission = params[0].toUpperCase();
   if (!validPermissions.includes(permission)) {
-    return msg.reply(`Invlaid permission string.\nChoose from: [${validPermissions}]`);
+    return msg.reply(
+      `Invlaid permission string.\nChoose from: [${validPermissions}]`
+    );
   }
 
   const memberIds = [];
+  const allMemberIds = Object.keys(serverDetails.members);
 
   for (var member of mentioned) {
-    memberIds.push(member[0]);
+    if (allMemberIds.includes(member[0])) {
+      memberIds.push(member[0]);
+    }
   }
+
+  if (memberIds.length == 0) {
+    return msg.reply("The mentioned user are not in the data base.");
+  }
+
 
   try {
     await givePermission(msg.guild, memberIds, permission);
