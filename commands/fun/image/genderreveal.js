@@ -61,8 +61,11 @@ async function genderReveal(client, msg, params, serverDetails) {
     try {
       avatar = await Canvas.loadImage(url);
     } catch (err) {
-      avatar = null;
-      return msg.reply("Error");
+      msg.reply(
+        `Error. profile pic of <@${
+          msg.mentions.members.first().user.id
+        }> has prolly expired.`
+      );
     }
     if (!avatar) return false;
   } else {
@@ -75,8 +78,11 @@ async function genderReveal(client, msg, params, serverDetails) {
     try {
       avatar = await Canvas.loadImage(url);
     } catch (err) {
-      avatar = null;
-      return msg.reply("Error");
+      return msg.reply(
+        `Error. profile pic of <@${
+          msg.mentions.members.first().user.id
+        }> has prolly expired.`
+      );
     }
     if (!avatar) return false;
   }
