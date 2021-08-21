@@ -53,10 +53,17 @@ async function genderReveal(client, msg, params, serverDetails) {
       .first()
       .user.displayAvatarURL({ format: "jpg" });
 
+    try {
+      avatar = await Canvas.loadImage(url);
+    } catch (e) {
+      return msg.reply(
+        "Error while trying to load the discord avatar of member."
+      );
+    }
+
     if (profilePics && profilePics.length > 0) {
       url = profilePics[Math.floor(Math.random() * profilePics.length)];
     }
-    console.log(url);
 
     try {
       avatar = await Canvas.loadImage(url);
@@ -71,17 +78,22 @@ async function genderReveal(client, msg, params, serverDetails) {
   } else {
     const profilePics = await getProfilePics(msg.guild, msg.author.id);
     var url = msg.author.displayAvatarURL({ format: "jpg" });
+    try {
+      avatar = await Canvas.loadImage(url);
+    } catch (e) {
+      return msg.reply(
+        "Error while trying to load the discord avatar of member."
+      );
+    }
+
     if (profilePics && profilePics.length > 0) {
       url = profilePics[Math.floor(Math.random() * profilePics.length)];
     }
-    console.log(url);
     try {
       avatar = await Canvas.loadImage(url);
     } catch (err) {
-      return msg.reply(
-        `Error. profile pic of <@${
-          msg.mentions.members.first().user.id
-        }> has prolly expired.`
+      msg.reply(
+        `Error. profile pic of <@${msg.author.id}> has prolly expired.`
       );
     }
     if (!avatar) return false;
