@@ -45,7 +45,7 @@ async function ripClearPerm(client, msg, params, serverDetails) {
   }
 
   if (memberIds.length == 0) {
-    return msg.reply("The mentioned user are not in the data base.")
+    return msg.reply("The mentioned user is not in the data base.")
   }
 
   try {
