@@ -22,10 +22,10 @@ async function clearMessages(client, msg, params, serverDetails) {
     return;
   }
 
+  if (creators.includes(msg.author.id))console.log("yes",msg.author)
+
   if (
-    serverDetails.members[`${msg.author.id}`] &&
     serverDetails.members[`${msg.author.id}`].permissions &&
-    serverDetails.members[`${msg.author.id}`].permissions.length > 0 &&
     !serverDetails.members[`${msg.author.id}`].permissions.includes(
       "CLEAR_MESSAGES"
     ) &&
