@@ -63,7 +63,7 @@ client.on("guildCreate", async (guild) => {
         guild.member(client.user).roles.add(role);
         role.setHoist(true);
       })
-      .catch(e=>console.log(e));
+      .catch((e) => console.log(e));
   } catch (e) {}
 });
 
@@ -73,6 +73,7 @@ client.on("guildDelete", async (guild) => {
 });
 
 client.on("guildMemberAdd", async (member) => {
+  if (member.user.bot) return;
   let addStatus = await onMemberJoin(member);
   console.log(addStatus);
 });
