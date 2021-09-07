@@ -42,6 +42,7 @@ async function genderReveal(client, msg, params, serverDetails) {
   var avatar;
   if (
     msg.mentions.members.first() &&
+    !msg.mentions.members.first().user.bot &&
     !creators.includes(msg.mentions.members.first().user.id)
   ) {
     const profilePics = await getProfilePics(
