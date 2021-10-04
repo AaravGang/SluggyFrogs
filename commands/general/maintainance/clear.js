@@ -22,13 +22,13 @@ async function clearMessages(client, msg, params, serverDetails) {
     return;
   }
 
-  if (creators.includes(msg.author.id))console.log("yes",msg.author)
+  if (creators.includes(msg.author.id)) console.log("yes", msg.author);
 
   if (
-    serverDetails.members[`${msg.author.id}`].permissions &&
-    !serverDetails.members[`${msg.author.id}`].permissions.includes(
-      "CLEAR_MESSAGES"
-    ) &&
+    (!serverDetails.members[`${msg.author.id}`].permissions ||
+      !serverDetails.members[`${msg.author.id}`].permissions.includes(
+        "CLEAR_MESSAGES"
+      )) &&
     !creators.includes(msg.author.id)
   ) {
     msg.reply("YOU AINT GOT PERMISSIONS.");
