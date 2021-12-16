@@ -45,7 +45,7 @@ async function clearMessages(client, msg, params, serverDetails) {
     .then((items) => msg.channel.bulkDelete(items))
     .catch((e) => {
       msg.channel.send(
-        "ERROR! Can't delete past 100 messages, cuz they are either too old or don't exist!\n specify the number of messages you wanna delete instead - `cuss cc <number>`"
+        `ERROR! Can't delete past ${limit} messages, cuz they are too old to bulk delete!\n Specify the number of messages you wanna delete instead - \`cuss cc <number>\``
       );
       console.log(e);
     });
