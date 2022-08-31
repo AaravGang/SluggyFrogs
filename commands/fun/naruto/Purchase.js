@@ -50,7 +50,7 @@ async function addItem(client, msg, params, serverDetails) {
     -item.cost * (number - alreadyPresentNumber)
   );
   if (!updateBalanceStatus) {
-    return msg.reply("Error while trying to deduct money from you bank!");
+    return msg.reply("Error while deducting money from your bank!");
   }
 
   let updateStatus = await updateToInventory(

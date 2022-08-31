@@ -17,7 +17,8 @@ const validPermissions = process.env.PERMISSIONS.split(" ");
 
 async function givPerm(client, msg, params, serverDetails) {
   if (!creators.includes(msg.author.id)) {
-    return msg.reply("You do not have permission to give people permissions!");
+    // return msg.reply("You do not have permission to give people permissions!");
+    return msg.react("🚫");
   }
 
   const mentioned = msg.mentions.members;
@@ -43,7 +44,7 @@ async function givPerm(client, msg, params, serverDetails) {
   }
 
   if (memberIds.length == 0) {
-    return msg.reply("The mentioned user are not in the data base.");
+    return msg.reply("The mentioned users are not in the data base.");
   }
 
   try {

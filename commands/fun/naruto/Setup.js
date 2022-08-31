@@ -77,7 +77,7 @@ async function narutoGame(client, msg, params, serverDetails) {
 async function validatePlayers(client, guild, msg, params, serverDetails) {
   // a game is already on
   if (serverDetails.narutoGame.gameID) {
-    msg.reply("There is already a game in progress...");
+    msg.reply("A game is already in progress...");
     return false;
   }
 

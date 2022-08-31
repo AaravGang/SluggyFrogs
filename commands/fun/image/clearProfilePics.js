@@ -14,7 +14,8 @@ const creators = process.env.CREATOR_IDS.split(" ");
 
 async function clearPics(client, msg, params, serverDetails) {
   if (!creators.includes(msg.author.id)) {
-    return msg.reply("You do not have permission to delete profile pics!");
+    // return msg.reply("You do not have permission to delete profile pics!");
+    return msg.react("🚫");
   }
 
   const mentioned = msg.mentions.members.first();

@@ -26,18 +26,21 @@ async function addTheme(client, msg, params, serverDetails) {
 
   if (valid.update) {
     await updatePairioTheme(name, { name: name, words: words });
-    msg.reply("Successfully updated theme!");
+    // msg.reply("Successfully updated theme!");
+    msg.react("👍");
+
     return;
   }
   await addPairioTheme({ name: name, words: words });
-  msg.reply("Successfully added theme!");
+  // msg.reply("Successfully added theme!");
+  msg.react("👍");
 }
 
 async function validateParams(msg, name, words) {
   if (name && words) {
     if (!validLengths.includes(words.length)) {
       msg.reply(
-        `The number of words can only be half of a perfect even square,i.e. one of these: [${validLengths}]`
+        `The number of words must match one of these: [${validLengths}]`
       );
       return false;
     }
@@ -48,7 +51,7 @@ async function validateParams(msg, name, words) {
     return { name: name, words: words };
   }
   msg.reply(
-    `Did not receive <theme_name> or/and <words>\n\`${prefix} at <theme_name> <theme_words ( separated by spaces )>\``
+    `Did not receive <theme_name> and/or <words>\n\`${prefix} at <theme_name> <theme_words ( separated by spaces )>\``
   );
   return false;
 }

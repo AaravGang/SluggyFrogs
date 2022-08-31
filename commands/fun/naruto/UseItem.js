@@ -31,9 +31,7 @@ async function equip(client, msg, params) {
   }
 
   if (player.shinobi) {
-    msg.reply(
-      "You cannot equip with yourself with items once you have chosen your shinobi! (kinda sucks but dats the way it is)"
-    );
+    msg.react("🚫");
     return false;
   }
 
@@ -49,14 +47,16 @@ async function equip(client, msg, params) {
     !serverDetails.members[player.id].inventory[itemName] ||
     serverDetails.members[player.id].inventory[itemName] <= 0
   ) {
-    msg.reply(`The item you wanna use is not in your inventory!`);
+    // msg.reply(`The item you wanna use is not in your inventory!`);
+    msg.react("🚫");
     return false;
   }
   if (
     serverDetails.narutoGame[playerRef].items &&
     serverDetails.narutoGame[playerRef].items.includes(itemName)
   ) {
-    msg.reply("You have already used this item!");
+    // msg.reply("You have already used this item!");
+    msg.react("🚫");
     return false;
   }
 

@@ -19,7 +19,8 @@ async function addPic(client, msg, params, serverDetails) {
       )) &&
     !creators.includes(msg.author.id)
   ) {
-    msg.reply("YOU AINT GOT PERMISSIONS.");
+    // msg.reply("YOU AINT GOT PERMISSIONS.");
+    msg.react("🚫");
     return;
   }
 

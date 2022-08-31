@@ -35,12 +35,14 @@ async function hireShinobi(client, msg, params) {
     opponent = serverDetails.narutoGame.player1;
     opponentRef = "player1";
   } else {
-    msg.reply("You need to be in a game to use this command!");
+    // msg.reply("You need to be in a game to use this command!");
+    msg.react("🚫");
     return false;
   }
 
   if (player.shinobi) {
-    msg.reply("You have already chosen your character!");
+    // msg.reply("You have already chosen your character!");
+    msg.react("🚫");
     return false;
   }
 
@@ -48,6 +50,7 @@ async function hireShinobi(client, msg, params) {
   // shinobi with that name does not exist
   if (!shinobiDetails[shinobiName]) {
     msg.reply("Invalid shinobi name.");
+    msg.react("🚫");
     Shinobis.execute(client, msg);
     return false;
   }
@@ -57,6 +60,7 @@ async function hireShinobi(client, msg, params) {
     msg.reply(
       `${shinobiName} has already been hired. Choose any other shinobi`
     );
+    msg.react("🚫");
     return false;
   }
 
@@ -66,9 +70,7 @@ async function hireShinobi(client, msg, params) {
       rankOrder.indexOf(shinobiDetails[opponent.shinobi].rank)
   ) {
     msg.reply(
-      `***DESTROYING*** your opponent is not allowed!\nYour opponent has chosen a shinobi of a lower rank (${
-        shinobiDetails[opponent.shinobi].rank
-      }), choose a shinobi of that rank or lower.\nAvailable ranks: ${rankOrder.slice(
+      `Play a fair game!\nAvailable ranks: ${rankOrder.slice(
         0,
         rankOrder.indexOf(shinobiDetails[opponent.shinobi].rank) + 1
       )} `
@@ -76,9 +78,7 @@ async function hireShinobi(client, msg, params) {
     return false;
   }
   if (serverDetails.members[player.id].prevShinobi == shinobiName) {
-    msg.reply(
-      `That's whom you hired previously! **Don't get to comfortable with a shinobi**.`
-    );
+    msg.reply(`You hired ${shinobiName} previously and now they want a break.`);
     return false;
   }
 
@@ -124,7 +124,8 @@ async function hireShinobi(client, msg, params) {
   }
 
   //update successful
-  msg.reply(`Set your shinobi to ${shinobiName}`);
+  // msg.reply(`Set your shinobi to ${shinobiName}`);
+  msg.react("👍");
   if (
     serverDetails.narutoGame.player1.shinobi &&
     serverDetails.narutoGame.player2.shinobi

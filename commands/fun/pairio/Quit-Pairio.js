@@ -26,13 +26,17 @@ async function quitGame(client, msg, params, _serverDetails, reply = true) {
     serverDetails.pairioGame.player2.id != msg.author.id &&
     reply
   ) {
-    msg.reply("You need to be in a game to quit it!");
+    // msg.reply("You need to be in a game to quit it!");
+    msg.react("🚫");
+
     return false;
   }
 
   try {
     if (reply) {
-      msg.reply("You have resigned!");
+      // msg.reply("You have resigned!");
+      msg.react("👍");
+
       let winner =
         serverDetails.pairioGame.player1.id == msg.author.id
           ? serverDetails.pairioGame.player2

@@ -46,11 +46,12 @@ async function addImageToDB(client, msg, params, serverDetail) {
   );
   if (addStatus) {
     msg.reply("Added successfully!");
+    msg.react("👍");
     sendPreview(addRequest, previewAvatar, msg);
 
     return;
   }
-  msg.reply("Error");
+  msg.reply("Error. line 54");
 }
 
 async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
@@ -91,6 +92,7 @@ async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
 
               await updateImage(name, imgDetails);
               msg.reply("Updated image successfully!");
+              msg.react("👍");
               sendPreview(imgDetails, previewAvatar, msg);
             })
             .catch((collected) => console.log(collected))

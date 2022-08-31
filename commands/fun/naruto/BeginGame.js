@@ -357,7 +357,8 @@ async function setPlayerJutsu(msg, player, jutsuName, gameID) {
     player.currentJutsu = jutsu;
     player.shinobi.chakra -= jutsu.chakra;
 
-    msg.reply(`Set your jutsu to ${jutsu.name}`);
+    // msg.reply(`Set your jutsu to ${jutsu.name}`);
+    msg.react("👍");
 
     return true;
   }
@@ -366,7 +367,8 @@ async function setPlayerJutsu(msg, player, jutsuName, gameID) {
 
 function checkValidJutsu(msg, jutsuName, player) {
   if (player.currentJutsu) {
-    msg.reply("You have already chosen jutsu!");
+    // msg.reply("You have already chosen jutsu!");
+    msg.react("🥦");
     return false;
   }
 
@@ -375,7 +377,8 @@ function checkValidJutsu(msg, jutsuName, player) {
     !Jutsus[jutsuName] ||
     !availableJutsus.filter((jutsu) => jutsu.commandName === jutsuName).length
   ) {
-    msg.reply("Invalid Jutsu!");
+    // msg.reply("Invalid Jutsu!");
+    msg.react("🚫 ");
     return false;
   }
 

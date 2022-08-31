@@ -17,9 +17,10 @@ const validPermissions = process.env.PERMISSIONS.split(" ");
 
 async function ripClearPerm(client, msg, params, serverDetails) {
   if (!creators.includes(msg.author.id)) {
-    return msg.reply(
-      "You do not have permission to rip permissions!"
-    );
+    // return msg.reply(
+    //   "You do not have permission to rip permissions!"
+    // );
+    return msg.react("🚫");
   }
 
   const mentioned = msg.mentions.members;
@@ -45,7 +46,7 @@ async function ripClearPerm(client, msg, params, serverDetails) {
   }
 
   if (memberIds.length == 0) {
-    return msg.reply("The mentioned user is not in the data base.")
+    return msg.reply("The mentioned user is not in the data base.");
   }
 
   try {

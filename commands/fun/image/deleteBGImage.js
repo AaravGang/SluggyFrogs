@@ -16,5 +16,6 @@ async function deleteImageFromDB(client, msg, params, serverDetail) {
   if (!params[0])
     return msg.reply("Did not recieve name of the image you wanna delete.");
   await deleteImage(params[0]);
-  msg.reply("Deleted!");
+  // msg.reply("Deleted!");
+  msg.react("👍");
 }

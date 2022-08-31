@@ -29,16 +29,16 @@ async function give(client, msg, params, serverDetails) {
   if (!creatorIds.includes(msg.author.id)) {
     if (msg.author.id == recipient.user.id) {
       msg.reply(
-        "Stupid! You can't fool me. Donation to self is not allowed unless you are god."
+        "Baka! Only god gets free money."
       );
       return false;
     }
     let authorBal = (await getMember(msg.guild, msg.author.id)).bal;
     if (authorBal < amount) {
-      msg.reply("You do not have enough money! Current Balance: " + authorBal);
+      msg.reply("You don't have enough money! Current Balance: " + authorBal);
       return false;
     } else if (amount <= 0) {
-      msg.reply("Ahhh, Selfish! You can give only positive money.");
+      msg.reply("Jerk.");
       return false;
     }
     await updateMemberBal(msg.guild, msg.author.id, -amount);

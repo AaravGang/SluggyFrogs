@@ -87,7 +87,7 @@ async function loadThemes() {
 async function validatePlayers(client, guild, msg, params, serverDetails) {
   // a game is already on
   if (serverDetails.pairioGame.gameID) {
-    msg.reply("There is already a game in progress...");
+    msg.reply("A game is already in progress...");
     return false;
   }
 
