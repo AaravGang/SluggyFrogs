@@ -65,7 +65,8 @@ async function genderReveal(client, msg, params, serverDetails) {
 
     //check if all pfps are valid, if not delete them
     if (profilePics) {
-      profilePics.forEach(async (imageLink) => {
+      urls = [...profilePics];
+      urls.forEach(async (imageLink, ind) => {
         try {
           avatar = await Canvas.loadImage(imageLink);
         } catch (err) {
@@ -74,6 +75,7 @@ async function genderReveal(client, msg, params, serverDetails) {
             msg.mentions.members.first().user.id,
             imageLink
           );
+          profilePics.splice(ind);
         }
       });
     }
@@ -105,11 +107,14 @@ async function genderReveal(client, msg, params, serverDetails) {
 
     //check if all pfps are valid, if not delete them
     if (profilePics) {
-      profilePics.forEach(async (imageLink) => {
+      urls = [...profilePics];
+
+      urls.forEach(async (imageLink, ind) => {
         try {
           avatar = await Canvas.loadImage(imageLink);
         } catch (err) {
           delProfilePic(msg.guild, msg.author.id, imageLink);
+          profilePics.splice(ind);
         }
       });
     }
