@@ -42,7 +42,10 @@ async function game(client, msg, gameDetails, theme) {
     let playerDone = false;
 
     const filter = async (m) => {
-      console.log(m.content.match(/^[0-9]+ [0-9]+$/));
+      console.log(
+        m.content.split(" ").filter((a) => theme.plainBoard > parseInt(a) > 0)
+          .length == 2
+      );
       return (
         m.content.match(/^[0-9]+ [0-9]+$/) &&
         m.content.split(" ").filter((a) => theme.plainBoard > parseInt(a) > 0)
