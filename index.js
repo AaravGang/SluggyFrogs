@@ -124,3 +124,4 @@ function handleCommands(client, msg, serverDetails) {
       .execute(client, msg, commandParams, serverDetails);
   }
 }
+

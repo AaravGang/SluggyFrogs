@@ -32,7 +32,8 @@ async function clearMessages(client, msg, params, serverDetails) {
     !creators.includes(msg.author.id)
   ) {
     // msg.reply("YOU AINT GOT PERMISSIONS.");
-    msg.react("🚫");
+    msg.react("🚫")
+    msg.react("<a:strechee:1014563312173850704>");
 
     return;
   }

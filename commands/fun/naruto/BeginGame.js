@@ -378,7 +378,7 @@ function checkValidJutsu(msg, jutsuName, player) {
     !availableJutsus.filter((jutsu) => jutsu.commandName === jutsuName).length
   ) {
     // msg.reply("Invalid Jutsu!");
-    msg.react("🚫 ");
+    msg.react("🚫");
     return false;
   }
 
