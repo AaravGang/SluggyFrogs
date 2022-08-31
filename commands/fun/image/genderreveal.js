@@ -62,6 +62,21 @@ async function genderReveal(client, msg, params, serverDetails) {
       );
     }
 
+    //check if all pfps are valid, if not delete them
+    if (profilePics) {
+      profilePics.forEach(async (imageLink) => {
+        try {
+          avatar = await Canvas.loadImage(imageLink);
+        } catch (err) {
+          delProfilePic(
+            msg.guild,
+            msg.mentions.members.first().user.id,
+            imageLink
+          );
+        }
+      });
+    }
+
     if (profilePics && profilePics.length > 0) {
       url = profilePics[Math.floor(Math.random() * profilePics.length)];
     }
@@ -85,6 +100,17 @@ async function genderReveal(client, msg, params, serverDetails) {
       return msg.reply(
         "Error while trying to load the discord avatar of member."
       );
+    }
+
+    //check if all pfps are valid, if not delete them
+    if (profilePics) {
+      profilePics.forEach(async (imageLink) => {
+        try {
+          avatar = await Canvas.loadImage(imageLink);
+        } catch (err) {
+          delProfilePic(msg.guild, msg.author.id, imageLink);
+        }
+      });
     }
 
     if (profilePics && profilePics.length > 0) {

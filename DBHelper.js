@@ -257,6 +257,15 @@ async function addProfilePic(guild, memberId, imageLink) {
   );
 }
 
+async function delProfilePic(guild, memberId, imageLink) {
+  const setField = {};
+  setField[`members.${memberId}.profilePics`] = imageLink;
+  return await serverModel.findOneAndUpdate(
+    { serverID: guild.id },
+    { $pull: setField }
+  );
+}
+
 async function clearProfilePics(guild, memberId) {
   const setField = {};
   setField[`members.${memberId}.profilePics`] = [];
@@ -321,4 +330,5 @@ module.exports = {
   clearProfilePics: clearProfilePics,
   givePermission: givePermission,
   ripPermission: ripPermission,
+  delProfilePic: delProfilePic,
 };
