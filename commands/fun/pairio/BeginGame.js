@@ -43,7 +43,7 @@ async function game(client, msg, gameDetails, theme) {
 
     const filter = async (m) => {
       console.log(
-        m.content.split(" ").filter((a) => theme.plainBoard > parseInt(a) > 0)
+        m.content.split(" ").filter((a) => parseInt(a) > 0)
           
       );
       return (
