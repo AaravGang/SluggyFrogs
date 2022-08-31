@@ -24,6 +24,7 @@ const creators = process.env.CREATOR_IDS.split(" ");
 const dbHelper = require("../../../DBHelper");
 const getImages = dbHelper.getImages;
 const getProfilePics = dbHelper.getProfilePics;
+const delProfilePic = dbHelper.delProfilePic;
 
 async function genderReveal(client, msg, params, serverDetails) {
   const bgOpts = await getImages();
