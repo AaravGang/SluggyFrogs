@@ -18,7 +18,7 @@ const validPermissions = process.env.PERMISSIONS.split(" ");
 async function ripClearPerm(client, msg, params, serverDetails) {
   if (!creators.includes(msg.author.id)) {
     return msg.reply(
-      "You do not have permission to rip permissions from people!"
+      "You do not have permission to rip permissions!"
     );
   }
 

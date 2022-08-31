@@ -17,15 +17,13 @@ const validPermissions = process.env.PERMISSIONS.split(" ");
 
 async function givPerm(client, msg, params, serverDetails) {
   if (!creators.includes(msg.author.id)) {
-    return msg.reply(
-      "You do not have permission to give people permission to clear messages!"
-    );
+    return msg.reply("You do not have permission to give people permissions!");
   }
 
   const mentioned = msg.mentions.members;
   if (!mentioned.first())
     return msg.reply(
-      `You need to mention the user(s) to whom u wanna give clearing permissions.\n\`${prefix} give_perm <PERMISSON> <@member>\``
+      `You need to mention the user(s) to whom u wanna give a permission.\n\`${prefix} give_perm <PERMISSON> <@member>\``
     );
 
   const permission = params[0].toUpperCase();
@@ -47,7 +45,6 @@ async function givPerm(client, msg, params, serverDetails) {
   if (memberIds.length == 0) {
     return msg.reply("The mentioned user are not in the data base.");
   }
-
 
   try {
     await givePermission(msg.guild, memberIds, permission);
