@@ -42,6 +42,7 @@ async function game(client, msg, gameDetails, theme) {
     let playerDone = false;
 
     const filter = async (m) => {
+      console.log(m.content.match(/^[0-9]+ [0-9]+$/));
       return (
         m.content.match(/^[0-9]+ [0-9]+$/) &&
         m.content.split(" ").filter((a) => theme.plainBoard > parseInt(a) > 0)
@@ -159,7 +160,6 @@ async function game(client, msg, gameDetails, theme) {
   }
 
   let success = await handleGameOver(msg, player1, player2);
-  console.log(success);
   await quitGame(client, msg, null, null, false);
 }
 

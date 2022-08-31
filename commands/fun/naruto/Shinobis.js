@@ -133,7 +133,7 @@ async function getShinobiDetails(client, msg, params = null) {
 module.exports = {
   name: "hire-options",
   aliases: ["shinobis", "shinobi", "hire_options", "hire-opts", "hire_opts"],
-  description: `Get list of available shinobis\nUsage: \`${prefix} hire-options\``,
+  description: `Get list of available shinobis`,
   execute: getShinobiDetails,
   shinobiDetails: shinobiDetails,
   Shinobi: Shinobi,
