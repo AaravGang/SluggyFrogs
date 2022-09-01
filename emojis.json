@@ -1,0 +1,36 @@
+{
+  "emojis": {
+    "dick": { "full": "<:dick:1014561291333013504>", "short": ":dick:" },
+    "peace": { "full": "<:peace:1014560912222474270>", "short": ":peace-1:" },
+    "shrekdisgusted": {
+      "full": "<:shrekdisgusted:1014561499802501223>",
+      "short": ":shrekdisgusted:"
+    }
+  },
+  "animated": {
+    "coinspin": {
+      "full": "<a:coinspin:1014952251908948089>",
+      "short": ":coinspin:"
+    },
+    "sparklycash": {
+      "full": "<a:sparklycash:1014949455411286027>",
+      "short": ":sparklycash:"
+    },
+    "narutobaryon": {
+      "full": "<a:narutobaryon:1014951230419771473>",
+      "short": ":narutobaryon:"
+    },
+    "narutostart": {
+      "full": "<a:narutostart:1014952548005859339>",
+      "short": ":narutostart:"
+    },
+    "ghostconfused": {
+      "full": "<a:ghostconfused:1014563350195212318>",
+      "short": ":ghostconfused:"
+    },
+    "strechee": {
+      "full": "<a:strechee:1014563312173850704>",
+      "short": ":strechee:"
+    }
+  }
+}
