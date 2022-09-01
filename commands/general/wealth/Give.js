@@ -45,16 +45,16 @@ async function give(client, msg, params, serverDetails) {
     }
     await updateMemberBal(msg.guild, msg.author.id, -amount);
     msg.reply(
-      `Deducted ${amount}animated.coinspin.full from your wallet. Current balance: ${
-        authorBal - amount
-      }`
+      `Deducted ${amount}${
+        animated.coinspin.full
+      } from your wallet. Current balance: ${authorBal - amount}`
     );
   }
 
   updateStatus = await updateMemberBal(msg.guild, recipient.user.id, amount);
   if (updateStatus) {
     msg.channel.send(
-      `<@${recipient.user.id}> ${amount}animated.coinspin.full has been added to your wallet by the super generous <@${msg.author.id}>! :)`
+      `<@${recipient.user.id}> ${amount}${animated.coinspin.full} has been added to your wallet by the super generous <@${msg.author.id}>! :)`
     );
     return true;
   }

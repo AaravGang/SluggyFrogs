@@ -30,7 +30,7 @@ async function getBal(client, msg, params, serverDetails) {
           fields: [
             {
               name: "🤑Wealth🤑",
-              value: `${member.bal}animated.coinspin.full`,
+              value: `${member.bal}${animated.coinspin.ful}l`,
             },
           ],
           thumbnail: { url: targetMember.avatarURL() },

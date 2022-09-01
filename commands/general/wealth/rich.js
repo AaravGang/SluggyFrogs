@@ -40,7 +40,7 @@ async function getRichOrder(client, msg, params, serverDetails) {
       name: `${
         rankEmojis[ind - 1] ? rankEmojis[ind - 1] : ind.toString() + ")"
       } ${value.userName}`,
-      value: `Wealth: ${value.bal}animated.coinspin.full`,
+      value: `Wealth: ${value.bal}${animated.coinspin.full}`,
       inline: false,
     };
     if (msg.author.id == value.id) {

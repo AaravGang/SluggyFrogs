@@ -46,7 +46,7 @@ async function addItem(client, msg, params, serverDetails) {
         number - alreadyPresentNumber
       } ${itemName} (${
         item.cost * (number - alreadyPresentNumber)
-      }animated.coinspin.full).\nCurrent balance: ${memberBal}animated.coinspin.full`
+      }${animated.coinspin.full}).\nCurrent balance: ${memberBal}${animated.coinspin.full}`
     );
   }
   // console.log(item.cost * (number - alreadyPresentNumber) , memberBal);

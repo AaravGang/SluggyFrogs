@@ -48,7 +48,7 @@ async function quitGame(client, msg, params, _serverDetails, reply = true) {
       let success = await updateMemberBal(msg.guild, winner.id, 2000);
       if (success) {
         msg.channel.send(
-          `<@${winner.id}>, You received ${2000}animated.coinspin.full`
+          `<@${winner.id}>, You received ${2000}${animated.coinspin.full}`
         );
       } else {
         msg.channel.send(`<@${winner.id}>, Unable to update your balance`);

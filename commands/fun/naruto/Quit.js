@@ -54,7 +54,7 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
       let updateStatus = await updateMembersBal(msg.guild, payload);
       if (updateStatus) {
         msg.channel.send(
-          `<@${winner.id}>, You have won ${winAmt}animated.coinspin.full`
+          `<@${winner.id}>, You have won ${winAmt}${animated.coinspin.full}`
         );
       } else {
         console.log(
@@ -75,7 +75,7 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
       msg.channel.send(
         `<@${playerWhoHired.id}>, Your money was refunded (${
           ShinobisJson[playerWhoHired.shinobi].fees
-        }animated.coinspin.full)`
+        }${animated.coinspin.full})`
       );
     }
 

@@ -325,7 +325,7 @@ async function sendGameOverMessages(
     await quitGame(client, msg, null, serverStats, (reply = false));
     msg.channel.send(`<@${winner.id}> <@${loser.id}> This match has tied!`);
     msg.channel.send(
-      `<@${winner.id}>, You recieved ${winnerAmount}animated.coinspin.full!\n\n<@${loser.id}>, You recieved ${loserAmount}animated.coinspin.full`
+      `<@${winner.id}>, You recieved ${winnerAmount}${animated.coinspin.full}!\n\n<@${loser.id}>, You recieved ${loserAmount}${animated.coinspin.full}`
     );
     return true;
   }
@@ -335,7 +335,7 @@ async function sendGameOverMessages(
     `Congratulations! <@${winner.id}>, You have won. <@${loser.id}>, Better luck next time!`
   );
   msg.channel.send(
-    `<@${winner.id}>, You have been awarded with ${winnerAmount}animated.coinspin.full!\n\n<@${loser.id}>, You recieved ${loserAmount}animated.coinspin.full`
+    `<@${winner.id}>, You have been awarded with ${winnerAmount}${animated.coinspin.full}!\n\n<@${loser.id}>, You recieved ${loserAmount}${animated.coinspin.full}`
   );
   return true;
 }
