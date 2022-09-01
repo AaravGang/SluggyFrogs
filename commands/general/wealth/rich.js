@@ -1,6 +1,10 @@
 const dbHelper = require("../../../DBHelper");
 const getServerStats = dbHelper.getServerStats;
 
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 module.exports = {
   name: "rich",
   aliases: ["richest", "rich-order"],
@@ -36,7 +40,7 @@ async function getRichOrder(client, msg, params, serverDetails) {
       name: `${
         rankEmojis[ind - 1] ? rankEmojis[ind - 1] : ind.toString() + ")"
       } ${value.userName}`,
-      value: `Wealth: ${value.bal}💰`,
+      value: `Wealth: ${value.bal}animated.coinspin.full`,
       inline: false,
     };
     if (msg.author.id == value.id) {

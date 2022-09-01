@@ -12,6 +12,10 @@ const dbHelper = require("../../../DBHelper");
 const getPairioGameStats = dbHelper.getPairioGameStats;
 const updateMembersBal = dbHelper.updateMembersBal;
 
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 const quitGame = require("./Quit-Pairio").execute;
 
 function generateBoard(words) {
@@ -184,7 +188,9 @@ async function handleGameOver(msg, player1, player2) {
       await msg.channel.send(
         `<@${player1.id}>, You received ${
           player1.score * rewardPerPoint
-        }💰\n<@${player2.id}>, You received ${player2.score * rewardPerPoint}💰`
+        }animated.coinspin.full\n<@${player2.id}>, You received ${
+          player2.score * rewardPerPoint
+        }animated.coinspin.full`
       );
       return true;
     }
@@ -196,7 +202,7 @@ async function handleGameOver(msg, player1, player2) {
   if (success) {
     await msg.channel.send(`<@${winner.id}>, You have won!`);
     await msg.channel.send(
-      `<@${winner.id}>, You won ${winnerAmount}💰\n<@${loser.id}>, You received ${loserAmount}💰`
+      `<@${winner.id}>, You won ${winnerAmount}animated.coinspin.full\n<@${loser.id}>, You received ${loserAmount}animated.coinspin.full`
     );
     return true;
   }

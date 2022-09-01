@@ -3,6 +3,10 @@ const updateMemberBal = dbHelper.updateMemberBal;
 const updateToInventory = dbHelper.updateToInventory;
 const Shop = require("./Shop.json");
 
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 module.exports = {
   name: "add",
   aliases: ["add_to_inventory", "ati", "buy", "purchase"],
@@ -13,7 +17,9 @@ module.exports = {
 async function addItem(client, msg, params, serverDetails) {
   const itemName = params[0];
   if (!Shop[itemName]) {
-    return msg.reply("That item does not exist!");
+    return msg.reply(
+      `That item does not exist! ${animated.ghostconfused.full}`
+    );
   }
 
   const item = Shop[itemName];
@@ -40,7 +46,7 @@ async function addItem(client, msg, params, serverDetails) {
         number - alreadyPresentNumber
       } ${itemName} (${
         item.cost * (number - alreadyPresentNumber)
-      }💰).\nCurrent balance: ${memberBal}💰`
+      }animated.coinspin.full).\nCurrent balance: ${memberBal}animated.coinspin.full`
     );
   }
   // console.log(item.cost * (number - alreadyPresentNumber) , memberBal);

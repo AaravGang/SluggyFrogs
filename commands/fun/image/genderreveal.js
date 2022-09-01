@@ -7,6 +7,10 @@ module.exports = {
 const Canvas = require("canvas");
 const Discord = require("discord.js");
 
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -146,9 +150,9 @@ async function genderReveal(client, msg, params, serverDetails) {
     "welcome-image.png"
   );
 
-  msg.react("<a:strechee:1014563312173850704>");
+  msg.react(animated.strechee.full);
   msg.channel.send(
-    `Your deepest secrets have been revealed, XD :)!`,
+    `Your deepest secrets have been revealed, XD :)! ${emojis.shrekdisgusted.full}`,
     attachment
   );
 }

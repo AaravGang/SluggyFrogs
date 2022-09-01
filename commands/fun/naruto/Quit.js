@@ -10,8 +10,12 @@ const creators = process.env.CREATOR_IDS.split(" ");
 
 const dbHelper = require("../../../DBHelper");
 const updateMembersBal = dbHelper.updateMembersBal;
-
 const updateNarutoGameStats = dbHelper.updateNarutoGameStats;
+
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 const ShinobisJson = require("./Shinobis.json");
 
 function randomNumber(min, max) {
@@ -49,7 +53,9 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
 
       let updateStatus = await updateMembersBal(msg.guild, payload);
       if (updateStatus) {
-        msg.channel.send(`<@${winner.id}>, You have won ${winAmt}💰`);
+        msg.channel.send(
+          `<@${winner.id}>, You have won ${winAmt}animated.coinspin.full`
+        );
       } else {
         console.log(
           "unable to update money of winner when someone quit the game."
@@ -57,7 +63,8 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
       }
     } else if (
       (serverDetails.narutoGame.player1.shinobi ||
-      serverDetails.narutoGame.player2.shinobi) && reply
+        serverDetails.narutoGame.player2.shinobi) &&
+      reply
     ) {
       let playerWhoHired = serverDetails.narutoGame.player1.shinobi
         ? serverDetails.narutoGame.player1
@@ -68,7 +75,7 @@ async function quitGame(client, msg, params, serverDetails, reply = true) {
       msg.channel.send(
         `<@${playerWhoHired.id}>, Your money was refunded (${
           ShinobisJson[playerWhoHired.shinobi].fees
-        }💰)`
+        }animated.coinspin.full)`
       );
     }
 

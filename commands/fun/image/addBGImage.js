@@ -3,6 +3,10 @@ const addImage = dbHelper.addImage;
 const getImage = dbHelper.getImage;
 const updateImage = dbHelper.updateImage;
 
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 const Discord = require("discord.js");
 
 const Canvas = require("canvas");
@@ -139,5 +143,5 @@ async function sendPreview(bgInfo, avatar, msg) {
     "welcome-image.png"
   );
 
-  msg.channel.send(`Preview.`, attachment);
+  msg.channel.send(`Preview.${emojis.dick.full}`, attachment);
 }

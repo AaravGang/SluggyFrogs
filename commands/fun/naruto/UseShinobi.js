@@ -10,6 +10,10 @@ const updateMemberBal = dbHelper.updateMemberBal;
 const getServerStats = dbHelper.getServerStats;
 const updateMemberPrevShinobi = dbHelper.updateMemberPrevShinobi;
 
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 module.exports = {
   name: "hire",
   description: "hire a shinobi",
@@ -83,7 +87,9 @@ async function hireShinobi(client, msg, params) {
   }
 
   if (serverDetails.members[player.id].bal < shinobiDetails[shinobiName].fees) {
-    msg.reply(`You don't have enough money to hire ${shinobiName} 😢`);
+    msg.reply(
+      `You don't have enough money to hire ${shinobiName} ${animated.sparklycash.full}`
+    );
     return false;
   }
 

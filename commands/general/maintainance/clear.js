@@ -2,6 +2,10 @@ const dotenv = require("dotenv");
 dotenv.config();
 const creators = process.env.CREATOR_IDS.split();
 
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 module.exports = {
   name: "clear",
   aliases: ["c", "cc"],
@@ -22,7 +26,7 @@ async function clearMessages(client, msg, params, serverDetails) {
     return;
   }
 
-  if (creators.includes(msg.author.id)) console.log("yes", msg.author);
+  // if (creators.includes(msg.author.id)) console.log("yes", msg.author);
 
   if (
     (!serverDetails.members[`${msg.author.id}`].permissions ||
@@ -33,7 +37,7 @@ async function clearMessages(client, msg, params, serverDetails) {
   ) {
     // msg.reply("YOU AINT GOT PERMISSIONS.");
     msg.react("🚫")
-    msg.react("<a:strechee:1014563312173850704>");
+    msg.react(animated.strechee.full);
 
     return;
   }

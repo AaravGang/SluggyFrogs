@@ -7,6 +7,10 @@ module.exports = {
 const dbHelper = require("../../../DBHelper");
 const addProfilePic = dbHelper.addProfilePic;
 
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 const dotenv = require("dotenv");
 dotenv.config();
 const creators = process.env.CREATOR_IDS.split(" ");
@@ -27,12 +31,15 @@ async function addPic(client, msg, params, serverDetails) {
   const imageLink = msg.attachments.first()
     ? msg.attachments.first().proxyURL
     : null;
-  if (!imageLink) return msg.reply("Did not recieve an attachment.");
+  if (!imageLink)
+    return msg.reply(
+      `Did not recieve an attachment.${animated.ghostconfused.full}`
+    );
 
   const mentioned = msg.mentions.members.first();
   if (!mentioned)
     return msg.reply(
-      "You need to mention the user whose picture you wanna set."
+      `You need to mention the user whose picture you wanna set. ${emojis.shrekdisgusted.full}`
     );
 
   try {

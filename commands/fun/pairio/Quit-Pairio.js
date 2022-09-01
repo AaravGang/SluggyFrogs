@@ -10,9 +10,12 @@ const creators = process.env.CREATOR_IDS.split(" ");
 
 const dbHelper = require("../../../DBHelper");
 const updateMemberBal = dbHelper.updateMemberBal;
-
 const updatePairioGameStats = dbHelper.updatePairioGameStats;
 const getServerStats = dbHelper.getServerStats;
+
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
 
 function randomNumber(min, max) {
   // min and max included
@@ -44,7 +47,9 @@ async function quitGame(client, msg, params, _serverDetails, reply = true) {
 
       let success = await updateMemberBal(msg.guild, winner.id, 2000);
       if (success) {
-        msg.channel.send(`<@${winner.id}>, You received ${2000}💰`);
+        msg.channel.send(
+          `<@${winner.id}>, You received ${2000}animated.coinspin.full`
+        );
       } else {
         msg.channel.send(`<@${winner.id}>, Unable to update your balance`);
       }

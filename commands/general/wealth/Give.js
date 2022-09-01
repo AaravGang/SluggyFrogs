@@ -14,6 +14,10 @@ const dbHelper = require("../../../DBHelper");
 const updateMemberBal = dbHelper.updateMemberBal;
 const getMember = dbHelper.getMember;
 
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 async function give(client, msg, params, serverDetails) {
   let recipient = msg.mentions.members.first();
   let amount = params[1];
@@ -28,9 +32,7 @@ async function give(client, msg, params, serverDetails) {
 
   if (!creatorIds.includes(msg.author.id)) {
     if (msg.author.id == recipient.user.id) {
-      msg.reply(
-        "Baka! Only god gets free money."
-      );
+      msg.reply("Baka! Only god gets free money.");
       return false;
     }
     let authorBal = (await getMember(msg.guild, msg.author.id)).bal;
@@ -43,7 +45,7 @@ async function give(client, msg, params, serverDetails) {
     }
     await updateMemberBal(msg.guild, msg.author.id, -amount);
     msg.reply(
-      `Deducted ${amount}💰 from your wallet. Current balance: ${
+      `Deducted ${amount}animated.coinspin.full from your wallet. Current balance: ${
         authorBal - amount
       }`
     );
@@ -52,7 +54,7 @@ async function give(client, msg, params, serverDetails) {
   updateStatus = await updateMemberBal(msg.guild, recipient.user.id, amount);
   if (updateStatus) {
     msg.channel.send(
-      `<@${recipient.user.id}> ${amount}💰 has been added to your wallet by the super generous <@${msg.author.id}>! :)`
+      `<@${recipient.user.id}> ${amount}animated.coinspin.full has been added to your wallet by the super generous <@${msg.author.id}>! :)`
     );
     return true;
   }

@@ -1,6 +1,11 @@
 const jutsusFile = require("./Jutsus");
 const newJutsu = jutsusFile.newJutsu;
 const jutsusJson = require("./Jutsus.json");
+
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 const dotenv = require("dotenv");
 dotenv.config();
 const prefix = process.env.PREFIX;
@@ -75,7 +80,7 @@ for (let rank of rankOrder) {
 async function getShinobiDetails(client, msg, params = null) {
   const shinobisListEmbed = {
     color: "BLUE",
-    title: "Choose your shinobi!",
+    title: `Choose your shinobi!${animated.narutostart.full}`,
     fields: [],
   };
 

@@ -1,12 +1,16 @@
 module.exports = {
   name: "bal",
-  aliases: ["balance","wealth"],
+  aliases: ["balance", "wealth"],
   description: "Get you sluggy bank balance!",
   execute: getBal,
 };
 
 const dbHelper = require("../../../DBHelper");
 const getMember = dbHelper.getMember;
+
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
 
 async function getBal(client, msg, params, serverDetails) {
   let targetMember = msg.mentions.members.first();
@@ -23,7 +27,12 @@ async function getBal(client, msg, params, serverDetails) {
         embed: {
           title: member.userName,
           color: "YELLOW",
-          fields: [{ name: "🤑Wealth🤑", value: `${member.bal}💰` }],
+          fields: [
+            {
+              name: "🤑Wealth🤑",
+              value: `${member.bal}animated.coinspin.full`,
+            },
+          ],
           thumbnail: { url: targetMember.avatarURL() },
         },
       });

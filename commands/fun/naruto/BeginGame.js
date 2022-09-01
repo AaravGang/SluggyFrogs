@@ -12,6 +12,10 @@ const updateMembersBal = dbHelper.updateMembersBal;
 const getServerStats = dbHelper.getServerStats;
 const getNarutoGameStats = dbHelper.getNarutoGameStats;
 
+const emojisJson = require("../../../emojis.json");
+const emojis = emojisJson.emojis;
+const animated = emojisJson.animated;
+
 const Shinobis = require("./Shinobis");
 const Shinobi = Shinobis.Shinobi;
 const shinobiDetails = Shinobis.shinobiDetails;
@@ -316,12 +320,12 @@ async function sendGameOverMessages(
   [winnerAmount, loserAmount],
   tie = false
 ) {
-  msg.channel.send("Game Over!");
+  msg.channel.send(`Game Over!${animated.narutobaryon.full}`);
   if (tie) {
     await quitGame(client, msg, null, serverStats, (reply = false));
     msg.channel.send(`<@${winner.id}> <@${loser.id}> This match has tied!`);
     msg.channel.send(
-      `<@${winner.id}>, You recieved ${winnerAmount}💰!\n\n<@${loser.id}>, You recieved ${loserAmount}💰`
+      `<@${winner.id}>, You recieved ${winnerAmount}animated.coinspin.full!\n\n<@${loser.id}>, You recieved ${loserAmount}animated.coinspin.full`
     );
     return true;
   }
@@ -331,7 +335,7 @@ async function sendGameOverMessages(
     `Congratulations! <@${winner.id}>, You have won. <@${loser.id}>, Better luck next time!`
   );
   msg.channel.send(
-    `<@${winner.id}>, You have been awarded with ${winnerAmount}💰!\n\n<@${loser.id}>, You recieved ${loserAmount}💰`
+    `<@${winner.id}>, You have been awarded with ${winnerAmount}animated.coinspin.full!\n\n<@${loser.id}>, You recieved ${loserAmount}animated.coinspin.full`
   );
   return true;
 }
@@ -368,7 +372,7 @@ async function setPlayerJutsu(msg, player, jutsuName, gameID) {
 function checkValidJutsu(msg, jutsuName, player) {
   if (player.currentJutsu) {
     // msg.reply("You have already chosen jutsu!");
-    msg.react("🥦");
+    msg.react(emojis.shrekdisgusted.full);
     return false;
   }
 
