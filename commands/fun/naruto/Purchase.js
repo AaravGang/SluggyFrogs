@@ -44,9 +44,9 @@ async function addItem(client, msg, params, serverDetails) {
     return msg.reply(
       `You don't have enough money to purchase ${
         number - alreadyPresentNumber
-      } ${itemName} (${
-        item.cost * (number - alreadyPresentNumber)
-      }${animated.coinspin.full}).\nCurrent balance: ${memberBal}${animated.coinspin.full}`
+      } ${itemName} (${item.cost * (number - alreadyPresentNumber)}${
+        animated.coinspin.full
+      }).\nCurrent balance: ${memberBal}${animated.coinspin.full}`
     );
   }
   // console.log(item.cost * (number - alreadyPresentNumber) , memberBal);
@@ -69,9 +69,9 @@ async function addItem(client, msg, params, serverDetails) {
     msg.reply(
       `Added item! Current stock of ${itemName}: ${number}\nMoney deducted from your wallet: ${
         item.cost * (number - alreadyPresentNumber)
-      }; Current Balance: ${
+      }${animated.coinspin.full}; Current Balance: ${
         memberBal - item.cost * (number - alreadyPresentNumber)
-      }`
+      }${animated.coinspin.full}`
     );
   } else {
     msg.reply("Error while trying to add item to your inventory.");
