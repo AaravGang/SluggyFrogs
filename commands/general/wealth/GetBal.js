@@ -29,7 +29,7 @@ async function getBal(client, msg, params, serverDetails) {
           color: "YELLOW",
           fields: [
             {
-              name: `Wealth${animated.sparklycash.full}`,
+              name: `Wealth ${animated.sparklycash.full}`,
               value: `${member.bal}${animated.coinspin.full}`,
             },
           ],
