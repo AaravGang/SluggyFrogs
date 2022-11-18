@@ -9,19 +9,28 @@ const prefix = process.env.PREFIX.toLowerCase();
 const helpCommands = {};
 
 for (let folder of commandFolders) {
+  if (folder.startsWith(".")) {
+    continue;
+  }
   let subFolders = fs.readdirSync(`./commands/${folder}`);
   for (let subFolder of subFolders) {
+    if (subFolder.startsWith(".")) {
+      continue;
+    }
+
     let commandFiles = fs
       .readdirSync(`./commands/${folder}/${subFolder}`)
       .filter((file) => file === "help.js");
     for (let file of commandFiles) {
+      if (file.startsWith(".")) {
+        continue;
+      }
+
       const command = require(`./commands/${folder}/${subFolder}/${file}`);
       helpCommands[subFolder] = command;
     }
   }
 }
-
-
 
 function help(client, msg, params) {
   for (let param of params) {

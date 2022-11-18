@@ -25,12 +25,24 @@ const onMemberJoin = dbHelper.onMemberJoin;
 
 function setCommands() {
   for (let folder of commandFolders) {
+    if (folder.startsWith(".")) {
+      continue;
+    }
+
     let subFolders = fs.readdirSync(`./commands/${folder}`);
     for (let subFolder of subFolders) {
+      if (subFolder.startsWith(".")) {
+        continue;
+      }
+
       let commandFiles = fs
         .readdirSync(`./commands/${folder}/${subFolder}`)
         .filter((file) => file.endsWith(".js"));
       for (let file of commandFiles) {
+        if (file.startsWith(".")) {
+          continue;
+        }
+
         const command = require(`./commands/${folder}/${subFolder}/${file}`);
         if (command.name) {
           client.commands.set(command.name, command);
@@ -124,4 +136,3 @@ function handleCommands(client, msg, serverDetails) {
       .execute(client, msg, commandParams, serverDetails);
   }
 }
-
