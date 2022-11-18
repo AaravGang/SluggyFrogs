@@ -15,7 +15,6 @@
     "mongoose": "^5.13.3"
   },
   "engines": {
-    "node": "14.x",
-    "npm": "6.x"
+    "node": "14.x"
   }
 }
