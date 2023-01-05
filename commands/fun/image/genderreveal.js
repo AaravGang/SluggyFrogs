@@ -15,6 +15,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const creators = process.env.CREATOR_IDS.split(" ");
+const faceSwapUrl = process.env.FACESWAP_URL
 // var bgOpts = [];
 
 // Canvas.loadImage(
@@ -32,21 +33,18 @@ const delProfilePic = dbHelper.delProfilePic;
 
 const imgStorage = require("../../../models").imgStorageModel
 
-
 const fetch = require("node-fetch")
-const mongoose = require("mongoose")
 
-const { ObjectId } = require('mongodb');
 
 async function genderReveal(client, msg, params, serverDetails) {
-let bgOpts = []
-  if (params.length>0){
-     bgOpts= await getImages({name:params[0]})
+  let bgOpts = []
+  if (params.length > 0) {
+    bgOpts = await getImages({ name: params[0] })
   }
-  if (bgOpts.length==0){
+  if (bgOpts.length == 0) {
     bgOpts = await getImages()
   }
-    const bgInfo = bgOpts[Math.floor(Math.random() * bgOpts.length)];
+  const bgInfo = bgOpts[Math.floor(Math.random() * bgOpts.length)];
 
 
   const canvas = Canvas.createCanvas(500, 500);
@@ -145,7 +143,7 @@ let bgOpts = []
   }
 
 
-  var data = await fetch(`https://onlyhotfaces.aaravgang.repl.co/api?srcUrl=${url}&dstUrl=${bgInfo.url}`)
+  var data = await fetch(`${faceSwapUrl}srcUrl=${url}&dstUrl=${bgInfo.url}`)
   data = await data.json()
   console.log(data)
 
@@ -171,7 +169,6 @@ let bgOpts = []
         );
 
         let res = await imgStorage.deleteOne({ _id: data.id })
-        // console.log(res)
 
       }
 
@@ -186,7 +183,6 @@ let bgOpts = []
     const bg = await Canvas.loadImage(bgInfo.url);
 
     const context = canvas.getContext("2d");
-    // Since the image takes time to load, you should await it
 
     // This uses the canvas dimensions to stretch the image onto the entire canvas
     context.drawImage(bg, 0, 0, canvas.width, canvas.height);
