@@ -1,4 +1,5 @@
 // IF IT DOESNT WORK USE `kill 1` in console
+// ADD .replit and replit.nix after pulling from github in replit
 
 const Discord = require("discord.js");
 
