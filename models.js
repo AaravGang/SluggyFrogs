@@ -1,19 +1,9 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+// const Image = require("image")
 dotenv.config();
 
 const databaseUrl = process.env.MONGODB_SRV;
-
-mongoose
-  .connect(databaseUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-  .then((data) => {
-    console.log("connected to model!");
-  })
-  .catch((err) => console.log(err));
 
 const serverSchema = new mongoose.Schema({
   serverID: { type: String, require: true, unique: true },
@@ -71,8 +61,32 @@ const pairioThemeModel = mongoose.model(
   pairioThemeSchema
 );
 
+async function connect() {
+  const res = await mongoose.connect(databaseUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  });
+  const { db } = mongoose.connection;
+  return db;
+}
+
+let db;
+connect().then((data) => {
+  db = data;
+  console.log("Database Connected!");
+});
+
+const imgStorageSchema = new mongoose.Schema();
+const imgStorageModel = mongoose.model(
+  "image-storage",
+  imgStorageSchema,
+  "image-storage"
+);
+
 module.exports = {
   serverModel: serverModel,
   imageModel: imageModel,
   pairioThemeModel: pairioThemeModel,
+  imgStorageModel: imgStorageModel,
 };

@@ -28,7 +28,8 @@ Canvas.loadImage("commands/fun/image/maya.png").then(
 
 async function addImageToDB(client, msg, params, serverDetail) {
   // name url avatarSize avatarX avatarY
-  const [name, url, avatarSize, avatarX, avatarY] = params.slice(0, 5);
+  let [name, url, avatarSize, avatarX, avatarY] = params.slice(0, 5);
+  url = msg.attachments.first() ? msg.attachments.first().url : url;
 
   const addRequest = await validateParams(
     name,
@@ -63,6 +64,7 @@ async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
     var image;
 
     try {
+      console.log(url);
       image = await Canvas.loadImage(url);
 
       if (!image) {
@@ -70,6 +72,7 @@ async function validateParams(name, url, avatarSize, avatarX, avatarY, msg) {
         return false;
       }
     } catch (err) {
+      console.log(err);
       msg.reply(`Exception while trying to load image from url`);
 
       return false;
