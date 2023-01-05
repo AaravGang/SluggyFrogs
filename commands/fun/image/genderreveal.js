@@ -15,6 +15,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const creators = process.env.CREATOR_IDS.split(" ");
+const faceSwapUrl = process.env.FACESWAP_URL;
+
 // var bgOpts = [];
 
 // Canvas.loadImage(
@@ -33,9 +35,6 @@ const delProfilePic = dbHelper.delProfilePic;
 const imgStorage = require("../../../models").imgStorageModel;
 
 const fetch = require("node-fetch");
-const mongoose = require("mongoose");
-
-const { ObjectId } = require("mongodb");
 
 async function genderReveal(client, msg, params, serverDetails) {
   let bgOpts = [];
@@ -142,9 +141,7 @@ async function genderReveal(client, msg, params, serverDetails) {
     if (!avatar) return false;
   }
 
-  var data = await fetch(
-    `https://onlyhotfaces.aaravgang.repl.co/api?srcUrl=${url}&dstUrl=${bgInfo.url}`
-  );
+  var data = await fetch(`${faceSwapUrl}srcUrl=${url}&dstUrl=${bgInfo.url}`);
   data = await data.json();
   console.log(data);
 
