@@ -28,23 +28,23 @@ async function addPic(client, msg, params, serverDetails) {
     return;
   }
 
-  const imageLink = msg.attachments.first()
-    ? msg.attachments.first().proxyURL
-    : null;
-  if (!imageLink)
-    return msg.reply(
-      `Did not recieve an attachment.${animated.ghostconfused.full}`
-    );
-
   const mentioned = msg.mentions.members.first();
   if (!mentioned)
     return msg.reply(
       `You need to mention the user whose picture you wanna set. ${emojis.shrekdisgusted.full}`
     );
 
+  if (!msg.attachments.first()) {
+    return msg.reply(
+      `Did not recieve an attachment.${animated.ghostconfused.full}`
+    );
+  }
+  msg.attachments.array().forEach(async (attachment) => {
+    await addProfilePic(msg.guild, mentioned.id, attachment.url);
+  });
+
   try {
-    await addProfilePic(msg.guild, mentioned.id, imageLink);
-    msg.channel.send("Added Picture!");
+    msg.channel.send("Added Picture(s)!");
     return true;
   } catch (err) {
     console.log(err);

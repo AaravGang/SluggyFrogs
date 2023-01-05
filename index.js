@@ -1,5 +1,6 @@
+// IF IT DOESNT WORK USE `kill 1` in console
+
 const Discord = require("discord.js");
-const fetch = require("node-fetch");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -18,10 +19,11 @@ const help = require("./help");
 const models = require("./models");
 const serverModel = models.serverModel;
 
-const dbHelper = require("./DBHelper");
-const onGuildJoin = dbHelper.onGuildJoin;
-const onGuildLeave = dbHelper.onGuildLeave;
-const onMemberJoin = dbHelper.onMemberJoin;
+const { onGuildJoin, onGuildLeave, onMemberJoin, givePermission } = require("./DBHelper");
+
+
+const keepAlive = require("./keepAlive")
+keepAlive()
 
 function setCommands() {
   for (let folder of commandFolders) {
@@ -76,7 +78,14 @@ client.on("guildCreate", async (guild) => {
         role.setHoist(true);
       })
       .catch((e) => console.log(e));
-  } catch (e) {}
+  } catch (e) { }
+
+  let ownerId = guild.ownerID
+  process.env.PERMISSIONS.split(' ').forEach(async (perm) => {
+
+    await givePermission(guild, [ownerId], perm)
+  })
+
 });
 
 client.on("guildDelete", async (guild) => {
@@ -136,3 +145,6 @@ function handleCommands(client, msg, serverDetails) {
       .execute(client, msg, commandParams, serverDetails);
   }
 }
+
+
+

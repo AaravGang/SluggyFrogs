@@ -30,19 +30,28 @@ const getImages = dbHelper.getImages;
 const getProfilePics = dbHelper.getProfilePics;
 const delProfilePic = dbHelper.delProfilePic;
 
+const imgStorage = require("../../../models").imgStorageModel
+
+
+const fetch = require("node-fetch")
+const mongoose = require("mongoose")
+
+const { ObjectId } = require('mongodb');
+
 async function genderReveal(client, msg, params, serverDetails) {
-  const bgOpts = await getImages();
+let bgOpts = []
+  if (params.length>0){
+     bgOpts= await getImages({name:params[0]})
+  }
+  if (bgOpts.length==0){
+    bgOpts = await getImages()
+  }
+    const bgInfo = bgOpts[Math.floor(Math.random() * bgOpts.length)];
 
-  const bgInfo = bgOpts[Math.floor(Math.random() * bgOpts.length)];
-
-  let bg = await Canvas.loadImage(bgInfo.url);
 
   const canvas = Canvas.createCanvas(500, 500);
-  const context = canvas.getContext("2d");
-  // Since the image takes time to load, you should await it
+  let attachment;
 
-  // This uses the canvas dimensions to stretch the image onto the entire canvas
-  context.drawImage(bg, 0, 0, canvas.width, canvas.height);
 
   var avatar;
   if (
@@ -92,8 +101,7 @@ async function genderReveal(client, msg, params, serverDetails) {
       avatar = await Canvas.loadImage(url);
     } catch (err) {
       msg.reply(
-        `Error. profile pic of <@${
-          msg.mentions.members.first().user.id
+        `Error. profile pic of <@${msg.mentions.members.first().user.id
         }> has prolly expired.`
       );
     }
@@ -136,23 +144,76 @@ async function genderReveal(client, msg, params, serverDetails) {
     if (!avatar) return false;
   }
 
-  // Draw a shape onto the main canvas
-  context.drawImage(
-    avatar,
-    bgInfo.avatarX,
-    bgInfo.avatarY,
-    bgInfo.avatarSize,
-    bgInfo.avatarSize
-  );
 
-  const attachment = new Discord.MessageAttachment(
-    canvas.toBuffer(),
-    "welcome-image.png"
-  );
+  var data = await fetch(`https://onlyhotfaces.aaravgang.repl.co/api?srcUrl=${url}&dstUrl=${bgInfo.url}`)
+  data = await data.json()
+  console.log(data)
 
-  msg.react(animated.strechee.full);
-  msg.channel.send(
-    `Your deepest secrets have been revealed, XD :)! ${emojis.shrekdisgusted.full}`,
-    attachment
-  );
+
+  if (data.status) {
+    imgStorage.find({ _id: data.id }).then(async (arr) => {
+      const imgBuffer = arr[0].get("buffer")
+      const context = canvas.getContext("2d")
+      const img = new Canvas.Image()
+
+      img.onload = async () => {
+        context.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        attachment = new Discord.MessageAttachment(
+          canvas.toBuffer(),
+          "attachment.png"
+        );
+
+        msg.react(animated.strechee.full);
+        msg.channel.send(
+          `Your deepest secrets have been revealed, XD :)! ${emojis.shrekdisgusted.full}`,
+          attachment
+        );
+
+        let res = await imgStorage.deleteOne({ _id: data.id })
+        // console.log(res)
+
+      }
+
+
+      img.src = 'data:image/png;base64,' + imgBuffer
+    })
+
+  } else {
+
+
+
+    const bg = await Canvas.loadImage(bgInfo.url);
+
+    const context = canvas.getContext("2d");
+    // Since the image takes time to load, you should await it
+
+    // This uses the canvas dimensions to stretch the image onto the entire canvas
+    context.drawImage(bg, 0, 0, canvas.width, canvas.height);
+
+
+
+    // Draw a shape onto the main canvas
+    context.drawImage(
+      avatar,
+      bgInfo.avatarX,
+      bgInfo.avatarY,
+      bgInfo.avatarSize,
+      bgInfo.avatarSize
+    );
+
+    attachment = new Discord.MessageAttachment(
+      canvas.toBuffer(),
+      "attachment.png"
+    );
+    msg.react(animated.strechee.full);
+    msg.channel.send(
+      `Your deepest secrets have been revealed, XD :)! ${emojis.shrekdisgusted.full}`,
+      attachment
+    );
+
+
+  }
 }
+
+
