@@ -2,4 +2,3 @@ node_modules
 .env
 TODO
 .DS_Store
-keepAlive.js

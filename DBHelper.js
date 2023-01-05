@@ -5,7 +5,6 @@ const pairioThemeModel = models.pairioThemeModel;
 
 const dotenv = require("dotenv");
 dotenv.config();
-const fetch = require("node-fetch");
 
 const botToken = process.env.BOT_TOKEN;
 const prefix = process.env.PREFIX.toLowerCase();
@@ -194,8 +193,8 @@ async function addImage(name, url, avatarSize, avatarX, avatarY) {
   }
 }
 
-async function getImages() {
-  return await imageModel.find({});
+async function getImages(filter = {}) {
+  return await imageModel.find(filter);
 }
 
 async function getImage(name) {
