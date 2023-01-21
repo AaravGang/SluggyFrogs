@@ -179,21 +179,15 @@ async function updateMemberPrevShinobi(guild, memberId, newShinobi) {
   }
 }
 
-async function addImage(name, url, avatarSize, avatarX, avatarY) {
+async function addImage(data) {
   try {
-    return await imageModel.create({
-      name: name,
-      url: url,
-      avatarSize: avatarSize,
-      avatarX: avatarX,
-      avatarY: avatarY,
-    });
+    return await imageModel.create(data);
   } catch (err) {
     console.log(err);
   }
 }
 
-async function getImages(filter = {}) {
+async function getImages(filter = { type: "image" }) {
   return await imageModel.find(filter);
 }
 
