@@ -18,6 +18,7 @@ const fs = require("fs");
 const creators = process.env.CREATOR_IDS.split(" ");
 const faceSwapUrl = process.env.FACESWAP_URL;
 const videoSwapUrl = process.env.VIDEO_FACE_SWAP;
+const progressUrl = process.env.PROGRESS_URL;
 
 // var bgOpts = [];
 
@@ -33,10 +34,26 @@ const dbHelper = require("../../../DBHelper");
 const getImages = dbHelper.getImages;
 const getProfilePics = dbHelper.getProfilePics;
 const delProfilePic = dbHelper.delProfilePic;
+const deleteImage = dbHelper.deleteImage;
 
 const imgStorage = require("../../../models").imgStorageModel;
 
 const fetch = require("node-fetch");
+
+let embedFormat = {
+  title: `Gender Reveal ${animated.strechee.full}`,
+  description: `Please wait while we make you transgender.🎊👯`,
+  fields: [],
+  color: "#EB459E",
+};
+
+let updateProgress = async (request_id, msg) => {
+  var data = await fetch(`${progressUrl}${request_id}`);
+  data = await data.json();
+  console.log(data);
+  embedFormat.fields = Object.values(data);
+  msg.edit({ embed: embedFormat });
+};
 
 async function genderReveal(client, msg, params, serverDetails) {
   let bgOpts = [];
@@ -144,15 +161,31 @@ async function genderReveal(client, msg, params, serverDetails) {
     if (!avatar) return false;
   }
 
+  let progressUpdater;
+  if (type == "video") {
+    let tracker = await msg.channel.send(`Editing. This may take some time.`);
+
+    progressUpdater = setInterval(updateProgress, 2000, msg.id, tracker);
+  }
+
   try {
+    console.log(bgInfo.url);
     var apiUrl =
       type == "image"
         ? `${faceSwapUrl}srcUrl=${url}&dstUrl=${bgInfo.url}`
-        : `${videoSwapUrl}&srcUrl=${url}&dstUrl=${bgInfo.url}`;
+        : `${videoSwapUrl}&srcUrl=${url}&dstUrl=${bgInfo.url}&request_id=${msg.id}`;
+
     var data = await fetch(apiUrl);
     data = await data.json();
+
+    clearInterval(progressUpdater);
+    if (data.error) {
+      return msg.reply(data.error);
+    }
   } catch (e) {
+    console.log("Error while trying to face swap:", e);
     if (type == "video") {
+      clearInterval(progressUpdater);
       msg.reply("Error while fetching.");
       return;
     }
@@ -183,6 +216,9 @@ async function genderReveal(client, msg, params, serverDetails) {
       `Your deepest secrets have been revealed, XD :)! ${emojis.shrekdisgusted.full}`,
       attachment
     );
+    console.log("uploaded image");
+
+    return;
   }
 
   if (data.status) {
@@ -222,17 +258,27 @@ async function genderReveal(client, msg, params, serverDetails) {
         `Your deepest secrets have been revealed, XD :)! ${emojis.shrekdisgusted.full}`,
         attachment
       );
+      console.log("uploaded image");
 
       let res = await imgStorage.deleteOne({ _id: data.id });
-      // console.log(res)
     });
   } else {
     if (type == "video") {
       msg.reply("Swapping Failed.");
+      await deleteImage(bgInfo.name);
+
       return;
     }
 
-    const bg = await Canvas.loadImage(bgInfo.url);
+    let bg;
+    try {
+      bg = await Canvas.loadImage(bgInfo.url);
+    } catch (e) {
+      console.log(`Background Image expired name:${bgInfo.name}`);
+      deleteImage(bgInfo.name);
+      msg.channel.send(`Looks like that image expired🤷‍♂️`);
+      return;
+    }
     const canvas = Canvas.createCanvas(500, 500);
     const context = canvas.getContext("2d");
     // Since the image takes time to load, you should await it
@@ -258,5 +304,8 @@ async function genderReveal(client, msg, params, serverDetails) {
       `Your deepest secrets have been revealed, XD :)! ${emojis.shrekdisgusted.full}`,
       attachment
     );
+    console.log("uploaded image");
+
+    return;
   }
 }
