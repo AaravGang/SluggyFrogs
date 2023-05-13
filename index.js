@@ -119,6 +119,10 @@ client.on("message", async (message) => {
 
     // console.log("THIS IS SERVER WAS CREATED WHEN SOMEONE TEXTED:", serverDetails);
 
+    if (message.guild.id !='864782567957987359'){
+      return false
+    }
+
     return handleCommands(client, message, serverDetails);
   }
 });
