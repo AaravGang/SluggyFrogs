@@ -172,8 +172,12 @@ async function genderReveal(client, msg, params, serverDetails) {
     console.log(bgInfo.url);
     var apiUrl =
       type == "image"
-        ? `${faceSwapUrl}srcUrl=${url}&dstUrl=${bgInfo.url}`
-        : `${videoSwapUrl}&srcUrl=${url}&dstUrl=${bgInfo.url}&request_id=${msg.id}`;
+        ? `${faceSwapUrl}srcUrl=${encodeURIComponent(
+            url
+          )}&dstUrl=${encodeURIComponent(bgInfo.url)}`
+        : `${videoSwapUrl}&srcUrl=${encodeURIComponent(
+            url
+          )}&dstUrl=${encodeURIComponent(bgInfo.url)}&request_id=${msg.id}`;
 
     var data = await fetch(apiUrl);
     data = await data.json();
