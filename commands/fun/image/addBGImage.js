@@ -30,7 +30,6 @@ async function addImageToDB(client, msg, params, serverDetail) {
   // name url avatarSize avatarX avatarY
   let [name, url, avatarSize, avatarX, avatarY] = params.slice(0, 5);
   url = msg.attachments.first() ? msg.attachments.first().url : url;
-  console.log(msg.attachments.first())
 
   const addRequest = await validateParams(
     name,

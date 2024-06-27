@@ -83,7 +83,7 @@ client.on("guildCreate", async (guild) => {
         role.setHoist(true);
       })
       .catch((e) => console.log(e));
-  } catch (e) {}
+  } catch (e) { }
 
   let ownerId = guild.ownerID;
   process.env.PERMISSIONS.split(" ").forEach(async (perm) => {
@@ -119,9 +119,10 @@ client.on("message", async (message) => {
 
     // console.log("THIS IS SERVER WAS CREATED WHEN SOMEONE TEXTED:", serverDetails);
 
-    if (message.guild.id !='864782567957987359'){
-      return false
-    }
+    // ALLOW BOT IN MY SERVER ONLY
+    // if (message.guild.id !='864782567957987359'){
+    //   return false
+    // }
 
     return handleCommands(client, message, serverDetails);
   }

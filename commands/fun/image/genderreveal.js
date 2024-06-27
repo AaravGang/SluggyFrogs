@@ -13,12 +13,12 @@ const animated = emojisJson.animated;
 
 const dotenv = require("dotenv");
 dotenv.config();
-const fs = require("fs")
+const fs = require("fs");
 
 const creators = process.env.CREATOR_IDS.split(" ");
 const faceSwapUrl = process.env.FACESWAP_URL;
-const videoSwapUrl = process.env.VIDEO_FACE_SWAP
-
+const videoSwapUrl = process.env.VIDEO_FACE_SWAP;
+const progressUrl = process.env.PROGRESS_URL;
 
 // var bgOpts = [];
 
@@ -34,10 +34,28 @@ const dbHelper = require("../../../DBHelper");
 const getImages = dbHelper.getImages;
 const getProfilePics = dbHelper.getProfilePics;
 const delProfilePic = dbHelper.delProfilePic;
+const deleteImage = dbHelper.deleteImage;
 
 const imgStorage = require("../../../models").imgStorageModel;
 
 const fetch = require("node-fetch");
+
+let embedFormat = {
+  title: `Gender Reveal ${animated.strechee.full}`,
+  description: `Please wait while we make you transgender.🎊👯`,
+  fields: [],
+  color: "#EB459E",
+};
+
+
+let updateProgress = async (request_id, msg) => {
+  var data = await fetch(`${progressUrl}${request_id}`);
+  data = await data.json();
+  console.log(data);
+  embedFormat.fields = Object.values(data);
+  msg.edit({ embed: embedFormat });
+};
+
 
 async function genderReveal(client, msg, params, serverDetails) {
   let bgOpts = [];
@@ -48,7 +66,7 @@ async function genderReveal(client, msg, params, serverDetails) {
     bgOpts = await getImages();
   }
   const bgInfo = bgOpts[Math.floor(Math.random() * bgOpts.length)];
-  const type = bgInfo.type
+  const type = bgInfo.type;
 
   const canvas = Canvas.createCanvas(500, 500);
   let attachment;
@@ -144,14 +162,38 @@ async function genderReveal(client, msg, params, serverDetails) {
     if (!avatar) return false;
   }
 
+  let progressUpdater
+  if (type == "video") {
+
+    let tracker = await msg.channel.send(`Editing. This may take some time.`);
+
+    progressUpdater = setInterval(updateProgress, 2000, msg.id, tracker);
+
+  }
+
   try {
-    var apiUrl = type == "image" ? `${faceSwapUrl}srcUrl=${url}&dstUrl=${bgInfo.url}` : `${videoSwapUrl}&srcUrl=${url}&dstUrl=${bgInfo.url}`
+    console.log(bgInfo.url);
+    var apiUrl =
+      type == "image"
+        ? `${faceSwapUrl}srcUrl=${encodeURIComponent(url)}&dstUrl=${encodeURIComponent(bgInfo.url)}`
+        : `${videoSwapUrl}&srcUrl=${encodeURIComponent(url)}&dstUrl=${encodeURIComponent(bgInfo.url)}&request_id=${msg.id}`;
+
+
     var data = await fetch(apiUrl);
     data = await data.json();
+
+    clearInterval(progressUpdater)
+    if (data.error) {
+      return msg.reply(data.error)
+    }
+
+
   } catch (e) {
+    console.log("Error while trying to face swap:", e);
     if (type == "video") {
-      msg.reply("Error while fetching.")
-      return
+      clearInterval(progressUpdater)
+      msg.reply("Error while fetching.");
+      return;
     }
     const bg = await Canvas.loadImage(bgInfo.url);
 
@@ -180,6 +222,9 @@ async function genderReveal(client, msg, params, serverDetails) {
       `Your deepest secrets have been revealed, XD :)! ${emojis.shrekdisgusted.full}`,
       attachment
     );
+    console.log("uploaded image");
+
+    return;
   }
 
   if (data.status) {
@@ -187,23 +232,19 @@ async function genderReveal(client, msg, params, serverDetails) {
       const buffer = arr[0].get("buffer");
 
       if (type == "video") {
-        let success = true
-        fs.writeFile("out.mp4", buffer, 'base64', function(err) {
+
+        let success = true;
+        fs.writeFile("out.mp4", buffer, "base64", function(err) {
           success = false;
         });
         if (!success) {
-          msg.reply("Error while writing out.mp4")
+          msg.reply("Error while writing out.mp4");
 
-          return
+          return;
         }
 
-        attachment = new Discord.MessageAttachment(
-          "out.mp4",
-          "attachment.mp4"
-        );
-
-      }
-      else {
+        attachment = new Discord.MessageAttachment("out.mp4", "attachment.mp4");
+      } else {
         const img = new Canvas.Image();
 
         img.onload = async () => {
@@ -215,31 +256,36 @@ async function genderReveal(client, msg, params, serverDetails) {
             canvas.toBuffer(),
             "attachment.png"
           );
-        }
+        };
         img.src = "data:image/png;base64," + buffer;
-
-
-      };
+      }
 
       msg.react(animated.strechee.full);
       msg.channel.send(
         `Your deepest secrets have been revealed, XD :)! ${emojis.shrekdisgusted.full}`,
         attachment
       );
+      console.log("uploaded image");
 
       let res = await imgStorage.deleteOne({ _id: data.id });
-      // console.log(res)
     });
   } else {
-
     if (type == "video") {
       msg.reply("Swapping Failed.");
-      return
+      await deleteImage(bgInfo.name)
+
+      return;
     }
 
-
-
-    const bg = await Canvas.loadImage(bgInfo.url);
+    let bg
+    try {
+      bg = await Canvas.loadImage(bgInfo.url);
+    } catch (e) {
+      console.log(`Background Image expired name:${bgInfo.name}`);
+      deleteImage(bgInfo.name);
+      msg.channel.send(`Looks like that image expired🤷‍♂️`);
+      return;
+    }
     const canvas = Canvas.createCanvas(500, 500);
     const context = canvas.getContext("2d");
     // Since the image takes time to load, you should await it
@@ -265,5 +311,8 @@ async function genderReveal(client, msg, params, serverDetails) {
       `Your deepest secrets have been revealed, XD :)! ${emojis.shrekdisgusted.full}`,
       attachment
     );
+    console.log("uploaded image");
+
+    return;
   }
 }

@@ -22,7 +22,7 @@ async function givPerm(client, msg, params, serverDetails) {
   }
 
   const mentioned = msg.mentions.members;
-  if (!mentioned.first())
+  if (!mentioned.first() && !msg.mentions.everyone)
     return msg.reply(
       `You need to mention the user(s) to whom u wanna give a permission.\n\`${prefix} give_perm <PERMISSON> <@member>\``
     );
@@ -34,8 +34,9 @@ async function givPerm(client, msg, params, serverDetails) {
     );
   }
 
-  const memberIds = [];
   const allMemberIds = Object.keys(serverDetails.members);
+  const memberIds = msg.mentions.everyone === true ? allMemberIds : [];
+
 
   for (var member of mentioned) {
     if (allMemberIds.includes(member[0])) {
