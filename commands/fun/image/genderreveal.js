@@ -162,36 +162,37 @@ async function genderReveal(client, msg, params, serverDetails) {
     if (!avatar) return false;
   }
 
-  let progressUpdater
-  if (type == "video") {
 
+  let progressUpdater;
+  if (type == "video") {
     let tracker = await msg.channel.send(`Editing. This may take some time.`);
 
     progressUpdater = setInterval(updateProgress, 2000, msg.id, tracker);
-
   }
 
   try {
     console.log(bgInfo.url);
     var apiUrl =
       type == "image"
-        ? `${faceSwapUrl}srcUrl=${encodeURIComponent(url)}&dstUrl=${encodeURIComponent(bgInfo.url)}`
-        : `${videoSwapUrl}&srcUrl=${encodeURIComponent(url)}&dstUrl=${encodeURIComponent(bgInfo.url)}&request_id=${msg.id}`;
-
+        ? `${faceSwapUrl}srcUrl=${encodeURIComponent(
+          url
+        )}&dstUrl=${encodeURIComponent(bgInfo.url)}`
+        : `${videoSwapUrl}&srcUrl=${encodeURIComponent(
+          url
+        )}&dstUrl=${encodeURIComponent(bgInfo.url)}&request_id=${msg.id}`;
 
     var data = await fetch(apiUrl);
     data = await data.json();
 
-    clearInterval(progressUpdater)
+    clearInterval(progressUpdater);
     if (data.error) {
-      return msg.reply(data.error)
+      return msg.reply(data.error);
     }
-
-
   } catch (e) {
     console.log("Error while trying to face swap:", e);
     if (type == "video") {
-      clearInterval(progressUpdater)
+      clearInterval(progressUpdater);
+
       msg.reply("Error while fetching.");
       return;
     }
@@ -235,6 +236,7 @@ async function genderReveal(client, msg, params, serverDetails) {
 
         let success = true;
         fs.writeFile("out.mp4", buffer, "base64", function(err) {
+
           success = false;
         });
         if (!success) {
@@ -272,12 +274,14 @@ async function genderReveal(client, msg, params, serverDetails) {
   } else {
     if (type == "video") {
       msg.reply("Swapping Failed.");
-      await deleteImage(bgInfo.name)
+
+      await deleteImage(bgInfo.name);
 
       return;
     }
 
-    let bg
+
+    let bg;
     try {
       bg = await Canvas.loadImage(bgInfo.url);
     } catch (e) {

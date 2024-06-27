@@ -187,7 +187,8 @@ async function addImage(data) {
   }
 }
 
-async function getImages(filter = {type:"image"}) {
+
+async function getImages(filter = { type: "image" }) {
   return await imageModel.find(filter);
 }
 

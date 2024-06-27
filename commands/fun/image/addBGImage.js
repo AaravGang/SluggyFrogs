@@ -42,9 +42,11 @@ async function addImageToDB(client, msg, params, serverDetail) {
   //   console.log(addRequest);
   if (addRequest == false) return;
 
+
   let addStatus = await addImage(
     addRequest
   );
+
   if (addStatus) {
     msg.reply("Added successfully!");
     msg.react("👍");

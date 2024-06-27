@@ -44,10 +44,11 @@ const serverModel = mongoose.model("server-models", serverSchema);
 const imageSchema = new mongoose.Schema({
   url: { type: String, require: true },
   name: { type: String, require: true, unique: true },
-  avatarSize: { type: Number,default:0},
-  avatarX: { type: Number,default:0},
-  avatarY: { type: Number,default:0 },
-  type:{type:String,default:"image"}
+
+  avatarSize: { type: Number, default: 0 },
+  avatarX: { type: Number, default: 0 },
+  avatarY: { type: Number, default: 0 },
+  type: { type: String, default: "image" },
 });
 
 const imageModel = mongoose.model("image-model", imageSchema);
